@@ -346,7 +346,7 @@ def _style_accelerando(
             pairs = scaled_pairs
         assert len(hleaves) == len(pairs)
         for pair, leaf in zip(pairs, hleaves):
-            leaf.multiplier = pair
+            leaf.set_multiplier(pair)
         if abjad.select.rests(hleaves):
             stemlet_length = 0.75
         else:
@@ -723,7 +723,7 @@ class Multiplier:
         tag = _helpers.function_name(_frame())
         components = _evaluate_basic_item(self.argument, denominator, voice_name, tag)
         for leaf in abjad.select.leaves(components):
-            leaf.multiplier = self.multiplier
+            leaf.set_multiplier(self.multiplier)
         return components
 
 

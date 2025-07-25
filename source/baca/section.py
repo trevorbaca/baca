@@ -1304,11 +1304,11 @@ def _label_duration_multipliers(score: abjad.Score) -> None:
         for leaf in abjad.iterate.leaves(voice):
             if isinstance(leaf, abjad.Skip):
                 continue
-            if leaf.multiplier is None:
+            if leaf.get_multiplier() is None:
                 continue
             if leaf in already_labeled:
                 continue
-            n, d = leaf.multiplier
+            n, d = leaf.get_multiplier()
             string = r"\baca-duration-multiplier-markup"
             string += f' #"{n}" #"{d}"'
             markup = abjad.Markup(string)
@@ -1480,7 +1480,7 @@ def _move_global_rests(
         staff.insert(0, global_rests)
     elif global_rests_in_every_staff is True:
         topmost_staff = True
-        tag = global_rests.tag or abjad.Tag()
+        tag = global_rests.get_tag() or abjad.Tag()
         for staff in abjad.iterate.components(music_context, abjad.Staff):
             staff.simultaneous = True
             global_rests_ = copy.deepcopy(global_rests)
@@ -1980,7 +1980,7 @@ def _style_framed_notes(score: abjad.Score) -> None:
             duration = abjad.get.duration(leaf)
             leaf.written_duration = abjad.Duration(1, 4)
             multiplier = 4 * duration
-            leaf.multiplier = multiplier.get_pair()
+            leaf.set_multiplier(multiplier.get_pair())
             literal = abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f")
             abjad.attach(literal, leaf, tag=tag)
             literal = abjad.LilyPondLiteral(r"\once \override Stem.thickness = 6")
@@ -2446,8 +2446,9 @@ def make_layout_score(
     )
     _comment_measure_numbers(first_measure_number, offset_to_measure_number, score)
     for component in abjad.iterate.components(score):
-        assert component.tag is not None
-        component.tag = component.tag.retain_shoutcase()
+        component_tag = component.get_tag()
+        assert component_tag is not None
+        component.set_tag(component_tag.retain_shoutcase())
         for wrapper in abjad.get.wrappers(component):
             tag_ = wrapper.get_tag().retain_shoutcase()
             wrapper.set_tag(tag_)
