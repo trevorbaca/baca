@@ -189,7 +189,7 @@ def _to_tightly_spaced_pitches_ascending(pitch_classes):
     pitch = abjad.NumberedPitch((pitch_class, 4))
     pitches.append(pitch)
     for pitch_class in pitch_classes[1:]:
-        candidate_octave = pitches[-1].octave.number
+        candidate_octave = pitches[-1].get_octave().number
         candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
         if pitches[-1] <= candidate:
             pitches.append(candidate)
@@ -207,7 +207,7 @@ def _to_tightly_spaced_pitches_descending(pitch_classes):
     pitch = abjad.NumberedPitch((pitch_class, 4))
     pitches.append(pitch)
     for pitch_class in pitch_classes[1:]:
-        candidate_octave = pitches[-1].octave.number
+        candidate_octave = pitches[-1].get_octave().number
         candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
         if candidate <= pitches[-1]:
             pitches.append(candidate)
@@ -217,7 +217,7 @@ def _to_tightly_spaced_pitches_descending(pitch_classes):
             assert pitch <= pitches[-1]
             pitches.append(pitch)
     collection = abjad.PitchSegment(pitches)
-    while collection[-1].octave.number < 4:
+    while collection[-1].get_octave().number < 4:
         collection = collection.transpose(n=12)
     return collection
 
@@ -2237,7 +2237,7 @@ def pitches_to_octave_adjustment(pitches, *, anchor=abjad.DOWN, octave_number=4)
             pitch = abjad.NumberedPitch(centroid)
         else:
             raise ValueError(anchor)
-        return pitch.octave.number
+        return pitch.get_octave().number
 
     target_octave_number = octave_number
     current_octave_number = _get_anchor_octave_number(pitches, anchor=anchor)

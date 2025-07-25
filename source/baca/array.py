@@ -999,7 +999,7 @@ class PitchArrayCell:
         Gets repr of pitch array cell.
         """
         if self.pitches():
-            pitches = " ".join([_.name for _ in self.pitches() or []])
+            pitches = " ".join([_.get_name() for _ in self.pitches() or []])
             return f'PitchArrayCell(pitches="{pitches}", width={self.width()})'
         else:
             return f"PitchArrayCell(width={self.width()})"
@@ -1056,7 +1056,7 @@ class PitchArrayCell:
 
     def _pitch_string(self):
         if self.pitches():
-            return " ".join([pitch.name for pitch in self.pitches()])
+            return " ".join([pitch.get_name() for pitch in self.pitches()])
         else:
             return ""
 
@@ -1317,27 +1317,27 @@ class PitchArrayCell:
         elif len(self.pitches()) == 1:
             if self.width() == 1:
                 return (
-                    self.pitches()[0].pitch_class.name,
-                    self.pitches()[0].octave.number,
+                    self.pitches()[0].pitch_class.get_name(),
+                    self.pitches()[0].get_octave().number,
                 )
             else:
                 return (
                     (
-                        self.pitches()[0].pitch_class.name,
-                        self.pitches()[0].octave.number,
+                        self.pitches()[0].pitch_class.get_name(),
+                        self.pitches()[0].get_octave().number,
                     ),
                     self.width(),
                 )
         else:
             if self.width() == 1:
                 return [
-                    (pitch.pitch_class.name, pitch.octave.number)
+                    (pitch.pitch_class.get_name(), pitch.get_octave().number)
                     for pitch in self.pitches()
                 ]
             else:
                 return (
                     [
-                        (pitch.pitch_class.name, pitch.octave.number)
+                        (pitch.pitch_class.get_name(), pitch.get_octave().number)
                         for pitch in self.pitches()
                     ],
                     self.width(),
