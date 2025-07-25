@@ -1121,7 +1121,7 @@ def _force_nonnatural_accidentals(score: abjad.Score) -> None:
             note_heads = plt[0].note_heads
         for note_head in note_heads:
             assert note_head is not None
-            if note_head.written_pitch.accidental != natural:
+            if note_head.written_pitch.get_accidental() != natural:
                 note_head.is_forced = True
 
 

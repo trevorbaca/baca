@@ -19,7 +19,7 @@ def _adjust_microtone_deviation_pitch(plt, deviation):
         return
     for pleaf in plt:
         pitch = pleaf.written_pitch
-        accidental = pitch.accidental.semitones + deviation
+        accidental = pitch.get_accidental().semitones + deviation
         pitch = abjad.NamedPitch(pitch, accidental=accidental)
         pleaf.written_pitch = pitch
         annotation = {"color microtone": True}
@@ -428,7 +428,7 @@ def _make_cluster_pitches(start_pitch, width):
     for i in range(width - 1):
         pitch = pitches[-1] + abjad.NamedInterval("M3")
         pitch = abjad.NamedPitch(pitch, accidental="natural")
-        assert pitch.accidental == abjad.Accidental("natural")
+        assert pitch.get_accidental() == abjad.Accidental("natural")
         pitches.append(pitch)
     return pitches
 

@@ -1317,13 +1317,13 @@ class PitchArrayCell:
         elif len(self.pitches()) == 1:
             if self.width() == 1:
                 return (
-                    self.pitches()[0].pitch_class.get_name(),
+                    self.pitches()[0].get_pitch_class().get_name(),
                     self.pitches()[0].get_octave().number,
                 )
             else:
                 return (
                     (
-                        self.pitches()[0].pitch_class.get_name(),
+                        self.pitches()[0].get_pitch_class().get_name(),
                         self.pitches()[0].get_octave().number,
                     ),
                     self.width(),
@@ -1331,13 +1331,13 @@ class PitchArrayCell:
         else:
             if self.width() == 1:
                 return [
-                    (pitch.pitch_class.get_name(), pitch.get_octave().number)
+                    (pitch.get_pitch_class().get_name(), pitch.get_octave().number)
                     for pitch in self.pitches()
                 ]
             else:
                 return (
                     [
-                        (pitch.pitch_class.get_name(), pitch.get_octave().number)
+                        (pitch.get_pitch_class().get_name(), pitch.get_octave().number)
                         for pitch in self.pitches()
                     ],
                     self.width(),

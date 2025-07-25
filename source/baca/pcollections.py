@@ -863,7 +863,7 @@ class Partial:
             NamedPitch('bf')
 
         """
-        hertz = self.number * self.fundamental.hertz
+        hertz = self.number * self.fundamental.get_hertz()
         return abjad.NamedPitch.from_hertz(hertz)
 
     def deviation(self) -> int:
@@ -877,7 +877,7 @@ class Partial:
 
         """
         deviation_multiplier = (
-            self.number * self.fundamental.hertz / self.approximation().hertz
+            self.number * self.fundamental.get_hertz() / self.approximation().get_hertz()
         )
         semitone_base = 2 ** abjad.Fraction(1, 12)
         deviation_semitones = math.log(deviation_multiplier, semitone_base)
@@ -2213,7 +2213,7 @@ def register_pcs(pitches, pcs):
     prototype = (abjad.NumberedPitchClass, abjad.NamedPitchClass)
     assert all(isinstance(_, prototype) for _ in pcs), repr(pcs)
     pcs = list(pcs)
-    reference_pcs = [_.pitch_class for _ in pitches]
+    reference_pcs = [_.get_pitch_class() for _ in pitches]
     result = []
     for pc in pcs:
         index = reference_pcs.index(pc)
