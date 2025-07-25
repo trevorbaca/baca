@@ -877,7 +877,9 @@ class Partial:
 
         """
         deviation_multiplier = (
-            self.number * self.fundamental.get_hertz() / self.approximation().get_hertz()
+            self.number
+            * self.fundamental.get_hertz()
+            / self.approximation().get_hertz()
         )
         semitone_base = 2 ** abjad.Fraction(1, 12)
         deviation_semitones = math.log(deviation_multiplier, semitone_base)
