@@ -19,9 +19,9 @@ def insert_and_transpose(notes, subrun_tokens):
     >>> result = []
     >>> for note in notes:
     ...   try:
-    ...        result.append(note.written_pitch.get_number())
+    ...        result.append(note.get_written_pitch().get_number())
     ...   except AttributeError:
-    ...        result.append([_.written_pitch.get_number() for _ in note])
+    ...        result.append([_.get_written_pitch().get_number() for _ in note])
 
     >>> result
     [0, [5, 7], 2, [4, 0, 6, 11], 7, 9, 5, [10, 6, 8], 11, [7], 4]
@@ -73,7 +73,7 @@ def insert_and_transpose(notes, subrun_tokens):
         for anchor_index, subrun_length in pairs:
             anchor_note = notes[anchor_index % len_notes]
             anchor_pitch = abjad.NamedPitch(anchor_note)
-            anchor_written_duration = anchor_note.written_duration
+            anchor_written_duration = anchor_note.get_written_duration()
             source_start_index = anchor_index + 1
             source_stop_index = source_start_index + subrun_length + 1
             cyclic_notes = abjad.CyclicTuple(notes)

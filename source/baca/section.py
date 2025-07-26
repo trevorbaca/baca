@@ -682,12 +682,12 @@ def _check_persistent_indicators_for_leaf(
 def _clean_up_laissez_vibrer_tie_direction(score: abjad.Score) -> None:
     default = abjad.Clef("treble")
     for note in abjad.iterate.leaves(score, abjad.Note):
-        if note.written_duration < 1:
+        if note.get_written_duration() < 1:
             continue
         if not abjad.get.has_indicator(note, abjad.LaissezVibrer):
             continue
         clef = abjad.get.effective_indicator(note, abjad.Clef, default=default)
-        staff_position = clef.to_staff_position(note.written_pitch)
+        staff_position = clef.to_staff_position(note.get_written_pitch())
         if staff_position == abjad.StaffPosition(0):
             abjad.override(note).LaissezVibrerTie.direction = abjad.UP
 
@@ -703,17 +703,18 @@ def _clean_up_obgcs(score: abjad.Score) -> None:
 def _clean_up_repeat_tie_direction(score: abjad.Score) -> None:
     default = abjad.Clef("treble")
     for leaf in abjad.iterate.leaves(score, pitched=True):
-        if leaf.written_duration < 1:
+        if leaf.get_written_duration() < 1:
             continue
         if not abjad.get.has_indicator(leaf, abjad.RepeatTie):
             continue
         clef = abjad.get.effective_indicator(leaf, abjad.Clef, default=default)
-        if hasattr(leaf, "written_pitch"):
+        # if hasattr(leaf, "written_pitch"):
+        if hasattr(leaf, "get_written_pitch"):
             note_heads = [leaf.note_head]
         else:
             note_heads = leaf.note_heads
         for note_head in note_heads:
-            staff_position = clef.to_staff_position(note_head.written_pitch)
+            staff_position = clef.to_staff_position(note_head.get_written_pitch())
             if staff_position.number == 0:
                 wrapper = abjad.get.wrapper(leaf, abjad.RepeatTie)
                 abjad.detach(wrapper, leaf)
@@ -1045,7 +1046,7 @@ def _extend_beam(leaf: abjad.Leaf) -> None:
     abjad.detach(abjad.StopBeam, leaf)
     if not abjad.get.has_indicator(leaf, abjad.StartBeam):
         abjad.detach(abjad.BeamCount, leaf)
-        left = leaf.written_duration.get_flag_count()
+        left = leaf.get_written_duration().get_flag_count()
         beam_count = abjad.BeamCount(left, 1)
         abjad.attach(beam_count, leaf, check_duplicate_indicator=True)
     current_leaf = leaf
@@ -1063,7 +1064,7 @@ def _extend_beam(leaf: abjad.Leaf) -> None:
             abjad.detach(abjad.StartBeam, next_leaf)
             if not abjad.get.has_indicator(next_leaf, abjad.StopBeam):
                 abjad.detach(abjad.BeamCount, next_leaf)
-                right = next_leaf.written_duration.get_flag_count()
+                right = next_leaf.get_written_duration().get_flag_count()
                 beam_count = abjad.BeamCount(1, right)
                 abjad.attach(beam_count, next_leaf, check_duplicate_indicator=True)
             return
@@ -1091,9 +1092,9 @@ def _find_repeat_pitch_classes(argument) -> list[abjad.LogicalTie]:
             if abjad.get.has_indicator(head, _enums.HIDDEN):
                 written_pitches = set()
             elif isinstance(head, abjad.Note):
-                written_pitches = set([head.written_pitch])
+                written_pitches = set([head.get_written_pitch()])
             elif isinstance(head, abjad.Chord):
-                written_pitches = set(head.written_pitches)
+                written_pitches = set(head.get_written_pitches())
             else:
                 written_pitches = set()
             pcs = set(abjad.NamedPitchClass(_) for _ in written_pitches)
@@ -1121,7 +1122,7 @@ def _force_nonnatural_accidentals(score: abjad.Score) -> None:
             note_heads = plt[0].note_heads
         for note_head in note_heads:
             assert note_head is not None
-            if note_head.written_pitch.get_accidental() != natural:
+            if note_head.get_written_pitch().get_accidental() != natural:
                 note_head.is_forced = True
 
 
@@ -1978,7 +1979,7 @@ def _style_framed_notes(score: abjad.Score) -> None:
     for leaf in abjad.iterate.leaves(score):
         if abjad.get.indicator(leaf, _enums.FRAMED_LEAF):
             duration = abjad.get.duration(leaf)
-            leaf.written_duration = abjad.Duration(1, 4)
+            leaf.set_written_duration(abjad.Duration(1, 4))
             multiplier = 4 * duration
             leaf.set_multiplier(multiplier.get_pair())
             literal = abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f")
@@ -2158,13 +2159,13 @@ def color_octaves(score: abjad.Score) -> None:
                 continue
             if isinstance(leaf, abjad.Note):
                 pleaves.append(leaf)
-                pitches.append(leaf.written_pitch)
+                pitches.append(leaf.get_written_pitch())
             elif isinstance(leaf, abjad.Chord):
                 pleaves.append(leaf)
-                pitches.extend(leaf.written_pitches)
+                pitches.extend(leaf.get_written_pitches())
         if not pitches:
             continue
-        pitch_classes = [_.pitch_class for _ in pitches]
+        pitch_classes = [_.get_pitch_class() for _ in pitches]
         if _pcollections.has_duplicates([pitch_classes]):
             color = True
             for pleaf in pleaves:

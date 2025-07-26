@@ -18,10 +18,10 @@ def _adjust_microtone_deviation_pitch(plt, deviation):
     if deviation == 0:
         return
     for pleaf in plt:
-        pitch = pleaf.written_pitch
+        pitch = pleaf.get_written_pitch()
         accidental = pitch.get_accidental().semitones + deviation
         pitch = abjad.NamedPitch(pitch, accidental=accidental)
-        pleaf.written_pitch = pitch
+        pleaf.set_written_pitch(pitch)
         annotation = {"color microtone": True}
         abjad.attach(annotation, pleaf)
 
@@ -100,11 +100,11 @@ def _do_interpolate_register_command(argument, start_pitch, stop_pitch):
         registration = _get_registration(start_pitch, stop_pitch, i, length)
         for pleaf in plt:
             if isinstance(pleaf, abjad.Note):
-                written_pitches = registration([pleaf.written_pitch])
-                pleaf.written_pitch = written_pitches[0]
+                written_pitches = registration([pleaf.get_written_pitch()])
+                pleaf.set_written_pitch(written_pitches[0])
             elif isinstance(pleaf, abjad.Chord):
-                written_pitches = registration(pleaf.written_pitches)
-                pleaf.written_pitches = written_pitches
+                written_pitches = registration(pleaf.get_written_pitches())
+                pleaf.set_written_pitches(written_pitches)
             else:
                 raise TypeError(pleaf)
             abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
@@ -125,13 +125,13 @@ def _do_octave_displacement_command(argument, displacements):
         interval = abjad.NumberedInterval(12 * displacement)
         for pleaf in plt:
             if isinstance(pleaf, abjad.Note):
-                pitch = pleaf.written_pitch
+                pitch = pleaf.get_written_pitch()
                 assert isinstance(pitch, abjad.NamedPitch)
                 pitch += interval
-                pleaf.written_pitch = pitch
+                pleaf.set_written_pitch(pitch)
             elif isinstance(pleaf, abjad.Chord):
-                pitches = [_ + interval for _ in pleaf.written_pitches]
-                pleaf.written_pitches = tuple(pitches)
+                pitches = [_ + interval for _ in pleaf.get_written_pitches()]
+                pleaf.set_written_pitches(tuple(pitches))
             else:
                 raise TypeError(pleaf)
 
@@ -207,13 +207,13 @@ def _do_register_command(argument, registration):
     for plt in plts:
         for pleaf in plt:
             if isinstance(pleaf, abjad.Note):
-                pitch = pleaf.written_pitch
+                pitch = pleaf.get_written_pitch()
                 pitches = registration([pitch])
-                pleaf.written_pitch = pitches[0]
+                pleaf.set_written_pitch(pitches[0])
             elif isinstance(pleaf, abjad.Chord):
-                pitches = pleaf.written_pitches
+                pitches = pleaf.get_written_pitches()
                 pitches = registration(pitches)
-                pleaf.written_pitches = pitches
+                pleaf.set_written_pitches(pitches)
             else:
                 raise TypeError(pleaf)
             abjad.detach(_enums.NOT_YET_REGISTERED, pleaf)
@@ -376,9 +376,9 @@ def _do_staff_position_interpolation_command(
 
 def _get_lowest_diatonic_pitch_number(plt):
     if isinstance(plt.get_head(), abjad.Note):
-        pitch = plt.get_head().written_pitch
+        pitch = plt.get_head().get_written_pitch()
     elif isinstance(plt.get_head(), abjad.Chord):
-        pitch = plt.get_head().written_pitches[0]
+        pitch = plt.get_head().get_written_pitches()[0]
     else:
         raise TypeError(plt)
     return pitch._get_diatonic_pitch_number()
@@ -407,11 +407,11 @@ def _make_cluster(
     assert plt.get_is_pitched(), repr(plt)
     assert isinstance(width, int), repr(width)
     if start_pitch is None:
-        start_pitch = plt.get_head().written_pitch
+        start_pitch = plt.get_head().get_written_pitch()
     pitches = _make_cluster_pitches(start_pitch, width)
     key_cluster = abjad.KeyCluster(hide_flat_markup=hide_flat_markup)
     for pleaf in plt:
-        chord = abjad.Chord(pitches, pleaf.written_duration)
+        chord = abjad.Chord(pitches, pleaf.get_written_duration())
         wrappers = abjad.get.wrappers(pleaf)
         abjad.detach(object, pleaf)
         abjad.mutate.replace(pleaf, chord, wrappers=True)
@@ -508,20 +508,20 @@ def _set_lt_pitch(
         else:
             for leaf in lt:
                 rest = abjad.Rest(
-                    leaf.written_duration, multiplier=leaf.get_multiplier()
+                    leaf.get_written_duration(), multiplier=leaf.get_multiplier()
                 )
                 abjad.mutate.replace(leaf, rest, wrappers=True)
             new_lt = abjad.get.logical_tie(rest)
     elif isinstance(pitch, collections.abc.Iterable):
         if isinstance(lt.get_head(), abjad.Chord):
             for chord in lt:
-                chord.written_pitches = pitch
+                chord.set_written_pitches(pitch)
         else:
             assert isinstance(lt.get_head(), abjad.Note | abjad.Rest)
             for leaf in lt:
                 chord = abjad.Chord(
                     pitch,
-                    leaf.written_duration,
+                    leaf.get_written_duration(),
                     multiplier=leaf.get_multiplier(),
                 )
                 abjad.mutate.replace(leaf, chord, wrappers=True)
@@ -529,11 +529,11 @@ def _set_lt_pitch(
     else:
         if isinstance(lt.get_head(), abjad.Note):
             for note in lt:
-                note.written_pitch = pitch
+                note.set_written_pitch(pitch)
         elif set_chord_pitches_equal is True and isinstance(lt.get_head(), abjad.Chord):
             for chord in lt:
                 for note_head in chord.note_heads:
-                    note_head.written_pitch = pitch
+                    note_head.set_written_pitch(pitch)
         else:
             assert isinstance(lt.get_head(), abjad.Chord | abjad.Rest)
             if not allow_obgc_mutation:
@@ -542,7 +542,7 @@ def _set_lt_pitch(
             for leaf in lt:
                 note = abjad.Note(
                     pitch,
-                    leaf.written_duration,
+                    leaf.get_written_duration(),
                     multiplier=leaf.get_multiplier(),
                 )
                 abjad.mutate.replace(leaf, note, wrappers=True)
@@ -552,11 +552,11 @@ def _set_lt_pitch(
 
 def _set_pitch(leaf, transposition):
     if isinstance(leaf, abjad.Note):
-        pitch = transposition(leaf.written_pitch)
-        leaf.written_pitch = pitch
+        pitch = transposition(leaf.get_written_pitch())
+        leaf.set_written_pitch(pitch)
     elif isinstance(leaf, abjad.Chord):
-        pitches = [transposition(_) for _ in leaf.written_pitches]
-        leaf.written_pitches = pitches
+        pitches = [transposition(_) for _ in leaf.get_written_pitches()]
+        leaf.set_written_pitches(pitches)
     abjad.detach(_enums.NOT_YET_REGISTERED, leaf)
 
 

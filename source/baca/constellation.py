@@ -2107,7 +2107,7 @@ class Constellation:
         assert isinstance(chord, abjad.Chord)
         constellation_index = self.circuit()._constellations.index(self)
         constellation_number = constellation_index + 1
-        numbers = [_.get_number() for _ in chord.written_pitches]
+        numbers = [_.get_number() for _ in chord.get_written_pitches()]
         set_ = abjad.PitchSet(numbers)
         chord_index = self._sets.index(set_)
         chord_number = chord_index + 1

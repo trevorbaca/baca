@@ -816,10 +816,10 @@ def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
         markup = abjad.Markup(rf"\markup {n}")
         abjad.attach(markup, note, direction=abjad.DOWN)
     notes = abjad.select.notes(staff)
-    if notes[0].written_pitch < abjad.NamedPitch("C4"):
+    if notes[0].get_written_pitch() < abjad.NamedPitch("C4"):
         abjad.attach(abjad.Clef("bass"), staff[0])
         for note in notes[1:]:
-            if abjad.NamedPitch("C4") <= note.written_pitch:
+            if abjad.NamedPitch("C4") <= note.get_written_pitch():
                 abjad.attach(abjad.Clef("treble"), note)
                 break
     abjad.override(staff).BarLine.stencil = False

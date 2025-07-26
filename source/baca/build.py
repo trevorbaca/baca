@@ -668,7 +668,7 @@ def _make_section_clicktrack(lilypond_file, mtime, section_directory):
             for _ in range(numerator):
                 note = abjad.Note("fs,1", multiplier=(1, denominator))
                 notes.append(note)
-            notes[0].written_pitch = -23
+            notes[0].set_written_pitch(-23)
         abjad.attach(time_signature, notes[0])
         abjad.attach(metronome_mark, notes[0])
         measure = abjad.Container(notes)
