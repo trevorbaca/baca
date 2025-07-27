@@ -174,7 +174,7 @@ def _evaluate_item(
         obgc, nongrace_voice = polyphony_container
         assert isinstance(obgc, abjad.OnBeatGraceContainer)
         assert isinstance(nongrace_voice, abjad.Voice)
-        assert nongrace_voice.name == voice_name
+        assert nongrace_voice.get_name() == voice_name
         nongrace_leaves = abjad.mutate.eject_contents(nongrace_voice)
         components.extend(nongrace_leaves)
         result = nongrace_leaves
@@ -792,7 +792,7 @@ class OBGC:
         obgc, nongrace_voice = polyphony_container
         assert isinstance(obgc, abjad.OnBeatGraceContainer)
         assert isinstance(nongrace_voice, abjad.Voice)
-        assert nongrace_voice.name == voice_name
+        assert nongrace_voice.get_name() == voice_name
         return polyphony_container
 
 

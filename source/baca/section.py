@@ -195,14 +195,15 @@ class VoiceCache:
     def __init__(self, score, voice_abbreviations=None) -> None:
         voices = []
         for voice in abjad.select.components(score, abjad.Voice):
-            assert voice.name is not None
-            if hasattr(self, voice.name):
+            voice_name = voice.get_name()
+            assert voice_name is not None
+            if hasattr(self, voice_name):
                 continue
             voices.append(voice)
-            setattr(self, voice.name, voice)
+            setattr(self, voice_name, voice)
             if voice_abbreviations:
                 for abbreviation, voice_name in voice_abbreviations.items():
-                    if voice_name == voice.name:
+                    if voice_name == voice.get_name():
                         setattr(self, abbreviation, voice)
         self._voices = voices
 
@@ -244,13 +245,14 @@ def _add_container_identifiers(
     context_name_to_count: dict[str, int] = {}
     for context in contexts:
         assert isinstance(context, abjad.Context), repr(context)
-        assert context.name is not None, repr(context)
-        count = context_name_to_count.get(context.name, 0)
+        context_name = context.get_name()
+        assert context_name is not None
+        count = context_name_to_count.get(context_name, 0)
         if count == 0:
-            suffixed_context_name = context.name
+            suffixed_context_name = context_name
         else:
-            suffixed_context_name = f"{context.name}.item.{count}"
-        context_name_to_count[context.name] = count + 1
+            suffixed_context_name = f"{context.get_name()}.item.{count}"
+        context_name_to_count[context_name] = count + 1
         if section_number:
             context_identifier = f"{section_number}.{suffixed_context_name}"
         else:
@@ -289,10 +291,11 @@ def _add_container_identifiers(
                 container.set_identifier(f"%*% {container_identifier}")
     for staff in abjad.iterate.components(score, abjad.Staff):
         if section_number:
-            context_identifier = f"{section_number}.{staff.name}"
+            context_identifier = f"{section_number}.{staff.get_name()}"
         else:
-            assert staff.name is not None
-            context_identifier = staff.name
+            staff_name = staff.get_name()
+            assert staff_name is not None
+            context_identifier = staff_name
         staff.set_identifier(f"%*% {context_identifier}")
     return container_to_part_assignment
 
@@ -304,7 +307,7 @@ def _analyze_memento(contexts, dictionary, memento) -> Analysis | None:
     if isinstance(previous_indicator, _layout.SpacingSection):
         return None
     for context in contexts:
-        if context.name == memento.get_context():
+        if context.get_name() == memento.get_context():
             memento_context = context
             break
     else:
@@ -371,7 +374,7 @@ def _attach_measure_number_spanners(
             abjad.attach(
                 start_text_span,
                 skip,
-                context=global_skips.name,
+                context=global_skips.get_name(),
                 deactivate=True,
                 tag=tag,
             )
@@ -385,7 +388,7 @@ def _attach_measure_number_spanners(
             abjad.attach(
                 start_text_span,
                 skip,
-                context=global_skips.name,
+                context=global_skips.get_name(),
                 deactivate=True,
                 tag=tag,
             )
@@ -396,7 +399,7 @@ def _attach_measure_number_spanners(
             abjad.attach(
                 stop_text_span,
                 skip,
-                context=global_skips.name,
+                context=global_skips.get_name(),
                 deactivate=True,
                 tag=tag,
             )
@@ -406,7 +409,7 @@ def _attach_measure_number_spanners(
             abjad.attach(
                 stop_text_span,
                 skip,
-                context=global_skips.name,
+                context=global_skips.get_name(),
                 deactivate=True,
                 tag=tag,
             )
@@ -582,7 +585,9 @@ def _check_all_music_in_part_containers(score: abjad.Score) -> None:
                 and component_identifier.startswith("%*% ")
             ):
                 continue
-            message = f"{voice.name} contains {component!r} outside part container."
+            message = (
+                f"{voice.get_name()} contains {component!r} outside part container."
+            )
             raise Exception(message)
 
 
@@ -606,8 +611,8 @@ def _check_doubled_dynamics(score: abjad.Score) -> None:
         if 1 < len(dynamics):
             voice = abjad.get.parentage(leaf).get(abjad.Voice)
             assert isinstance(voice, abjad.Voice)
-            assert voice.name is not None
-            message = f"leaf {str(leaf)} in {voice.name} has"
+            assert voice.get_name() is not None
+            message = f"leaf {str(leaf)} in {voice.get_name()} has"
             message += f" {len(dynamics)} dynamics attached:"
             for dynamic in dynamics:
                 message += f"\n   {dynamic!s}"
@@ -649,7 +654,7 @@ def _check_persistent_indicators(
             continue
         for i, leaf in enumerate(abjad.iterate.leaves(voice)):
             _check_persistent_indicators_for_leaf(
-                do_not_require_short_instrument_names, leaf, i, voice.name
+                do_not_require_short_instrument_names, leaf, i, voice.get_name()
             )
 
 
@@ -756,9 +761,10 @@ def _clone_section_initial_short_instrument_name(score: abjad.Score) -> None:
 def _collect_alive_during_section(score: abjad.Score) -> list[str]:
     result = []
     for context in abjad.iterate.components(score, abjad.Context):
-        assert context.name is not None
-        if context.name not in result:
-            result.append(context.name)
+        context_name = context.get_name()
+        assert context_name is not None
+        if context_name not in result:
+            result.append(context_name)
     return result
 
 
@@ -844,14 +850,15 @@ def _collect_persistent_indicators(
 ) -> dict[str, list[_memento.Memento]]:
     result: dict[str, list[_memento.Memento]] = {}
     contexts = abjad.select.components(score, abjad.Context)
-    contexts.sort(key=lambda _: _.name or "")
+    contexts.sort(key=lambda _: _.get_name() or "")
     name_to_wrappers: dict[str, list[abjad.wrapper.Wrapper]] = {}
     for context in contexts:
-        assert context.name is not None
-        if context.name not in name_to_wrappers:
-            name_to_wrappers[context.name] = []
+        context_name = context.get_name()
+        assert context_name is not None
+        if context_name not in name_to_wrappers:
+            name_to_wrappers[context_name] = []
         wrappers = context._dependent_wrappers[:]
-        name_to_wrappers[context.name].extend(wrappers)
+        name_to_wrappers[context_name].extend(wrappers)
     do_not_persist_on_anchor_leaf = (
         abjad.Instrument,
         abjad.MetronomeMark,
@@ -935,7 +942,7 @@ def _collect_persistent_indicators(
             else:
                 editions = None
             memento = _memento.Memento(
-                context=first_context.name,
+                context=first_context.get_name(),
                 edition=editions,
                 manifest=manifest,
                 prototype=prototype,
@@ -948,6 +955,7 @@ def _collect_persistent_indicators(
             result[name] = mementos
     if previous_persistent_indicators:
         for context_name, mementos in previous_persistent_indicators.items():
+            assert context_name is not None  # new
             if context_name not in result:
                 result[context_name] = mementos
     empty_contexts = []
@@ -1017,11 +1025,11 @@ def _comment_measure_numbers(
         if abjad.get.has_indicator(leaf, _enums.ANCHOR_SKIP):
             string = "% [anchor skip]"
         elif abjad.get.has_indicator(leaf, _enums.ANCHOR_NOTE):
-            string = f"% [{context.name} anchor note]"
+            string = f"% [{context.get_name()} anchor note]"
         else:
             local_measure_number = measure_number - first_measure_number
             local_measure_number += 1
-            string = f"% [{context.name} measure {local_measure_number}]"
+            string = f"% [{context.get_name()} measure {local_measure_number}]"
         literal = abjad.LilyPondLiteral(string, site="absolute_before")
         abjad.attach(literal, leaf, tag=tag)
 
@@ -1031,7 +1039,7 @@ def _error_on_not_yet_pitched(score: abjad.Score) -> None:
     for voice in abjad.iterate.components(score, abjad.Voice):
         for leaf in abjad.iterate.leaves(voice):
             if abjad.get.has_indicator(leaf, _enums.NOT_YET_PITCHED):
-                violators.append((voice.name, leaf))
+                violators.append((voice.get_name(), leaf))
     if violators:
         strings = [f"{len(violators)} leaves not yet pitched ..."]
         strings.extend([f"    {_[0]} {repr(_[1])}" for _ in violators])
@@ -1044,7 +1052,7 @@ def _extend_beam(leaf: abjad.Leaf) -> None:
         parentage = abjad.get.parentage(leaf)
         voice = parentage.get(abjad.Voice)
         assert isinstance(voice, abjad.Voice)
-        message = f"{leaf!s} in {voice.name} has no StopBeam."
+        message = f"{leaf!s} in {voice.get_name()} has no StopBeam."
         raise Exception(message)
     abjad.detach(abjad.StopBeam, leaf)
     if not abjad.get.has_indicator(leaf, abjad.StartBeam):
@@ -1059,7 +1067,7 @@ def _extend_beam(leaf: abjad.Leaf) -> None:
             parentage = abjad.get.parentage(current_leaf)
             voice = parentage.get(abjad.Voice)
             assert isinstance(voice, abjad.Voice)
-            message = f"no leaf follows {current_leaf!s} in {voice.name};"
+            message = f"no leaf follows {current_leaf!s} in {voice.get_name()};"
             message += "\n\tDo not set extend_beam=True on last figure."
             raise Exception(message)
             return
@@ -1189,7 +1197,7 @@ def _get_measure_timespan(measure_number: int, score: abjad.Score) -> abjad.Time
 
 
 def _global_rests_are_meaningful(context: abjad.Context) -> bool:
-    assert context.name == "Rests"
+    assert context.get_name() == "Rests"
     for skip in context:
         indicators = abjad.get.indicators(skip)
         if 2 < len(indicators):
@@ -1210,7 +1218,7 @@ def _label_clock_time(
         rests = []
     else:
         for context in abjad.iterate.components(score, abjad.Context):
-            if context.name == "Rests":
+            if context.get_name() == "Rests":
                 break
         items = abjad.select.rests(context)
         for item in items:
@@ -1825,8 +1833,10 @@ def _style_fermata_measures(
                 continue
             voice = abjad.get.parentage(leaf).get(abjad.Voice)
             assert voice is not None
-            assert hasattr(voice, "name")
-            if "Rests" in voice.name:
+            assert isinstance(voice, abjad.Voice)
+            voice_name = voice.get_name()
+            assert voice_name is not None
+            if "Rests" in voice_name:
                 continue
             if start_offset not in empty_fermata_measure_start_offsets:
                 continue
@@ -2100,9 +2110,10 @@ def cache_leaves(
         parentage = abjad.get.parentage(leaf)
         context = parentage.get(abjad.Context)
         assert isinstance(context, abjad.Context)
-        assert context.name is not None
+        context_name = context.get_name()
+        assert context_name is not None
         measure_number_to_leaves = voice_name_to_leaves_by_measure_dict.setdefault(
-            context.name, {}
+            context_name, {}
         )
         leaf_timespan = abjad.get.timespan(leaf)
         # TODO: replace loop with bisection:
@@ -2240,14 +2251,15 @@ def extend_beams(score: abjad.Score) -> None:
 def get_voice_names(score: abjad.Score) -> tuple[str, ...]:
     voice_names = ["Skips", "Rests"]
     for voice in abjad.iterate.components(score, abjad.Voice):
-        if voice.name is not None:
-            voice_names.append(voice.name)
-            words = voice.name.split(".")
+        voice_name = voice.get_name()
+        if voice_name is not None:
+            voice_names.append(voice_name)
+            words = voice_name.split(".")
             if "Music" in words:
-                rest_voice_name = voice.name.replace("Music", "Rests")
+                rest_voice_name = voice_name.replace("Music", "Rests")
                 voice_names.append(rest_voice_name)
             elif "Voice" in words:
-                rest_voice_name = f"{voice.name}.Rests"
+                rest_voice_name = f"{voice_name}.Rests"
                 voice_names.append(rest_voice_name)
     return tuple(voice_names)
 
@@ -2775,17 +2787,18 @@ def reapply_persistent_indicators(
         leaf = abjad.select.leaf(voice, 0)
         for component in abjad.get.parentage(leaf):
             if isinstance(component, abjad.Context):
-                assert isinstance(component.name, str), repr(component.name)
-                deactivate = component.name in deactivate_contexts
-                if component.name not in already_reapplied_contexts:
-                    mementos = previous_persistent_indicators.get(component.name, [])
+                component_name = component.get_name()
+                assert component_name is not None
+                deactivate = component_name in deactivate_contexts
+                if component_name not in already_reapplied_contexts:
+                    mementos = previous_persistent_indicators.get(component_name, [])
                     _reapply_persistent_indicators(
                         contexts,
                         manifests,
                         mementos,
                         deactivate=deactivate,
                     )
-                    already_reapplied_contexts.add(component.name)
+                    already_reapplied_contexts.add(component_name)
 
 
 def remove_redundant_time_signatures(global_skips: abjad.Context) -> list[str]:
@@ -2915,7 +2928,7 @@ def span_metronome_marks(
     hide: bool = False,
     parts_metric_modulation_multiplier: tuple[float, float] | None = None,
 ) -> None:
-    assert global_skips.name == "Skips", repr(global_skips.name)
+    assert global_skips.get_name() == "Skips", repr(global_skips.get_name())
     indicator_count = 0
     skips = _select.skips(global_skips)
     final_leaf_metronome_mark = abjad.get.indicator(skips[-1], abjad.MetronomeMark)
@@ -3090,7 +3103,7 @@ def span_metronome_marks(
             abjad.attach(
                 stop_text_span,
                 skip,
-                context=global_skips.name,
+                context=global_skips.get_name(),
                 tag=_helpers.function_name(_frame(), n=1),
             )
         if add_right_text_to_me is skip:
@@ -3135,7 +3148,7 @@ def span_metronome_marks(
             abjad.attach(
                 abjad.bundle(start_text_span, *metronome_mark_tweaks),
                 skip,
-                context=global_skips.name,
+                context=global_skips.get_name(),
                 deactivate=True,
                 tag=tag.append(_helpers.function_name(_frame(), n=2)),
             )
@@ -3143,7 +3156,7 @@ def span_metronome_marks(
             abjad.attach(
                 abjad.bundle(start_text_span, *metronome_mark_tweaks),
                 skip,
-                context=global_skips.name,
+                context=global_skips.get_name(),
                 deactivate=True,
                 tag=tag.append(_helpers.function_name(_frame(), n=2.1)).append(
                     _tags.METRIC_MODULATION_IS_NOT_SCALED,
@@ -3159,7 +3172,7 @@ def span_metronome_marks(
             abjad.attach(
                 abjad.bundle(start_text_span_, *metronome_mark_tweaks),
                 skip,
-                context=global_skips.name,
+                context=global_skips.get_name(),
                 deactivate=True,
                 tag=tag.append(_helpers.function_name(_frame(), n=2.2)).append(
                     _tags.METRIC_MODULATION_IS_SCALED,
@@ -3172,7 +3185,7 @@ def span_metronome_marks(
             abjad.attach(
                 abjad.bundle(start_text_span_, *metronome_mark_tweaks),
                 skip,
-                context=global_skips.name,
+                context=global_skips.get_name(),
                 deactivate=True,
                 tag=tag.append(_helpers.function_name(_frame(), n=2.2)).append(
                     _tags.METRIC_MODULATION_IS_STRIPPED,
@@ -3245,7 +3258,7 @@ def span_metronome_marks(
         abjad.attach(
             abjad.bundle(start_text_span, *metronome_mark_tweaks),
             skip,
-            context=global_skips.name,
+            context=global_skips.get_name(),
             deactivate=False,
             tag=tag.append(_helpers.function_name(_frame(), n=3)),
         )
@@ -3257,7 +3270,7 @@ def span_metronome_marks(
         abjad.attach(
             stop_text_span,
             final_skip,
-            context=global_skips.name,
+            context=global_skips.get_name(),
             tag=tag_,
         )
 
