@@ -718,9 +718,9 @@ def _clean_up_repeat_tie_direction(score: abjad.Score) -> None:
         clef = abjad.get.effective_indicator(leaf, abjad.Clef, default=default)
         # if hasattr(leaf, "written_pitch"):
         if hasattr(leaf, "get_written_pitch"):
-            note_heads = [leaf.note_head]
+            note_heads = [leaf.get_note_head()]
         else:
-            note_heads = leaf.note_heads
+            note_heads = leaf.get_note_heads()
         for note_head in note_heads:
             staff_position = clef.to_staff_position(note_head.get_written_pitch())
             if staff_position.number == 0:
@@ -1128,9 +1128,9 @@ def _force_nonnatural_accidentals(score: abjad.Score) -> None:
     natural = abjad.Accidental("natural")
     for plt in _select.plts(score):
         if isinstance(plt[0], abjad.Note):
-            note_heads = [plt[0].note_head]
+            note_heads = [plt[0].get_note_head()]
         else:
-            note_heads = plt[0].note_heads
+            note_heads = plt[0].get_note_heads()
         for note_head in note_heads:
             assert note_head is not None
             if note_head.get_written_pitch().get_accidental() != natural:

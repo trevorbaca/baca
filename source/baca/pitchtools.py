@@ -89,7 +89,7 @@ def _do_diatonic_cluster_command(argument, widths):
         pitches = [abjad.NamedPitch(_) for _ in numbers_]
         for pleaf in plt:
             chord = abjad.Chord(pleaf)
-            chord.note_heads[:] = pitches
+            chord.get_note_heads()[:] = pitches
             abjad.mutate.replace(pleaf, chord, wrappers=True)
 
 
@@ -532,7 +532,7 @@ def _set_lt_pitch(
                 note.set_written_pitch(pitch)
         elif set_chord_pitches_equal is True and isinstance(lt.get_head(), abjad.Chord):
             for chord in lt:
-                for note_head in chord.note_heads:
+                for note_head in chord.get_note_heads():
                     note_head.set_written_pitch(pitch)
         else:
             assert isinstance(lt.get_head(), abjad.Chord | abjad.Rest)
