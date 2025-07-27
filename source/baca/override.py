@@ -30,7 +30,7 @@ def _override(
         context = getattr(abjad, lilypond_type)
         assert issubclass(context, abjad.Context), repr(context)
         context = abjad.get.parentage(leaves[0]).get(context) or context()
-        lilypond_type = context.lilypond_type
+        lilypond_type = context.get_lilypond_type()
         assert isinstance(lilypond_type, str), repr(lilypond_type)
     assert isinstance(grob, str)
     assert isinstance(attribute, str)

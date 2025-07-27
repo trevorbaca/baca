@@ -258,24 +258,25 @@ def force_accidental(argument, *, tag: abjad.Tag | None = None) -> None:
             assert note_head is not None
             if not tag.string:
                 if cautionary:
-                    note_head.is_cautionary = True
+                    note_head.set_is_cautionary(True)
                 if forced:
-                    note_head.is_forced = True
+                    note_head.set_is_forced(True)
                 if parenthesized:
-                    note_head.is_parenthesized = True
+                    note_head.set_is_parenthesized(True)
             else:
                 alternative = copy.copy(note_head)
                 if cautionary:
-                    alternative.is_cautionary = True
+                    alternative.set_is_cautionary(True)
                 if forced:
-                    alternative.is_forced = True
+                    alternative.set_is_forced(True)
                 if parenthesized:
-                    alternative.is_parenthesized = True
-                note_head.alternative = (
+                    alternative.set_is_parenthesized(True)
+                triple = (
                     alternative,
                     alternative_tag,
                     primary_tag,
                 )
+                note_head.set_alternative(triple)
 
 
 def glissando(

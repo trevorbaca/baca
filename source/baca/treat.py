@@ -45,7 +45,7 @@ def _attach_color_literal(
     assert context_name is not None
     context = wrapper._find_correct_effective_context(component, context_name)
     assert isinstance(context, abjad.Context), repr(context)
-    string = rf"\override {context.lilypond_type}.{grob}.color ="
+    string = rf"\override {context.get_lilypond_type()}.{grob}.color ="
     if cancelation is True:
         string += " ##f"
     elif redraw is True:
@@ -568,7 +568,7 @@ def treat_persistent_wrapper(
             existing_tag=existing_tag,
         )
         if isinstance(unbundled_indicator, abjad.Clef):
-            string = rf"\set {context.lilypond_type}.forceClef = ##t"
+            string = rf"\set {context.get_lilypond_type()}.forceClef = ##t"
             literal = abjad.LilyPondLiteral(string, site="before")
             abjad.attach(
                 literal,

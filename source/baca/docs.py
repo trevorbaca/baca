@@ -56,20 +56,20 @@ _global_context_string = r"""\layout
 
 def _move_global_context(score):
     global_skips = score["Skips"]
-    global_skips.lilypond_type = "Voice"
+    global_skips.set_lilypond_type("Voice")
     music_context = score["MusicContext"]
     for component in abjad.iterate.components(music_context):
         if isinstance(component, abjad.Staff):
             first_music_staff = component
             break
-    first_music_staff.simultaneous = True
+    first_music_staff.set_simultaneous(True)
     first_music_staff.insert(0, global_skips)
     score["GlobalContext"][:] = []
     del score["GlobalContext"]
     assert len(score) == 1, repr(score)
     score[:] = music_context[:]
     if len(score) == 1:
-        score.simultaneous = False
+        score.set_simultaneous(False)
 
 
 def attach_time_signature(voice: abjad.Voice) -> None:
@@ -286,7 +286,7 @@ def make_empty_score(
         del score["Skips"]
     for context in abjad.select.components(score, abjad.Context):
         if len(context) == 1:
-            context.simultaneous = False
+            context.set_simultaneous(False)
     return score
 
 

@@ -255,20 +255,22 @@ def _add_container_identifiers(
             context_identifier = f"{section_number}.{suffixed_context_name}"
         else:
             context_identifier = suffixed_context_name
-        context.identifier = f"%*% {context_identifier}"
+        context.set_identifier(f"%*% {context_identifier}")
         part_container_count = 0
         total_part_containers = 0
         for container in abjad.iterate.components(context, abjad.Container):
-            if not container.identifier:
+            container_identifier = container.get_identifier()
+            if not container_identifier:
                 continue
-            if container.identifier.startswith("%*% Part"):
+            if container_identifier.startswith("%*% Part"):
                 total_part_containers += 1
         for container in abjad.iterate.components(context, abjad.Container):
-            if not container.identifier:
+            container_identifier = container.get_identifier()
+            if not container_identifier:
                 continue
-            if container.identifier.startswith("%*% Part"):
+            if container_identifier.startswith("%*% Part"):
                 part_container_count += 1
-                part = container.identifier.strip("%*% ")
+                part = container_identifier.strip("%*% ")
                 globals_ = globals()
                 globals_["PartAssignment"] = _parts.PartAssignment
                 part = eval(part, globals_)
@@ -284,14 +286,14 @@ def _add_container_identifiers(
                 assert isinstance(timespan, abjad.Timespan)
                 pair: tuple[_parts.PartAssignment, abjad.Timespan] = (part, timespan)
                 container_to_part_assignment[container_identifier] = pair
-                container.identifier = f"%*% {container_identifier}"
+                container.set_identifier(f"%*% {container_identifier}")
     for staff in abjad.iterate.components(score, abjad.Staff):
         if section_number:
             context_identifier = f"{section_number}.{staff.name}"
         else:
             assert staff.name is not None
             context_identifier = staff.name
-        staff.identifier = f"%*% {context_identifier}"
+        staff.set_identifier(f"%*% {context_identifier}")
     return container_to_part_assignment
 
 
@@ -573,10 +575,11 @@ def _check_all_music_in_part_containers(score: abjad.Score) -> None:
                 continue
             if abjad.get.has_indicator(component, indicator):
                 continue
+            component_identifier = component.get_identifier()
             if (
                 type(component) is abjad.Container
-                and component.identifier
-                and component.identifier.startswith("%*% ")
+                and component_identifier is not None
+                and component_identifier.startswith("%*% ")
             ):
                 continue
             message = f"{voice.name} contains {component!r} outside part container."
@@ -1123,7 +1126,7 @@ def _force_nonnatural_accidentals(score: abjad.Score) -> None:
         for note_head in note_heads:
             assert note_head is not None
             if note_head.get_written_pitch().get_accidental() != natural:
-                note_head.is_forced = True
+                note_head.set_is_forced(True)
 
 
 def _get_fermata_measure_numbers(
@@ -1477,13 +1480,13 @@ def _move_global_rests(
     if global_rests_in_topmost_staff is True:
         for staff in abjad.iterate.components(music_context, abjad.Staff):
             break
-        staff.simultaneous = True
+        staff.set_simultaneous(True)
         staff.insert(0, global_rests)
     elif global_rests_in_every_staff is True:
         topmost_staff = True
         tag = global_rests.get_tag() or abjad.Tag()
         for staff in abjad.iterate.components(music_context, abjad.Staff):
-            staff.simultaneous = True
+            staff.set_simultaneous(True)
             global_rests_ = copy.deepcopy(global_rests)
             if not topmost_staff:
                 global_rests_._tag = tag.append(_tags.NOT_TOPMOST)

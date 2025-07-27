@@ -236,8 +236,8 @@ class PersistentOverride:
 
     def _get_lilypond_format(self, context=None):
         if isinstance(context, abjad.Context):
-            assert isinstance(context.lilypond_type, str), repr(context)
-            lilypond_type = context.lilypond_type
+            assert isinstance(context.get_lilypond_type(), str), repr(context)
+            lilypond_type = context.get_lilypond_type()
         else:
             lilypond_type = self.context
         override = abjad.LilyPondOverride(
