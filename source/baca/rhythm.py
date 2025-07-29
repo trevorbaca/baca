@@ -1052,7 +1052,7 @@ def make_mmrests(
                 pair = time_signature.pair
             else:
                 assert isinstance(time_signature, abjad.Duration)
-                pair = time_signature.get_pair()
+                pair = time_signature.pair()
             mmrest = abjad.MultimeasureRest(1, multiplier=pair, tag=tag)
             mmrests.append(mmrest)
     else:
@@ -1344,7 +1344,7 @@ def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tup
     durations = [_.get_duration() for _ in time_signatures]
     tag = _helpers.function_name(_frame())
     duration = abjad.Duration(duration)
-    numerator, denominator = duration.get_pair()
+    numerator, denominator = duration.pair()
     tuplets = rmakers.incised(
         durations,
         fill_with_rests=True,
@@ -1524,7 +1524,7 @@ def replace_nontrivial_skip_filled_tuplets(argument):
             violators.append(tuplet)
     for tuplet in violators:
         duration = abjad.get.duration(tuplet)
-        skip = abjad.Skip(1, multiplier=duration.get_pair())
+        skip = abjad.Skip(1, multiplier=duration.pair())
         assert duration == abjad.get.duration(skip)
         abjad.mutate.replace([tuplet], [skip])
 
