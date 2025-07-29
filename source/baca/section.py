@@ -1732,7 +1732,7 @@ def _replace_rests_with_multimeasure_rests(
         for group in groups:
             if not all(isinstance(_, abjad.Rest) for _ in group):
                 continue
-            parents = [abjad.get.parentage(_).get_parent() for _ in group]
+            parents = [abjad.get.parentage(_).parent() for _ in group]
             if any(_ is not voice for _ in parents):
                 continue
             start_offset = abjad.get.timespan(group[0]).start_offset
@@ -2164,7 +2164,7 @@ def color_octaves(score: abjad.Score) -> None:
     for vertical_moment in vertical_moments:
         pleaves: list[abjad.Chord | abjad.Note] = []
         pitches = []
-        for leaf in vertical_moment.get_leaves():
+        for leaf in vertical_moment.leaves():
             if abjad.get.has_indicator(leaf, _enums.HIDDEN):
                 continue
             if abjad.get.has_indicator(leaf, _enums.STAFF_POSITION):

@@ -4717,7 +4717,7 @@ def tupletted(argument) -> list:
     """
     result = []
     for item in argument:
-        parentage = abjad.get.parentage(item).get_components()[1:]
+        parentage = abjad.get.parentage(item).components()[1:]
         if any(isinstance(_, abjad.Tuplet) for _ in parentage):
             result.append(item)
     return result
@@ -4727,7 +4727,7 @@ def tupletted_first_leaf(argument) -> list:
     result = []
     for item in argument:
         first_leaf = abjad.select.leaf(item, 0)
-        parentage = abjad.get.parentage(first_leaf).get_components()[1:]
+        parentage = abjad.get.parentage(first_leaf).components()[1:]
         if any(isinstance(_, abjad.Tuplet) for _ in parentage):
             result.append(item)
     return result
@@ -4749,7 +4749,7 @@ def untupletted(argument) -> list:
     """
     result = []
     for item in argument:
-        parentage = abjad.get.parentage(item).get_components()[1:]
+        parentage = abjad.get.parentage(item).components()[1:]
         if not any(isinstance(_, abjad.Tuplet) for _ in parentage):
             result.append(item)
     return result
@@ -4759,7 +4759,7 @@ def untupletted_first_leaf(argument) -> list:
     result = []
     for item in argument:
         first_leaf = abjad.select.leaf(item, 0)
-        parentage = abjad.get.parentage(first_leaf).get_components()[1:]
+        parentage = abjad.get.parentage(first_leaf).components()[1:]
         if not any(isinstance(_, abjad.Tuplet) for _ in parentage):
             result.append(item)
     return result

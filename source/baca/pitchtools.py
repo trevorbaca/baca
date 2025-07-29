@@ -61,7 +61,7 @@ def _do_cluster_command(
     if not argument:
         return False
     leaf = abjad.select.leaf(argument, 0)
-    root = abjad.get.parentage(leaf).get_root()
+    root = abjad.get.parentage(leaf).root()
     widths = abjad.CyclicTuple(widths)
     with abjad.contextmanagers.ForbidUpdate(component=root):
         chords = []
