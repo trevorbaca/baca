@@ -1131,7 +1131,7 @@ def _force_nonnatural_accidentals(score: abjad.Score) -> None:
             note_heads = plt[0].get_note_heads()
         for note_head in note_heads:
             assert note_head is not None
-            if note_head.get_written_pitch().get_accidental() != natural:
+            if note_head.get_written_pitch().accidental() != natural:
                 note_head.set_is_forced(True)
 
 
@@ -2177,7 +2177,7 @@ def color_octaves(score: abjad.Score) -> None:
                 pitches.extend(leaf.get_written_pitches())
         if not pitches:
             continue
-        pitch_classes = [_.get_pitch_class() for _ in pitches]
+        pitch_classes = [_.pitch_class() for _ in pitches]
         if _pcollections.has_duplicates([pitch_classes]):
             color = True
             for pleaf in pleaves:

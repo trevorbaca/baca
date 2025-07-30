@@ -915,8 +915,8 @@ def from_collection(
     talea = rmakers.Talea(counts, denominator)
     leaves, i = [], 0
     for item in collection:
-        if hasattr(item, "get_number"):
-            item = item.get_number()
+        if hasattr(item, "number"):
+            item = item.number()
         assert isinstance(item, int | float | str | tuple), repr(item)
         while abjad.Fraction(*talea[i]) < 0:
             pair = talea[i]

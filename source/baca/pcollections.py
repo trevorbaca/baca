@@ -189,7 +189,7 @@ def _to_tightly_spaced_pitches_ascending(pitch_classes):
     pitch = abjad.NumberedPitch((pitch_class, 4))
     pitches.append(pitch)
     for pitch_class in pitch_classes[1:]:
-        candidate_octave = pitches[-1].get_octave().number
+        candidate_octave = pitches[-1].octave().number
         candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
         if pitches[-1] <= candidate:
             pitches.append(candidate)
@@ -207,7 +207,7 @@ def _to_tightly_spaced_pitches_descending(pitch_classes):
     pitch = abjad.NumberedPitch((pitch_class, 4))
     pitches.append(pitch)
     for pitch_class in pitch_classes[1:]:
-        candidate_octave = pitches[-1].get_octave().number
+        candidate_octave = pitches[-1].octave().number
         candidate = abjad.NumberedPitch((pitch_class, candidate_octave))
         if candidate <= pitches[-1]:
             pitches.append(candidate)
@@ -217,7 +217,7 @@ def _to_tightly_spaced_pitches_descending(pitch_classes):
             assert pitch <= pitches[-1]
             pitches.append(pitch)
     collection = abjad.PitchSegment(pitches)
-    while collection[-1].get_octave().number < 4:
+    while collection[-1].octave().number < 4:
         collection = collection.transpose(n=12)
     return collection
 
@@ -519,20 +519,20 @@ class ChordalSpacingSpecifier:
         pitch_classes, pitch_classes_, iterations = pitch_classes[:], [], 0
         if self.minimum_semitones is not None:
             candidate = abjad.NumberedPitchClass(
-                start.get_number() - self.minimum_semitones
+                start.number() - self.minimum_semitones
             )
         else:
-            candidate = abjad.NumberedPitchClass(start.get_number() - 1)
+            candidate = abjad.NumberedPitchClass(start.number() - 1)
         while pitch_classes:
             if candidate in pitch_classes:
                 pitch_classes_.append(candidate)
                 pitch_classes.remove(candidate)
                 if self.minimum_semitones is not None:
                     candidate = abjad.NumberedPitchClass(
-                        candidate.get_number() - self.minimum_semitones
+                        candidate.number() - self.minimum_semitones
                     )
             else:
-                candidate = abjad.NumberedPitchClass(candidate.get_number() - 1)
+                candidate = abjad.NumberedPitchClass(candidate.number() - 1)
             if 999 <= iterations:
                 raise Exception("stuck in while-loop.")
             iterations += 1
@@ -863,7 +863,7 @@ class Partial:
             NamedPitch('bf')
 
         """
-        hertz = self.number * self.fundamental.get_hertz()
+        hertz = self.number * self.fundamental.hertz()
         return abjad.NamedPitch.from_hertz(hertz)
 
     def deviation(self) -> int:
@@ -877,9 +877,7 @@ class Partial:
 
         """
         deviation_multiplier = (
-            self.number
-            * self.fundamental.get_hertz()
-            / self.approximation().get_hertz()
+            self.number * self.fundamental.hertz() / self.approximation().hertz()
         )
         semitone_base = 2 ** abjad.Fraction(1, 12)
         deviation_semitones = math.log(deviation_multiplier, semitone_base)
@@ -1099,7 +1097,7 @@ def alpha(collection):
     """
     numbers = []
     for pc in collection:
-        pc = abs(float(pc.get_number()))
+        pc = abs(float(pc.number()))
         is_integer = True
         if not abjad.math.is_integer_equivalent_number(pc):
             is_integer = False
@@ -2215,7 +2213,7 @@ def register_pcs(pitches, pcs):
     prototype = (abjad.NumberedPitchClass, abjad.NamedPitchClass)
     assert all(isinstance(_, prototype) for _ in pcs), repr(pcs)
     pcs = list(pcs)
-    reference_pcs = [_.get_pitch_class() for _ in pitches]
+    reference_pcs = [_.pitch_class() for _ in pitches]
     result = []
     for pc in pcs:
         index = reference_pcs.index(pc)
@@ -2235,11 +2233,11 @@ def pitches_to_octave_adjustment(pitches, *, anchor=abjad.DOWN, octave_number=4)
         elif anchor == abjad.CENTER:
             soprano = max(pitches)
             bass = min(pitches)
-            centroid = (soprano.get_number() + bass.get_number()) / 2.0
+            centroid = (soprano.number() + bass.number()) / 2.0
             pitch = abjad.NumberedPitch(centroid)
         else:
             raise ValueError(anchor)
-        return pitch.get_octave().number
+        return pitch.octave().number
 
     target_octave_number = octave_number
     current_octave_number = _get_anchor_octave_number(pitches, anchor=anchor)

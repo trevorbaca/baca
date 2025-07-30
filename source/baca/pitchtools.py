@@ -19,7 +19,7 @@ def _adjust_microtone_deviation_pitch(plt, deviation):
         return
     for pleaf in plt:
         pitch = pleaf.get_written_pitch()
-        accidental = pitch.get_accidental().semitones + deviation
+        accidental = pitch.accidental().semitones + deviation
         pitch = abjad.NamedPitch(pitch, accidental=accidental)
         pleaf.set_written_pitch(pitch)
         annotation = {"color microtone": True}
@@ -385,8 +385,8 @@ def _get_lowest_diatonic_pitch_number(plt):
 
 
 def _get_registration(start_pitch, stop_pitch, i, length):
-    start_pitch = start_pitch.get_number()
-    stop_pitch = stop_pitch.get_number()
+    start_pitch = start_pitch.number()
+    stop_pitch = stop_pitch.number()
     compass = stop_pitch - start_pitch
     fraction = abjad.Fraction(i, length)
     addendum = fraction * compass
@@ -428,7 +428,7 @@ def _make_cluster_pitches(start_pitch, width):
     for i in range(width - 1):
         pitch = pitches[-1] + abjad.NamedInterval("M3")
         pitch = abjad.NamedPitch(pitch, accidental="natural")
-        assert pitch.get_accidental() == abjad.Accidental("natural")
+        assert pitch.accidental() == abjad.Accidental("natural")
         pitches.append(pitch)
     return pitches
 
