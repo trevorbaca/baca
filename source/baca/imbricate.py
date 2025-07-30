@@ -16,9 +16,9 @@ def _matches_pitch(pitched_leaf, pitch_object):
     if pitch_object == []:
         return False
     if isinstance(pitched_leaf, abjad.Note):
-        written_pitches = [pitched_leaf.get_written_pitch()]
+        written_pitches = [pitched_leaf.written_pitch()]
     elif isinstance(pitched_leaf, abjad.Chord):
-        written_pitches = pitched_leaf.get_written_pitches()
+        written_pitches = pitched_leaf.written_pitches()
     else:
         raise TypeError(pitched_leaf)
     if isinstance(pitch_object, int | float):
@@ -45,7 +45,7 @@ def _trim_matching_chord(logical_tie, pitch_object):
     if isinstance(pitch_object, abjad.PitchClass):
         raise NotImplementedError(logical_tie, pitch_object)
     for chord in logical_tie:
-        duration = chord.get_written_duration()
+        duration = chord.written_duration()
         note = abjad.Note(pitch_object, duration)
         abjad.mutate.replace(chord, [note])
 
@@ -83,7 +83,7 @@ def imbricate(
     for logical_tie, original_logical_tie in pairs:
         if isinstance(logical_tie.head(), abjad.Rest):
             for leaf in logical_tie:
-                duration = leaf.get_written_duration()
+                duration = leaf.written_duration()
                 skip = abjad.Skip(duration)
                 abjad.mutate.replace(leaf, [skip])
         elif isinstance(logical_tie.head(), abjad.Skip):
@@ -105,7 +105,7 @@ def imbricate(
                 head = logical_tie.head()
                 tail = logical_tie.tail()
                 for leaf in logical_tie[1:]:
-                    duration = leaf.get_written_duration()
+                    duration = leaf.written_duration()
                     skip = abjad.Skip(duration)
                     abjad.mutate.replace(leaf, [skip])
                 abjad.detach(abjad.Tie, head)
@@ -114,12 +114,12 @@ def imbricate(
                     abjad.detach(abjad.RepeatTie, next_leaf)
             if hocket:
                 for leaf in original_logical_tie:
-                    duration = leaf.get_written_duration()
+                    duration = leaf.written_duration()
                     skip = abjad.Skip(duration)
                     abjad.mutate.replace(leaf, [skip])
         else:
             for leaf in logical_tie:
-                duration = leaf.get_written_duration()
+                duration = leaf.written_duration()
                 skip = abjad.Skip(duration)
                 abjad.mutate.replace(leaf, [skip])
     if not allow_unused_pitches and i < len(segment):

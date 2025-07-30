@@ -11,15 +11,15 @@ from . import helpers as _helpers
 
 def assert_lilypond_identifiers(score):
     for context in abjad.iterate.components(score, abjad.Context):
-        if not abjad.string.is_lilypond_identifier(context.get_name()):
-            raise Exception(f"invalid LilyPond identifier: {context.get_name()!r}")
+        if not abjad.string.is_lilypond_identifier(context.name()):
+            raise Exception(f"invalid LilyPond identifier: {context.name()!r}")
 
 
 def assert_unique_context_names(score):
     names = []
     for context in abjad.iterate.components(score, abjad.Context):
-        if context.get_name() in names:
-            raise Exception(f"duplicate context name: {context.get_name()!r}.")
+        if context.name() in names:
+            raise Exception(f"duplicate context name: {context.name()!r}.")
 
 
 def attach_lilypond_tag(tag, context, *, part_manifest=None):
@@ -27,7 +27,7 @@ def attach_lilypond_tag(tag, context, *, part_manifest=None):
         raise Exception(f"invalid LilyPond identifier: {tag!r}.")
     part_names = []
     if part_manifest is not None:
-        part_names = [_.get_name() for _ in part_manifest.parts]
+        part_names = [_.name() for _ in part_manifest.parts]
     if part_names and tag not in part_names:
         raise Exception(f"not listed in parts manifest: {tag!r}.")
     literal = abjad.LilyPondLiteral(rf"\tag #'{tag}", site="before")

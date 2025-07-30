@@ -174,7 +174,7 @@ def _evaluate_item(
         obgc, nongrace_voice = polyphony_container
         assert isinstance(obgc, abjad.OnBeatGraceContainer)
         assert isinstance(nongrace_voice, abjad.Voice)
-        assert nongrace_voice.get_name() == voice_name
+        assert nongrace_voice.name() == voice_name
         nongrace_leaves = abjad.mutate.eject_contents(nongrace_voice)
         components.extend(nongrace_leaves)
         result = nongrace_leaves
@@ -792,7 +792,7 @@ class OBGC:
         obgc, nongrace_voice = polyphony_container
         assert isinstance(obgc, abjad.OnBeatGraceContainer)
         assert isinstance(nongrace_voice, abjad.Voice)
-        assert nongrace_voice.get_name() == voice_name
+        assert nongrace_voice.name() == voice_name
         return polyphony_container
 
 
@@ -1506,7 +1506,7 @@ def prolate(
         raise Exception(f"bad treatment: {treatment!r}.")
     ratio = abjad.Ratio(multiplier[1], multiplier[0])
     tuplet.set_ratio(ratio)
-    if not tuplet.get_ratio().is_normalized():
+    if not tuplet.ratio().is_normalized():
         tuplet.normalize_ratio()
     return tuplet
 
@@ -1515,7 +1515,7 @@ def replace_nontrivial_skip_filled_tuplets(argument):
     tuplets = abjad.select.tuplets(argument)
     violators = []
     for tuplet in tuplets:
-        if tuplet.get_ratio() == abjad.Ratio(1, 1):
+        if tuplet.ratio() == abjad.Ratio(1, 1):
             continue
         for component in tuplet:
             if not isinstance(component, abjad.Skip):
@@ -1535,8 +1535,8 @@ def set_tuplet_ratios_in_terms_of(argument, denominator):
         tuplet_duration_with_denominator = abjad.duration.with_denominator(
             tuplet_duration, denominator
         )
-        numerator_ = tuplet.get_ratio().denominator
-        denominator_ = tuplet.get_ratio().numerator
+        numerator_ = tuplet.ratio().denominator
+        denominator_ = tuplet.ratio().numerator
         contents_duration = abjad.Duration(denominator_, numerator_) * tuplet_duration
         contents_duration_with_denominator = abjad.duration.with_denominator(
             contents_duration, denominator
@@ -1545,7 +1545,7 @@ def set_tuplet_ratios_in_terms_of(argument, denominator):
             contents_duration_with_denominator[0],
             tuplet_duration_with_denominator[0],
         )
-        if tuplet.get_ratio().as_fraction() == fractions.Fraction(*pair):
+        if tuplet.ratio().as_fraction() == fractions.Fraction(*pair):
             ratio = abjad.Ratio(*pair)
             tuplet.set_ratio(ratio)
 

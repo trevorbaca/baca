@@ -58,7 +58,7 @@ class Breaks:
         return bol_measure_numbers, skip_index_to_indicators
 
     def attach_indicators(self, context):
-        assert context.get_name() == "Breaks"
+        assert context.name() == "Breaks"
         abjad.attach(
             abjad.LilyPondLiteral(r"\autoLineBreaksOff", site="before"),
             context[0],
@@ -145,7 +145,7 @@ class Spacing:
         has_anchor_skip=False,
         measure_count=None,
     ):
-        assert spacing_commands_context.get_name() == "SpacingCommands"
+        assert spacing_commands_context.name() == "SpacingCommands"
         spacing_commands_skips = _select.skips(spacing_commands_context)
         spacing_annotations_skips = _select.skips(spacing_annotations_context)
         measure_count = measure_count or len(spacing_commands_skips)
@@ -234,7 +234,7 @@ class Spacing:
                 abjad.attach(
                     start_text_span,
                     spacing_annotations_skip,
-                    context=spacing_annotations_context.get_name(),
+                    context=spacing_annotations_context.name(),
                     deactivate=True,
                     tag=tag.append(_helpers.function_name(_frame(), n=2)),
                 )
@@ -244,7 +244,7 @@ class Spacing:
                 abjad.attach(
                     stop_text_span,
                     spacing_annotations_skip,
-                    context=spacing_annotations_context.get_name(),
+                    context=spacing_annotations_context.name(),
                     deactivate=True,
                     tag=tag.append(_helpers.function_name(_frame(), n=3)),
                 )
@@ -309,7 +309,7 @@ class System:
 
 
 def apply_spacing_dictionary(context, spacing_dictionary):
-    assert context.get_name() == "SpacingCommands"
+    assert context.name() == "SpacingCommands"
     for n, skip in enumerate(context, start=1):
         value = spacing_dictionary.get(n)
         if value is None:

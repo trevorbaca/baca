@@ -248,10 +248,10 @@ def force_accidental(argument, *, tag: abjad.Tag | None = None) -> None:
     pleaves = _select.pleaves(argument)
     for pleaf in pleaves:
         if isinstance(pleaf, abjad.Note):
-            note_heads = [pleaf.get_note_head()]
+            note_heads = [pleaf.note_head()]
         else:
             assert isinstance(pleaf, abjad.Chord)
-            note_heads = list(pleaf.get_note_heads())
+            note_heads = list(pleaf.note_heads())
         for note_head in note_heads:
             assert note_head is not None
             if not tag.string:

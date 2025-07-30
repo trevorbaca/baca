@@ -135,10 +135,10 @@ def assign_part(
     if voice is not None and part_assignment is not None:
         assert isinstance(voice, abjad.Voice)
         section = part_assignment.name or "ZZZ"
-        voice_name = voice.get_name()
+        voice_name = voice.name()
         assert voice_name is not None
         if not voice_name.startswith(section):
-            message = f"{voice.get_name()} does not allow"
+            message = f"{voice.name()} does not allow"
             message += f" {part_assignment.name} part assignment:"
             message += f"\n  {part_assignment}"
             raise Exception(message)
