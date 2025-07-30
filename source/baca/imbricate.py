@@ -39,9 +39,9 @@ def _matches_pitch(pitched_leaf, pitch_object):
 
 
 def _trim_matching_chord(logical_tie, pitch_object):
-    if isinstance(logical_tie.get_head(), abjad.Note):
+    if isinstance(logical_tie.head(), abjad.Note):
         return
-    assert isinstance(logical_tie.get_head(), abjad.Chord), repr(logical_tie)
+    assert isinstance(logical_tie.head(), abjad.Chord), repr(logical_tie)
     if isinstance(pitch_object, abjad.PitchClass):
         raise NotImplementedError(logical_tie, pitch_object)
     for chord in logical_tie:
@@ -81,14 +81,14 @@ def imbricate(
     logical_ties = abjad.select.logical_ties(container)
     pairs = zip(logical_ties, original_logical_ties)
     for logical_tie, original_logical_tie in pairs:
-        if isinstance(logical_tie.get_head(), abjad.Rest):
+        if isinstance(logical_tie.head(), abjad.Rest):
             for leaf in logical_tie:
                 duration = leaf.get_written_duration()
                 skip = abjad.Skip(duration)
                 abjad.mutate.replace(leaf, [skip])
-        elif isinstance(logical_tie.get_head(), abjad.Skip):
+        elif isinstance(logical_tie.head(), abjad.Skip):
             pass
-        elif _matches_pitch(logical_tie.get_head(), pitch_number):
+        elif _matches_pitch(logical_tie.head(), pitch_number):
             _trim_matching_chord(logical_tie, pitch_number)
             i += 1
             if i < len(segment):
@@ -102,8 +102,8 @@ def imbricate(
                     assert len(pitch_number) == 1, repr(pitch_number)
                     pitch_number = pitch_number[0]
             if truncate_ties:
-                head = logical_tie.get_head()
-                tail = logical_tie.get_tail()
+                head = logical_tie.head()
+                tail = logical_tie.tail()
                 for leaf in logical_tie[1:]:
                     duration = leaf.get_written_duration()
                     skip = abjad.Skip(duration)
