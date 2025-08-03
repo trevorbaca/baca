@@ -1181,6 +1181,7 @@ def make_repeated_duration_notes(
 ) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _helpers.function_name(_frame())
+    # TODO: will both branches will always be false?
     if isinstance(weights, abjad.Duration):
         weights = [weights]
     elif isinstance(weights, tuple):
@@ -1188,7 +1189,7 @@ def make_repeated_duration_notes(
         weights = [abjad.Duration(*weights)]
     durations = abjad.duration.durations(time_signatures)
     durations = [sum(durations, start=abjad.Duration(0))]
-    weights = abjad.durations(weights)
+    weights = abjad.duration.durations(weights)
     durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
     components = rmakers.note(durations, tag=tag)
@@ -1389,11 +1390,12 @@ def make_tied_repeated_durations(
 ) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _helpers.function_name(_frame())
-    durations = [_.duration() for _ in time_signatures]
-    durations = [sum(durations)]
-    weights = abjad.durations(weights)
+    durations = abjad.duration.durations(time_signatures)
+    durations = [sum(durations, abjad.Duration(0))]
+    weights = abjad.duration.durations(weights)
     durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
+    # TODO: both branches will always be false, correct?
     if isinstance(weights, abjad.Duration):
         weights = [weights]
     elif isinstance(weights, tuple):

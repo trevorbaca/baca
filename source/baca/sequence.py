@@ -973,7 +973,7 @@ def quarters(durations: list[abjad.Duration]) -> list[abjad.Duration]:
 
     ..  container:: example
 
-        >>> durations = abjad.durations([(2, 4), (6, 4)])
+        >>> durations = abjad.duration.durations([(2, 4), (6, 4)])
         >>> for list_ in baca.sequence.quarters(durations): list_
         Duration(1, 4)
         Duration(1, 4)
@@ -987,7 +987,7 @@ def quarters(durations: list[abjad.Duration]) -> list[abjad.Duration]:
     """
     assert isinstance(durations, list), repr(durations)
     assert all(isinstance(_, abjad.Duration) for _ in durations), repr(durations)
-    weights = abjad.durations([(1, 4)])
+    weights = abjad.duration.durations([(1, 4)])
     lists = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     result = abjad.sequence.flatten(lists, depth=-1)
     assert all(isinstance(_, abjad.Duration) for _ in result), repr(result)
