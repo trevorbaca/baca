@@ -1185,9 +1185,9 @@ def make_repeated_duration_notes(
         weights = [weights]
     elif isinstance(weights, tuple):
         assert len(weights) == 2
-        weights = [abjad.Duration(weights)]
-    durations = [_.duration() for _ in time_signatures]
-    durations = [sum(durations)]
+        weights = [abjad.Duration(*weights)]
+    durations = abjad.duration.durations(time_signatures)
+    durations = [sum(durations, start=abjad.Duration(0))]
     weights = abjad.durations(weights)
     durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
@@ -1398,7 +1398,7 @@ def make_tied_repeated_durations(
         weights = [weights]
     elif isinstance(weights, tuple):
         assert len(weights) == 2
-        weights = [abjad.Duration(weights)]
+        weights = [abjad.Duration(*weights)]
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     pheads = _select.pheads(voice)[1:]
