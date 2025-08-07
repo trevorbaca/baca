@@ -2578,7 +2578,9 @@ def parse_duration_inequality_string(string) -> tuple[str, abjad.Duration]:
 def partition_in_halves(argument) -> list[list]:
     durations = [abjad.get.duration(_) for _ in argument]
     maximum_denominator = max([_.denominator for _ in durations])
-    pairs = [abjad.duration.with_denominator(_, maximum_denominator) for _ in durations]
+    pairs = [
+        abjad.duration.pair_with_denominator(_, maximum_denominator) for _ in durations
+    ]
     numerators = [_[0] for _ in pairs]
     lists = _sequence.partition_in_halves(numerators)
     counts = [len(_) for _ in lists]

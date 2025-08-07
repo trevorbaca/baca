@@ -312,7 +312,7 @@ def _make_accelerando_multipliers(
     assert len(durations) == len(durations_)
     for duration_, duration in zip(durations_, durations):
         fraction = duration_ / duration
-        pair = abjad.duration.with_denominator(fraction, 2**10)
+        pair = abjad.duration.pair_with_denominator(fraction, 2**10)
         pairs.append(pair)
     return pairs
 
@@ -1482,7 +1482,7 @@ def prolate(
     if isinstance(treatment, int):
         extra_count = treatment
         contents_duration = abjad.get.duration(tuplet)
-        pair = abjad.duration.with_denominator(contents_duration, denominator)
+        pair = abjad.duration.pair_with_denominator(contents_duration, denominator)
         contents_duration_pair = pair
         contents_count = contents_duration_pair[0]
         if 0 < extra_count:
@@ -1493,17 +1493,15 @@ def prolate(
             extra_count *= -1
         new_contents_count = contents_count + extra_count
         tuplet_multiplier = abjad.Fraction(new_contents_count, contents_count)
-        pair = abjad.duration.pair(tuplet_multiplier)
-        multiplier = pair
+        multiplier = tuplet_multiplier.numerator, tuplet_multiplier.denominator
     elif isinstance(treatment, str) and ":" in treatment:
         n, d = treatment.split(":")
         multiplier = (int(d), int(n))
     elif isinstance(treatment, abjad.Duration):
         tuplet_duration = treatment
         contents_duration = abjad.get.duration(tuplet)
-        multiplier = tuplet_duration / contents_duration
-        pair = abjad.duration.pair(multiplier)
-        multiplier = pair
+        fraction = tuplet_duration / contents_duration
+        multiplier = (fraction.numerator, fraction.denominator)
     else:
         raise Exception(f"bad treatment: {treatment!r}.")
     ratio = abjad.Ratio(multiplier[1], multiplier[0])
@@ -1534,13 +1532,13 @@ def replace_nontrivial_skip_filled_tuplets(argument):
 def set_tuplet_ratios_in_terms_of(argument, denominator):
     for tuplet in abjad.select.tuplets(argument):
         tuplet_duration = abjad.get.duration(tuplet)
-        tuplet_duration_with_denominator = abjad.duration.with_denominator(
+        tuplet_duration_with_denominator = abjad.duration.pair_with_denominator(
             tuplet_duration, denominator
         )
         numerator_ = tuplet.ratio().denominator
         denominator_ = tuplet.ratio().numerator
         contents_duration = abjad.Duration(denominator_, numerator_) * tuplet_duration
-        contents_duration_with_denominator = abjad.duration.with_denominator(
+        contents_duration_with_denominator = abjad.duration.pair_with_denominator(
             contents_duration, denominator
         )
         pair = (

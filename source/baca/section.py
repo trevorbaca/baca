@@ -1351,10 +1351,9 @@ def _magnify_staves(
     if isinstance(magnify_staves, tuple):
         multiplier, tag_ = magnify_staves
     else:
-        # multiplier, tag_ = magnify_staves, None
         multiplier, tag_ = magnify_staves, ""
-    fraction_multiplier = abjad.Fraction(multiplier)
-    numerator, denominator = abjad.duration.pair(fraction_multiplier)
+    fraction = abjad.Fraction(multiplier)
+    numerator, denominator = fraction.numerator, fraction.denominator
     string = rf"\magnifyStaff #{numerator}/{denominator}"
     tag = abjad.Tag(tag_)
     tag = tag.append(_helpers.function_name(_frame()))

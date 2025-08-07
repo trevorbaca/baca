@@ -26,8 +26,8 @@ def _make_multiplied_quarter_notes(durations):
     notes = []
     written_duration = abjad.Duration(1, 4)
     for duration in durations:
-        multiplier = duration / written_duration
-        pair = abjad.duration.pair(multiplier)
+        fraction = duration / written_duration
+        pair = (fraction.numerator, fraction.denominator)
         note = abjad.Note(0, written_duration, multiplier=pair)
         notes.append(note)
     return notes

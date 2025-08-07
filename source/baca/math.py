@@ -311,6 +311,6 @@ def list_related_tempos(
             reference_duration=metronome_mark.reference_duration,
             units_per_minute=new_units_per_minute,
         )
-        pair = abjad.duration.pair(multiplier)
+        pair = (multiplier.numerator, multiplier.denominator)
         pairs.append((metronome_mark_, pair))
     return pairs
