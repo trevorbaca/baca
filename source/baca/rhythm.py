@@ -1482,6 +1482,7 @@ def prolate(
     if isinstance(treatment, int):
         extra_count = treatment
         contents_duration = abjad.get.duration(tuplet)
+        assert denominator is not None
         pair = abjad.duration.pair_with_denominator(contents_duration, denominator)
         contents_duration_pair = pair
         contents_count = contents_duration_pair[0]
