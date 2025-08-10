@@ -773,8 +773,9 @@ class OBGC:
         )
         if self.grace_leaf_duration is True:
             nongrace_duration = abjad.get.duration(nongrace_leaves)
-            grace_leaf_duration = nongrace_duration / len(grace_leaves)
+            grace_leaf_duration = abjad.Duration(nongrace_duration / len(grace_leaves))
         else:
+            assert isinstance(self.grace_leaf_duration, abjad.Duration)
             grace_leaf_duration = self.grace_leaf_duration
         abjad.on_beat_grace_container(
             grace_leaves,
@@ -1538,7 +1539,7 @@ def set_tuplet_ratios_in_terms_of(argument, denominator):
         )
         numerator_ = tuplet.ratio().denominator
         denominator_ = tuplet.ratio().numerator
-        contents_duration = abjad.Duration(denominator_, numerator_) * tuplet_duration
+        contents_duration = abjad.Fraction(denominator_, numerator_) * tuplet_duration
         contents_duration_with_denominator = abjad.duration.pair_with_denominator(
             contents_duration, denominator
         )

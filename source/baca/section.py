@@ -1987,7 +1987,7 @@ def _style_framed_notes(score: abjad.Score) -> None:
         if abjad.get.indicator(leaf, _enums.FRAMED_LEAF):
             duration = abjad.get.duration(leaf)
             leaf.set_written_duration(abjad.Duration(1, 4))
-            multiplier = 4 * duration
+            multiplier = abjad.Duration(4 * duration)
             leaf.set_multiplier(multiplier.pair())
             literal = abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f")
             abjad.attach(literal, leaf, tag=tag)
