@@ -333,8 +333,13 @@ def _analyze_memento(contexts, dictionary, memento) -> Analysis | None:
     if memento.get_synthetic_offset() is None:
         synthetic_offset = None
     else:
-        assert 0 < memento.get_synthetic_offset(), repr(memento)
-        synthetic_offset = -memento.get_synthetic_offset()
+        assert 0 < memento.get_synthetic_offset().fraction, repr(memento)
+        # synthetic_offset = -memento.get_synthetic_offset()
+        fraction = -memento.get_synthetic_offset().fraction
+        synthetic_offset = abjad.ValueOffset(fraction)
+    if synthetic_offset is not None:
+        if not isinstance(synthetic_offset, abjad.ValueOffset):
+            synthetic_offset = abjad.ValueOffset.from_offset(synthetic_offset)
     return Analysis(
         leaf=leaf,
         previous_indicator=previous_indicator,
@@ -1670,7 +1675,7 @@ def _reanalyze_reapplied_synthetic_wrappers(score: abjad.Score) -> None:
             synthetic_offset = wrapper.synthetic_offset()
             if synthetic_offset is None:
                 continue
-            if 0 <= synthetic_offset:
+            if 0 <= synthetic_offset.fraction:
                 continue
             if "REAPPLIED" in wrapper.tag().string:
                 string = wrapper.tag().string
@@ -1906,7 +1911,7 @@ def _style_fermata_measures(
                     resume_staff_lines,
                     leaf,
                     hide=True,
-                    synthetic_offset=abjad.Offset(99),
+                    synthetic_offset=abjad.ValueOffset(abjad.Fraction(99)),
                     tag=_helpers.function_name(_frame(), n=5),
                 )
                 previous_line_count = 5
@@ -1917,7 +1922,7 @@ def _style_fermata_measures(
                     resume_bar_extent,
                     leaf,
                     hide=True,
-                    synthetic_offset=abjad.Offset(99),
+                    synthetic_offset=abjad.ValueOffset(abjad.Fraction(99)),
                     tag=_helpers.function_name(_frame(), n=6).append(
                         _tags.FERMATA_MEASURE_RESUME_BAR_EXTENT
                     ),

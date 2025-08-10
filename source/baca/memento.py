@@ -49,7 +49,11 @@ class Memento:
             assert manifest is None
         self._prototype = prototype
         if synthetic_offset is not None:
-            assert isinstance(synthetic_offset, abjad.Offset), repr(synthetic_offset)
+            if isinstance(synthetic_offset, abjad.ValueOffset):
+                pass
+            else:
+                assert isinstance(synthetic_offset, abjad.Offset)
+                synthetic_offset = abjad.ValueOffset.from_offset(synthetic_offset)
         self._synthetic_offset = synthetic_offset
         if value is not None:
             if not isinstance(value, int | str | dict):
