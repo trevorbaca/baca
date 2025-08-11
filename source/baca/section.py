@@ -1017,6 +1017,7 @@ def _comment_measure_numbers(
     tag = _helpers.function_name(_frame())
     for leaf in abjad.iterate.leaves(score):
         offset = abjad.get.timespan(leaf).start_offset
+        assert isinstance(offset, abjad.Offset), repr(offset)
         measure_number = offset_to_measure_number.get(offset, None)
         if measure_number is None:
             continue
@@ -1155,7 +1156,9 @@ def _get_fermata_measure_numbers(
                 final_measure_is_fermata = True
             measure_number = first_measure_number + measure_index
             timespan = abjad.get.timespan(rest)
-            fermata_start_offsets.append(timespan.start_offset)
+            timespan_start_offset = timespan.start_offset
+            assert isinstance(timespan_start_offset, abjad.Offset)
+            fermata_start_offsets.append(timespan_start_offset)
             fermata_measure_numbers.append(measure_number)
     return FermataMeasureNumbers(
         fermata_start_offsets=fermata_start_offsets,
@@ -1168,6 +1171,7 @@ def _get_measure_number_tag(
     leaf: abjad.Leaf, offset_to_measure_number: dict[abjad.Offset, int]
 ) -> abjad.Tag | None:
     start_offset = abjad.get.timespan(leaf).start_offset
+    assert isinstance(start_offset, abjad.Offset), repr(start_offset)
     measure_number = offset_to_measure_number.get(start_offset)
     if measure_number is not None:
         return abjad.Tag(f"MEASURE_{measure_number}")
@@ -1181,9 +1185,11 @@ def _get_measure_offsets(
     start_skip = skips[start_measure - 1]
     assert isinstance(start_skip, abjad.Skip), start_skip
     start_offset = abjad.get.timespan(start_skip).start_offset
+    assert isinstance(start_offset, abjad.Offset), repr(start_offset)
     stop_skip = skips[stop_measure - 1]
     assert isinstance(stop_skip, abjad.Skip), stop_skip
     stop_offset = abjad.get.timespan(stop_skip).stop_offset
+    assert isinstance(stop_offset, abjad.Offset), repr(stop_offset)
     return start_offset, stop_offset
 
 
@@ -1565,6 +1571,7 @@ def _populate_offset_to_measure_number(
     offset_to_measure_number = {}
     for skip in _select.skips(global_skips):
         offset = abjad.get.timespan(skip).start_offset
+        assert isinstance(offset, abjad.Offset), repr(offset)
         offset_to_measure_number[offset] = measure_number
         measure_number += 1
     return offset_to_measure_number
@@ -1737,9 +1744,11 @@ def _replace_rests_with_multimeasure_rests(
             if any(_ is not voice for _ in parents):
                 continue
             start_offset = abjad.get.timespan(group[0]).start_offset
+            assert isinstance(start_offset, abjad.Offset)
             if start_offset not in offset_to_time_signature:
                 continue
             stop_offset = abjad.get.timespan(group[-1]).stop_offset
+            assert isinstance(stop_offset, abjad.Offset), repr(stop_offset)
             if stop_offset not in offset_to_time_signature:
                 continue
             time_signature = offset_to_time_signature[start_offset]
@@ -1786,6 +1795,7 @@ def _shift_measure_initial_clefs(
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
             start_offset = abjad.get.timespan(leaf).start_offset
+            assert isinstance(start_offset, abjad.Offset), repr(start_offset)
             wrapper = abjad.get.wrapper(leaf, abjad.Clef)
             if wrapper is None or not wrapper.tag():
                 continue
