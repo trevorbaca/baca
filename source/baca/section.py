@@ -1896,7 +1896,9 @@ def _style_fermata_measures(
                 else:
                     next_bar_extent_ = next_bar_extent
                 wrapper = abjad.get.effective_wrapper(next_leaf, _classes.StaffLines)
-                next_leaf_start_offset = abjad.get.timespan(next_leaf).start_offset
+                next_leaf_start_offset = abjad.get.timespan(
+                    next_leaf
+                ).value_start_offset()
                 if wrapper is None or (
                     wrapper.start_offset() != next_leaf_start_offset
                 ):
