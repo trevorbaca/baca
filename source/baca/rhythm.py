@@ -1287,7 +1287,10 @@ def make_rhythm(
                         pairs = []
                         for pair in timespan_to_original_item:
                             timespan, original_item = pair
-                            if unchanged_duration <= timespan.start_offset:
+                            if (
+                                unchanged_duration
+                                <= timespan.value_start_offset().fraction
+                            ):
                                 timespan = timespan.translate(needed_duration)
                                 pair = (timespan, original_item)
                             pairs.append(pair)

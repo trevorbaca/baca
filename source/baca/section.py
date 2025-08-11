@@ -165,7 +165,7 @@ class DictionaryGetItemWrapper:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class FermataMeasureNumbers:
-    fermata_start_offsets: list[abjad.Offset]
+    fermata_start_offsets: list[abjad.ValueOffset]
     fermata_measure_numbers: list[int]
     final_measure_is_fermata: bool
 
@@ -557,6 +557,7 @@ def _calculate_clock_times(
             duration = abjad.Duration(fermata_duration)
             clock_times.append(duration)
         start_offset += duration
+    assert isinstance(start_offset, abjad.Duration), repr(start_offset)
     clock_times.append(start_offset)
     assert len(skips) == len(clock_times) - 1
     if clock_time_override:
@@ -1011,13 +1012,16 @@ def _color_not_yet_registered(score: abjad.Score) -> None:
 
 def _comment_measure_numbers(
     first_measure_number: int,
-    offset_to_measure_number: dict[abjad.Offset, int],
+    offset_to_measure_number: dict[abjad.ValueOffset, int],
     score: abjad.Score,
 ) -> None:
+    assert isinstance(offset_to_measure_number, dict)
+    keys = offset_to_measure_number.keys()
+    assert all(isinstance(_, abjad.ValueOffset) for _ in keys)
     tag = _helpers.function_name(_frame())
     for leaf in abjad.iterate.leaves(score):
-        offset = abjad.get.timespan(leaf).start_offset
-        assert isinstance(offset, abjad.Offset), repr(offset)
+        offset = abjad.get.timespan(leaf).value_start_offset()
+        assert isinstance(offset, abjad.ValueOffset), repr(offset)
         measure_number = offset_to_measure_number.get(offset, None)
         if measure_number is None:
             continue
@@ -1156,8 +1160,8 @@ def _get_fermata_measure_numbers(
                 final_measure_is_fermata = True
             measure_number = first_measure_number + measure_index
             timespan = abjad.get.timespan(rest)
-            timespan_start_offset = timespan.start_offset
-            assert isinstance(timespan_start_offset, abjad.Offset)
+            timespan_start_offset = timespan.value_start_offset()
+            assert isinstance(timespan_start_offset, abjad.ValueOffset)
             fermata_start_offsets.append(timespan_start_offset)
             fermata_measure_numbers.append(measure_number)
     return FermataMeasureNumbers(
@@ -1168,10 +1172,10 @@ def _get_fermata_measure_numbers(
 
 
 def _get_measure_number_tag(
-    leaf: abjad.Leaf, offset_to_measure_number: dict[abjad.Offset, int]
+    leaf: abjad.Leaf, offset_to_measure_number: dict[abjad.ValueOffset, int]
 ) -> abjad.Tag | None:
-    start_offset = abjad.get.timespan(leaf).start_offset
-    assert isinstance(start_offset, abjad.Offset), repr(start_offset)
+    start_offset = abjad.get.timespan(leaf).value_start_offset()
+    assert isinstance(start_offset, abjad.ValueOffset), repr(start_offset)
     measure_number = offset_to_measure_number.get(start_offset)
     if measure_number is not None:
         return abjad.Tag(f"MEASURE_{measure_number}")
@@ -1180,16 +1184,16 @@ def _get_measure_number_tag(
 
 def _get_measure_offsets(
     score: abjad.Score, start_measure: int, stop_measure: int
-) -> tuple[abjad.Offset, abjad.Offset]:
+) -> tuple[abjad.ValueOffset, abjad.ValueOffset]:
     skips = _select.skips(score["Skips"])
     start_skip = skips[start_measure - 1]
     assert isinstance(start_skip, abjad.Skip), start_skip
-    start_offset = abjad.get.timespan(start_skip).start_offset
-    assert isinstance(start_offset, abjad.Offset), repr(start_offset)
+    start_offset = abjad.get.timespan(start_skip).value_start_offset()
+    assert isinstance(start_offset, abjad.ValueOffset), repr(start_offset)
     stop_skip = skips[stop_measure - 1]
     assert isinstance(stop_skip, abjad.Skip), stop_skip
-    stop_offset = abjad.get.timespan(stop_skip).stop_offset
-    assert isinstance(stop_offset, abjad.Offset), repr(stop_offset)
+    stop_offset = abjad.get.timespan(stop_skip).value_stop_offset()
+    assert isinstance(stop_offset, abjad.ValueOffset), repr(stop_offset)
     return start_offset, stop_offset
 
 
@@ -1199,7 +1203,7 @@ def _get_measure_timespan(measure_number: int, score: abjad.Score) -> abjad.Time
         measure_number,
         measure_number,
     )
-    return abjad.Timespan(start_offset, stop_offset)
+    return abjad.Timespan(start_offset.offset(), stop_offset.offset())
 
 
 def _global_rests_are_meaningful(context: abjad.Context) -> bool:
@@ -1566,12 +1570,12 @@ def _pitch_unpitched_anchor_notes(score: abjad.Score) -> None:
 
 def _populate_offset_to_measure_number(
     first_measure_number: int, global_skips: abjad.Context
-) -> dict[abjad.Offset, int]:
+) -> dict[abjad.ValueOffset, int]:
     measure_number = first_measure_number
     offset_to_measure_number = {}
     for skip in _select.skips(global_skips):
-        offset = abjad.get.timespan(skip).start_offset
-        assert isinstance(offset, abjad.Offset), repr(offset)
+        offset = abjad.get.timespan(skip).value_start_offset()
+        assert isinstance(offset, abjad.ValueOffset), repr(offset)
         offset_to_measure_number[offset] = measure_number
         measure_number += 1
     return offset_to_measure_number
@@ -1723,15 +1727,19 @@ def _remove_layout_tags(score: abjad.Score) -> None:
 
 
 def _replace_rests_with_multimeasure_rests(
-    offset_to_measure_number: dict[abjad.Offset, int],
+    offset_to_measure_number: dict[abjad.ValueOffset, int],
     score: abjad.Score,
     time_signatures: list[abjad.TimeSignature],
 ) -> None:
+    assert isinstance(offset_to_measure_number, dict)
+    keys = offset_to_measure_number.keys()
+    assert all(isinstance(_, abjad.ValueOffset) for _ in keys)
     if len(offset_to_measure_number) == len(time_signatures) + 1:
         items = list(offset_to_measure_number.items())
         offset_to_measure_number = dict(items[:-1])
     assert len(offset_to_measure_number) == len(time_signatures)
     offsets = offset_to_measure_number.keys()
+    assert all(isinstance(_, abjad.ValueOffset) for _ in offsets), repr(offsets)
     pairs = zip(offsets, time_signatures, strict=True)
     offset_to_time_signature = dict(pairs)
     for voice in abjad.select.components(score, abjad.Voice):
@@ -1743,12 +1751,12 @@ def _replace_rests_with_multimeasure_rests(
             parents = [abjad.get.parentage(_).parent() for _ in group]
             if any(_ is not voice for _ in parents):
                 continue
-            start_offset = abjad.get.timespan(group[0]).start_offset
-            assert isinstance(start_offset, abjad.Offset)
+            start_offset = abjad.get.timespan(group[0]).value_start_offset()
+            assert isinstance(start_offset, abjad.ValueOffset)
             if start_offset not in offset_to_time_signature:
                 continue
-            stop_offset = abjad.get.timespan(group[-1]).stop_offset
-            assert isinstance(stop_offset, abjad.Offset), repr(stop_offset)
+            stop_offset = abjad.get.timespan(group[-1]).value_stop_offset()
+            assert isinstance(stop_offset, abjad.ValueOffset), repr(stop_offset)
             if stop_offset not in offset_to_time_signature:
                 continue
             time_signature = offset_to_time_signature[start_offset]
@@ -1789,13 +1797,13 @@ def _set_not_yet_pitched_to_staff_position_zero(score: abjad.Score) -> None:
 
 def _shift_measure_initial_clefs(
     first_measure_number: int,
-    offset_to_measure_number: dict[abjad.Offset, int],
+    offset_to_measure_number: dict[abjad.ValueOffset, int],
     score: abjad.Score,
 ) -> None:
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
-            start_offset = abjad.get.timespan(leaf).start_offset
-            assert isinstance(start_offset, abjad.Offset), repr(start_offset)
+            start_offset = abjad.get.timespan(leaf).value_start_offset()
+            assert isinstance(start_offset, abjad.ValueOffset), repr(start_offset)
             wrapper = abjad.get.wrapper(leaf, abjad.Clef)
             if wrapper is None or not wrapper.tag():
                 continue
@@ -1819,9 +1827,9 @@ def _style_anchor_notes(score: abjad.Score) -> None:
 def _style_fermata_measures(
     fermata_extra_offset_y: float,
     fermata_measure_empty_overrides: list[int],
-    fermata_start_offsets: list[abjad.Offset],
+    fermata_start_offsets: list[abjad.ValueOffset],
     final_section: bool,
-    offset_to_measure_number: dict[abjad.Offset, int],
+    offset_to_measure_number: dict[abjad.ValueOffset, int],
     score: abjad.Score,
 ) -> None:
     if not fermata_measure_empty_overrides:
@@ -1832,12 +1840,12 @@ def _style_fermata_measures(
     empty_fermata_measure_start_offsets = []
     for measure_number in fermata_measure_empty_overrides or []:
         timespan = _get_measure_timespan(measure_number, score)
-        empty_fermata_measure_start_offsets.append(timespan.start_offset)
+        empty_fermata_measure_start_offsets.append(timespan.value_start_offset())
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
             if abjad.get.has_indicator(leaf, (_enums.ANCHOR_NOTE, _enums.ANCHOR_SKIP)):
                 continue
-            start_offset = abjad.get.timespan(leaf).start_offset
+            start_offset = abjad.get.timespan(leaf).value_start_offset()
             if start_offset not in fermata_start_offsets:
                 continue
             voice = abjad.get.parentage(leaf).get(abjad.Voice)
@@ -2131,8 +2139,10 @@ def cache_leaves(
         for i, measure_timespan in enumerate(measure_timespans):
             measure_number = i + 1
             if (
-                measure_timespan.start_offset <= leaf_timespan.start_offset
-                and leaf_timespan.start_offset < measure_timespan.stop_offset
+                measure_timespan.value_start_offset()
+                <= leaf_timespan.value_start_offset()
+                and leaf_timespan.value_start_offset()
+                < measure_timespan.value_stop_offset()
             ):
                 cached_leaves = measure_number_to_leaves.setdefault(measure_number, [])
                 cached_leaves.append(leaf)
