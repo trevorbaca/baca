@@ -263,13 +263,13 @@ def _evaluate_item(
     if capture_original_item is not False or isinstance(item, OBGC):
         components = [_ for _ in components if not isinstance(_, abjad.Skip)]
         total_duration = abjad.get.duration(components)
-        stop_offset = abjad.Offset(total_duration)
+        stop_offset = abjad.ValueOffset(total_duration.fraction())
         if isinstance(item, OBGC):
             item_duration = abjad.get.duration(result)
         else:
             item_duration = abjad.get.duration(capture_original_item)
         start_offset = stop_offset - item_duration
-        timespan = abjad.Timespan(start_offset, stop_offset)
+        timespan = abjad.Timespan.fvo(start_offset, stop_offset)
         pair = (timespan, capture_original_item)
         timespan_to_original_item.append(pair)
     assert isinstance(result, abjad.Component | list), repr(result)

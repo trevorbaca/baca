@@ -1203,7 +1203,7 @@ def _get_measure_timespan(measure_number: int, score: abjad.Score) -> abjad.Time
         measure_number,
         measure_number,
     )
-    return abjad.Timespan(start_offset.offset(), stop_offset.offset())
+    return abjad.Timespan.fvo(start_offset, stop_offset)
 
 
 def _global_rests_are_meaningful(context: abjad.Context) -> bool:
