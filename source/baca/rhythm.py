@@ -269,7 +269,7 @@ def _evaluate_item(
         else:
             item_duration = abjad.get.duration(capture_original_item)
         start_offset = stop_offset - item_duration
-        timespan = abjad.Timespan.fvo(start_offset, stop_offset)
+        timespan = abjad.Timespan(start_offset, stop_offset)
         pair = (timespan, capture_original_item)
         timespan_to_original_item.append(pair)
     assert isinstance(result, abjad.Component | list), repr(result)
