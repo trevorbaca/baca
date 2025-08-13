@@ -263,7 +263,7 @@ def _evaluate_item(
     if capture_original_item is not False or isinstance(item, OBGC):
         components = [_ for _ in components if not isinstance(_, abjad.Skip)]
         total_duration = abjad.get.duration(components)
-        stop_offset = abjad.ValueOffset(total_duration.fraction())
+        stop_offset = abjad.Offset(total_duration.fraction())
         if isinstance(item, OBGC):
             item_duration = abjad.get.duration(result)
         else:
@@ -1288,7 +1288,7 @@ def make_rhythm(
                         for pair in timespan_to_original_item:
                             timespan, original_item = pair
                             timespan_start_offset = timespan.value_start_offset()
-                            assert isinstance(timespan_start_offset, abjad.ValueOffset)
+                            assert isinstance(timespan_start_offset, abjad.Offset)
                             if unchanged_duration <= timespan_start_offset.fraction:
                                 timespan = timespan.translate(needed_duration)
                                 pair = (timespan, original_item)

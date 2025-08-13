@@ -165,7 +165,7 @@ class DictionaryGetItemWrapper:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class FermataMeasureNumbers:
-    fermata_start_offsets: list[abjad.ValueOffset]
+    fermata_start_offsets: list[abjad.Offset]
     fermata_measure_numbers: list[int]
     final_measure_is_fermata: bool
 
@@ -336,10 +336,10 @@ def _analyze_memento(contexts, dictionary, memento) -> Analysis | None:
         assert 0 < memento.get_synthetic_offset().fraction, repr(memento)
         # synthetic_offset = -memento.get_synthetic_offset()
         fraction = -memento.get_synthetic_offset().fraction
-        synthetic_offset = abjad.ValueOffset(fraction)
+        synthetic_offset = abjad.Offset(fraction)
     if synthetic_offset is not None:
-        if not isinstance(synthetic_offset, abjad.ValueOffset):
-            synthetic_offset = abjad.ValueOffset.from_offset(synthetic_offset)
+        if not isinstance(synthetic_offset, abjad.Offset):
+            synthetic_offset = abjad.Offset.from_offset(synthetic_offset)
     return Analysis(
         leaf=leaf,
         previous_indicator=previous_indicator,
@@ -1012,16 +1012,16 @@ def _color_not_yet_registered(score: abjad.Score) -> None:
 
 def _comment_measure_numbers(
     first_measure_number: int,
-    offset_to_measure_number: dict[abjad.ValueOffset, int],
+    offset_to_measure_number: dict[abjad.Offset, int],
     score: abjad.Score,
 ) -> None:
     assert isinstance(offset_to_measure_number, dict)
     keys = offset_to_measure_number.keys()
-    assert all(isinstance(_, abjad.ValueOffset) for _ in keys)
+    assert all(isinstance(_, abjad.Offset) for _ in keys)
     tag = _helpers.function_name(_frame())
     for leaf in abjad.iterate.leaves(score):
         offset = abjad.get.timespan(leaf).value_start_offset()
-        assert isinstance(offset, abjad.ValueOffset), repr(offset)
+        assert isinstance(offset, abjad.Offset), repr(offset)
         measure_number = offset_to_measure_number.get(offset, None)
         if measure_number is None:
             continue
@@ -1161,7 +1161,7 @@ def _get_fermata_measure_numbers(
             measure_number = first_measure_number + measure_index
             timespan = abjad.get.timespan(rest)
             timespan_start_offset = timespan.value_start_offset()
-            assert isinstance(timespan_start_offset, abjad.ValueOffset)
+            assert isinstance(timespan_start_offset, abjad.Offset)
             fermata_start_offsets.append(timespan_start_offset)
             fermata_measure_numbers.append(measure_number)
     return FermataMeasureNumbers(
@@ -1172,10 +1172,10 @@ def _get_fermata_measure_numbers(
 
 
 def _get_measure_number_tag(
-    leaf: abjad.Leaf, offset_to_measure_number: dict[abjad.ValueOffset, int]
+    leaf: abjad.Leaf, offset_to_measure_number: dict[abjad.Offset, int]
 ) -> abjad.Tag | None:
     start_offset = abjad.get.timespan(leaf).value_start_offset()
-    assert isinstance(start_offset, abjad.ValueOffset), repr(start_offset)
+    assert isinstance(start_offset, abjad.Offset), repr(start_offset)
     measure_number = offset_to_measure_number.get(start_offset)
     if measure_number is not None:
         return abjad.Tag(f"MEASURE_{measure_number}")
@@ -1184,16 +1184,16 @@ def _get_measure_number_tag(
 
 def _get_measure_offsets(
     score: abjad.Score, start_measure: int, stop_measure: int
-) -> tuple[abjad.ValueOffset, abjad.ValueOffset]:
+) -> tuple[abjad.Offset, abjad.Offset]:
     skips = _select.skips(score["Skips"])
     start_skip = skips[start_measure - 1]
     assert isinstance(start_skip, abjad.Skip), start_skip
     start_offset = abjad.get.timespan(start_skip).value_start_offset()
-    assert isinstance(start_offset, abjad.ValueOffset), repr(start_offset)
+    assert isinstance(start_offset, abjad.Offset), repr(start_offset)
     stop_skip = skips[stop_measure - 1]
     assert isinstance(stop_skip, abjad.Skip), stop_skip
     stop_offset = abjad.get.timespan(stop_skip).value_stop_offset()
-    assert isinstance(stop_offset, abjad.ValueOffset), repr(stop_offset)
+    assert isinstance(stop_offset, abjad.Offset), repr(stop_offset)
     return start_offset, stop_offset
 
 
@@ -1570,12 +1570,12 @@ def _pitch_unpitched_anchor_notes(score: abjad.Score) -> None:
 
 def _populate_offset_to_measure_number(
     first_measure_number: int, global_skips: abjad.Context
-) -> dict[abjad.ValueOffset, int]:
+) -> dict[abjad.Offset, int]:
     measure_number = first_measure_number
     offset_to_measure_number = {}
     for skip in _select.skips(global_skips):
         offset = abjad.get.timespan(skip).value_start_offset()
-        assert isinstance(offset, abjad.ValueOffset), repr(offset)
+        assert isinstance(offset, abjad.Offset), repr(offset)
         offset_to_measure_number[offset] = measure_number
         measure_number += 1
     return offset_to_measure_number
@@ -1727,19 +1727,19 @@ def _remove_layout_tags(score: abjad.Score) -> None:
 
 
 def _replace_rests_with_multimeasure_rests(
-    offset_to_measure_number: dict[abjad.ValueOffset, int],
+    offset_to_measure_number: dict[abjad.Offset, int],
     score: abjad.Score,
     time_signatures: list[abjad.TimeSignature],
 ) -> None:
     assert isinstance(offset_to_measure_number, dict)
     keys = offset_to_measure_number.keys()
-    assert all(isinstance(_, abjad.ValueOffset) for _ in keys)
+    assert all(isinstance(_, abjad.Offset) for _ in keys)
     if len(offset_to_measure_number) == len(time_signatures) + 1:
         items = list(offset_to_measure_number.items())
         offset_to_measure_number = dict(items[:-1])
     assert len(offset_to_measure_number) == len(time_signatures)
     offsets = offset_to_measure_number.keys()
-    assert all(isinstance(_, abjad.ValueOffset) for _ in offsets), repr(offsets)
+    assert all(isinstance(_, abjad.Offset) for _ in offsets), repr(offsets)
     pairs = zip(offsets, time_signatures, strict=True)
     offset_to_time_signature = dict(pairs)
     for voice in abjad.select.components(score, abjad.Voice):
@@ -1752,11 +1752,11 @@ def _replace_rests_with_multimeasure_rests(
             if any(_ is not voice for _ in parents):
                 continue
             start_offset = abjad.get.timespan(group[0]).value_start_offset()
-            assert isinstance(start_offset, abjad.ValueOffset)
+            assert isinstance(start_offset, abjad.Offset)
             if start_offset not in offset_to_time_signature:
                 continue
             stop_offset = abjad.get.timespan(group[-1]).value_stop_offset()
-            assert isinstance(stop_offset, abjad.ValueOffset), repr(stop_offset)
+            assert isinstance(stop_offset, abjad.Offset), repr(stop_offset)
             if stop_offset not in offset_to_time_signature:
                 continue
             time_signature = offset_to_time_signature[start_offset]
@@ -1797,13 +1797,13 @@ def _set_not_yet_pitched_to_staff_position_zero(score: abjad.Score) -> None:
 
 def _shift_measure_initial_clefs(
     first_measure_number: int,
-    offset_to_measure_number: dict[abjad.ValueOffset, int],
+    offset_to_measure_number: dict[abjad.Offset, int],
     score: abjad.Score,
 ) -> None:
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
             start_offset = abjad.get.timespan(leaf).value_start_offset()
-            assert isinstance(start_offset, abjad.ValueOffset), repr(start_offset)
+            assert isinstance(start_offset, abjad.Offset), repr(start_offset)
             wrapper = abjad.get.wrapper(leaf, abjad.Clef)
             if wrapper is None or not wrapper.tag():
                 continue
@@ -1827,9 +1827,9 @@ def _style_anchor_notes(score: abjad.Score) -> None:
 def _style_fermata_measures(
     fermata_extra_offset_y: float,
     fermata_measure_empty_overrides: list[int],
-    fermata_start_offsets: list[abjad.ValueOffset],
+    fermata_start_offsets: list[abjad.Offset],
     final_section: bool,
-    offset_to_measure_number: dict[abjad.ValueOffset, int],
+    offset_to_measure_number: dict[abjad.Offset, int],
     score: abjad.Score,
 ) -> None:
     if not fermata_measure_empty_overrides:
@@ -1931,7 +1931,7 @@ def _style_fermata_measures(
                     resume_staff_lines,
                     leaf,
                     hide=True,
-                    synthetic_offset=abjad.ValueOffset(abjad.Fraction(99)),
+                    synthetic_offset=abjad.Offset(abjad.Fraction(99)),
                     tag=_helpers.function_name(_frame(), n=5),
                 )
                 previous_line_count = 5
@@ -1942,7 +1942,7 @@ def _style_fermata_measures(
                     resume_bar_extent,
                     leaf,
                     hide=True,
-                    synthetic_offset=abjad.ValueOffset(abjad.Fraction(99)),
+                    synthetic_offset=abjad.Offset(abjad.Fraction(99)),
                     tag=_helpers.function_name(_frame(), n=6).append(
                         _tags.FERMATA_MEASURE_RESUME_BAR_EXTENT
                     ),

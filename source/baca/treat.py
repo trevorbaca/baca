@@ -387,7 +387,7 @@ def remove_reapplied_wrappers(leaf: abjad.Leaf, item: typing.Any) -> list | None
     if getattr(indicator, "parameter", None) == "TEXT_SPANNER":
         return None
     start_offset = abjad.get.timespan(leaf).value_start_offset()
-    assert isinstance(start_offset, abjad.ValueOffset)
+    assert isinstance(start_offset, abjad.Offset)
     if start_offset.fraction != 0:
         return None
     prototype: (
