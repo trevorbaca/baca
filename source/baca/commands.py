@@ -253,7 +253,6 @@ def force_accidental(argument, *, tag: abjad.Tag | None = None) -> None:
             assert isinstance(pleaf, abjad.Chord)
             note_heads = list(pleaf.note_heads())
         for note_head in note_heads:
-            assert note_head is not None
             if not tag.string:
                 if cautionary:
                     note_head.set_is_cautionary(True)
