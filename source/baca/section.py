@@ -869,16 +869,14 @@ def _collect_persistent_indicators(
     for name, dependent_wrappers in name_to_wrappers.items():
         mementos = []
         wrappers = []
-        dictionary = abjad._getlib._get_persistent_wrappers(
+        dictionary = _get_persistent_wrappers(
             dependent_wrappers=dependent_wrappers,
             omit_with_indicator=(_enums.ANCHOR_NOTE, _enums.ANCHOR_SKIP),
         )
         for wrapper in dictionary.values():
             if isinstance(wrapper.unbundle_indicator(), do_not_persist_on_anchor_leaf):
                 wrappers.append(wrapper)
-        dictionary = abjad._getlib._get_persistent_wrappers(
-            dependent_wrappers=dependent_wrappers
-        )
+        dictionary = _get_persistent_wrappers(dependent_wrappers=dependent_wrappers)
         for wrapper in dictionary.values():
             if not isinstance(
                 wrapper.unbundle_indicator(),
@@ -1204,6 +1202,52 @@ def _get_measure_timespan(measure_number: int, score: abjad.Score) -> abjad.Time
         measure_number,
     )
     return abjad.Timespan(start_offset, stop_offset)
+
+
+def _get_persistent_wrappers(*, dependent_wrappers=None, omit_with_indicator=None):
+    wrappers = {}
+    for wrapper in dependent_wrappers:
+        if wrapper.annotation():
+            continue
+        if not getattr(wrapper.unbundle_indicator(), "persistent", False):
+            continue
+        assert isinstance(wrapper.unbundle_indicator().persistent, bool)
+        should_omit = False
+        if omit_with_indicator is not None:
+            for component in wrapper.component()._get_parentage():
+                if component._has_indicator(omit_with_indicator):
+                    should_omit = True
+                    continue
+        if should_omit:
+            continue
+        if hasattr(wrapper.unbundle_indicator(), "parameter"):
+            key = wrapper.unbundle_indicator().parameter
+        elif isinstance(wrapper.unbundle_indicator(), abjad.Instrument):
+            key = "Instrument"
+        else:
+            key = str(type(wrapper.unbundle_indicator()))
+        if key not in wrappers:
+            wrappers[key] = wrapper
+        elif (
+            wrappers[key].site_adjusted_start_offset()
+            < wrapper.site_adjusted_start_offset()
+        ):
+            wrappers[key] = wrapper
+        elif (
+            wrappers[key].site_adjusted_start_offset()
+            == wrapper.site_adjusted_start_offset()
+        ):
+            if isinstance(
+                wrappers[key].unbundle_indicator(), abjad.StartHairpin
+            ) and isinstance(wrapper.unbundle_indicator(), abjad.Dynamic):
+                pass
+            elif (
+                getattr(wrapper.unbundle_indicator(), "spanner_start", False) is True
+                or getattr(wrapper.unbundle_indicator(), "spanner_stop", False) is True
+                or getattr(wrapper.unbundle_indicator(), "trend", False) is True
+            ):
+                wrappers[key] = wrapper
+    return wrappers
 
 
 def _global_rests_are_meaningful(context: abjad.Context) -> bool:
