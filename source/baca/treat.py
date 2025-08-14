@@ -386,7 +386,7 @@ def remove_reapplied_wrappers(leaf: abjad.Leaf, item: typing.Any) -> list | None
         return None
     if getattr(indicator, "parameter", None) == "TEXT_SPANNER":
         return None
-    start_offset = abjad.get.timespan(leaf).value_start_offset()
+    start_offset = abjad.get.timespan(leaf).start_offset
     assert isinstance(start_offset, abjad.Offset)
     if start_offset.fraction != 0:
         return None
@@ -440,8 +440,8 @@ def remove_reapplied_wrappers(leaf: abjad.Leaf, item: typing.Any) -> list | None
     if effective_wrapper and effective_wrapper not in wrappers:
         effective_wrapper_component = effective_wrapper.component()
         assert effective_wrapper_component is not None
-        start_1 = abjad.get.timespan(leaf).value_start_offset()
-        start_2 = abjad.get.timespan(effective_wrapper_component).value_start_offset()
+        start_1 = abjad.get.timespan(leaf).start_offset
+        start_2 = abjad.get.timespan(effective_wrapper_component).start_offset
         if start_1 == start_2:
             wrappers_ = abjad.get.wrappers(effective_wrapper_component)
             wrappers.extend(wrappers_)

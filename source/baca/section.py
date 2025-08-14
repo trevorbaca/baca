@@ -1020,7 +1020,7 @@ def _comment_measure_numbers(
     assert all(isinstance(_, abjad.Offset) for _ in keys)
     tag = _helpers.function_name(_frame())
     for leaf in abjad.iterate.leaves(score):
-        offset = abjad.get.timespan(leaf).value_start_offset()
+        offset = abjad.get.timespan(leaf).start_offset
         assert isinstance(offset, abjad.Offset), repr(offset)
         measure_number = offset_to_measure_number.get(offset, None)
         if measure_number is None:
@@ -1160,7 +1160,7 @@ def _get_fermata_measure_numbers(
                 final_measure_is_fermata = True
             measure_number = first_measure_number + measure_index
             timespan = abjad.get.timespan(rest)
-            timespan_start_offset = timespan.value_start_offset()
+            timespan_start_offset = timespan.start_offset
             assert isinstance(timespan_start_offset, abjad.Offset)
             fermata_start_offsets.append(timespan_start_offset)
             fermata_measure_numbers.append(measure_number)
@@ -1174,7 +1174,7 @@ def _get_fermata_measure_numbers(
 def _get_measure_number_tag(
     leaf: abjad.Leaf, offset_to_measure_number: dict[abjad.Offset, int]
 ) -> abjad.Tag | None:
-    start_offset = abjad.get.timespan(leaf).value_start_offset()
+    start_offset = abjad.get.timespan(leaf).start_offset
     assert isinstance(start_offset, abjad.Offset), repr(start_offset)
     measure_number = offset_to_measure_number.get(start_offset)
     if measure_number is not None:
@@ -1188,11 +1188,11 @@ def _get_measure_offsets(
     skips = _select.skips(score["Skips"])
     start_skip = skips[start_measure - 1]
     assert isinstance(start_skip, abjad.Skip), start_skip
-    start_offset = abjad.get.timespan(start_skip).value_start_offset()
+    start_offset = abjad.get.timespan(start_skip).start_offset
     assert isinstance(start_offset, abjad.Offset), repr(start_offset)
     stop_skip = skips[stop_measure - 1]
     assert isinstance(stop_skip, abjad.Skip), stop_skip
-    stop_offset = abjad.get.timespan(stop_skip).value_stop_offset()
+    stop_offset = abjad.get.timespan(stop_skip).stop_offset
     assert isinstance(stop_offset, abjad.Offset), repr(stop_offset)
     return start_offset, stop_offset
 
@@ -1574,7 +1574,7 @@ def _populate_offset_to_measure_number(
     measure_number = first_measure_number
     offset_to_measure_number = {}
     for skip in _select.skips(global_skips):
-        offset = abjad.get.timespan(skip).value_start_offset()
+        offset = abjad.get.timespan(skip).start_offset
         assert isinstance(offset, abjad.Offset), repr(offset)
         offset_to_measure_number[offset] = measure_number
         measure_number += 1
@@ -1751,11 +1751,11 @@ def _replace_rests_with_multimeasure_rests(
             parents = [abjad.get.parentage(_).parent() for _ in group]
             if any(_ is not voice for _ in parents):
                 continue
-            start_offset = abjad.get.timespan(group[0]).value_start_offset()
+            start_offset = abjad.get.timespan(group[0]).start_offset
             assert isinstance(start_offset, abjad.Offset)
             if start_offset not in offset_to_time_signature:
                 continue
-            stop_offset = abjad.get.timespan(group[-1]).value_stop_offset()
+            stop_offset = abjad.get.timespan(group[-1]).stop_offset
             assert isinstance(stop_offset, abjad.Offset), repr(stop_offset)
             if stop_offset not in offset_to_time_signature:
                 continue
@@ -1802,7 +1802,7 @@ def _shift_measure_initial_clefs(
 ) -> None:
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
-            start_offset = abjad.get.timespan(leaf).value_start_offset()
+            start_offset = abjad.get.timespan(leaf).start_offset
             assert isinstance(start_offset, abjad.Offset), repr(start_offset)
             wrapper = abjad.get.wrapper(leaf, abjad.Clef)
             if wrapper is None or not wrapper.tag():
@@ -1840,12 +1840,12 @@ def _style_fermata_measures(
     empty_fermata_measure_start_offsets = []
     for measure_number in fermata_measure_empty_overrides or []:
         timespan = _get_measure_timespan(measure_number, score)
-        empty_fermata_measure_start_offsets.append(timespan.value_start_offset())
+        empty_fermata_measure_start_offsets.append(timespan.start_offset)
     for staff in abjad.iterate.components(score, abjad.Staff):
         for leaf in abjad.iterate.leaves(staff):
             if abjad.get.has_indicator(leaf, (_enums.ANCHOR_NOTE, _enums.ANCHOR_SKIP)):
                 continue
-            start_offset = abjad.get.timespan(leaf).value_start_offset()
+            start_offset = abjad.get.timespan(leaf).start_offset
             if start_offset not in fermata_start_offsets:
                 continue
             voice = abjad.get.parentage(leaf).get(abjad.Voice)
@@ -1904,9 +1904,7 @@ def _style_fermata_measures(
                 else:
                     next_bar_extent_ = next_bar_extent
                 wrapper = abjad.get.effective_wrapper(next_leaf, _classes.StaffLines)
-                next_leaf_start_offset = abjad.get.timespan(
-                    next_leaf
-                ).value_start_offset()
+                next_leaf_start_offset = abjad.get.timespan(next_leaf).start_offset
                 if wrapper is None or (
                     wrapper.start_offset() != next_leaf_start_offset
                 ):
@@ -2139,10 +2137,8 @@ def cache_leaves(
         for i, measure_timespan in enumerate(measure_timespans):
             measure_number = i + 1
             if (
-                measure_timespan.value_start_offset()
-                <= leaf_timespan.value_start_offset()
-                and leaf_timespan.value_start_offset()
-                < measure_timespan.value_stop_offset()
+                measure_timespan.start_offset <= leaf_timespan.start_offset
+                and leaf_timespan.start_offset < measure_timespan.stop_offset
             ):
                 cached_leaves = measure_number_to_leaves.setdefault(measure_number, [])
                 cached_leaves.append(leaf)

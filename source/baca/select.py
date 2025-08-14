@@ -650,14 +650,14 @@ def graces(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad.L
 def group_consecutive(components) -> list[list]:
     assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
     groups = [components[:1]]
-    previous_stop_offset = abjad.get.timespan(groups[-1][-1]).value_stop_offset()
+    previous_stop_offset = abjad.get.timespan(groups[-1][-1]).stop_offset
     for component in components[1:]:
         component_timespan = abjad.get.timespan(component)
-        if component_timespan.value_start_offset() == previous_stop_offset:
+        if component_timespan.start_offset == previous_stop_offset:
             groups[-1].append(component)
         else:
             groups.append([component])
-        previous_stop_offset = component_timespan.value_stop_offset()
+        previous_stop_offset = component_timespan.stop_offset
     return groups
 
 
@@ -4466,8 +4466,8 @@ def sort_by_timeline(leaves):
     assert all(isinstance(_, abjad.Leaf) for _ in leaves), repr(leaves)
 
     def compare(leaf_1, leaf_2):
-        start_offset_1 = abjad.get.timespan(leaf_1).value_start_offset()
-        start_offset_2 = abjad.get.timespan(leaf_2).value_start_offset()
+        start_offset_1 = abjad.get.timespan(leaf_1).start_offset
+        start_offset_2 = abjad.get.timespan(leaf_2).start_offset
         if start_offset_1 < start_offset_2:
             return -1
         if start_offset_2 < start_offset_1:

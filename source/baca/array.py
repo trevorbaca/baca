@@ -12,10 +12,10 @@ import abjad
 def _get_leaf_offsets(argment):
     offsets = []
     for leaf in abjad.iterate.leaves(argment):
-        start_offset = abjad.get.timespan(leaf).value_start_offset()
+        start_offset = abjad.get.timespan(leaf).start_offset
         if start_offset not in offsets:
             offsets.append(start_offset)
-        stop_offset = abjad.get.timespan(leaf).value_stop_offset()
+        stop_offset = abjad.get.timespan(leaf).stop_offset
         if stop_offset not in offsets:
             offsets.append(stop_offset)
     offsets.sort()

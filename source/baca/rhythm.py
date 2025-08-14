@@ -1287,7 +1287,7 @@ def make_rhythm(
                         pairs = []
                         for pair in timespan_to_original_item:
                             timespan, original_item = pair
-                            timespan_start_offset = timespan.value_start_offset()
+                            timespan_start_offset = timespan.start_offset
                             assert isinstance(timespan_start_offset, abjad.Offset)
                             if unchanged_duration <= timespan_start_offset.fraction:
                                 timespan = timespan.translate(needed_duration)
