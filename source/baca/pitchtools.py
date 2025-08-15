@@ -538,7 +538,7 @@ def _set_lt_pitch(
                 raise Exception("set allow_obgc_mutation=True")
                 pass
             for leaf in lt:
-                note = abjad.Note(
+                note = abjad.Note.from_pitch_and_duration(
                     pitch,
                     leaf.written_duration(),
                     multiplier=leaf.multiplier(),

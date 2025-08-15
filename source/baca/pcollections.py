@@ -801,10 +801,11 @@ def illustrate_harmonic_series(harmonic_series) -> abjad.LilyPondFile:
 
     """
     staff = abjad.Staff(name="Staff")
+    duration = abjad.Duration(1, 4)
     for n in range(1, 20 + 1):
         partial = harmonic_series.partial(n)
         pitch = partial.approximation()
-        note = abjad.Note.from_pitch_and_duration(pitch, (1, 4))
+        note = abjad.Note.from_pitch_and_duration(pitch, duration)
         staff.append(note)
         deviation = partial.deviation()
         if 0 < deviation:

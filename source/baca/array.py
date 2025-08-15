@@ -25,10 +25,13 @@ def _get_leaf_offsets(argment):
 def _make_multiplied_quarter_notes(durations):
     notes = []
     written_duration = abjad.Duration(1, 4)
+    pitch = abjad.NamedPitch("C4")
     for duration in durations:
         fraction = duration / written_duration
         pair = (fraction.numerator, fraction.denominator)
-        note = abjad.Note(0, written_duration, multiplier=pair)
+        note = abjad.Note.from_pitch_and_duration(
+            pitch, written_duration, multiplier=pair
+        )
         notes.append(note)
     return notes
 
