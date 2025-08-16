@@ -233,7 +233,7 @@ def _evaluate_item(
         components.extend(components_)
         result = components_
     elif item in ("+", "-"):
-        skip = abjad.Skip(1, multiplier=(99, 1))
+        skip = abjad.Skip("s1", multiplier=(99, 1))
         abjad.attach("SPACER", skip)
         abjad.attach(item, skip)
         components.append(skip)
@@ -1054,7 +1054,7 @@ def make_mmrests(
             else:
                 assert isinstance(time_signature, abjad.Duration)
                 pair = time_signature.pair()
-            mmrest = abjad.MultimeasureRest(1, multiplier=pair, tag=tag)
+            mmrest = abjad.MultimeasureRest("R1", multiplier=pair, tag=tag)
             mmrests.append(mmrest)
     else:
         assert isinstance(head, str)
@@ -1092,7 +1092,7 @@ def make_mmrests(
                 tag = tag.append(_tags.REST_VOICE)
                 tag = tag.append(_tags.MULTIMEASURE_REST)
                 rest = abjad.MultimeasureRest(
-                    1, multiplier=time_signature.pair, tag=tag
+                    "R1", multiplier=time_signature.pair, tag=tag
                 )
                 abjad.attach(_enums.MULTIMEASURE_REST, rest)
                 abjad.attach(_enums.REST_VOICE, rest)
@@ -1114,7 +1114,7 @@ def make_mmrests(
                 mmrests.append(container)
             else:
                 mmrest = abjad.MultimeasureRest(
-                    1, multiplier=time_signature.pair, tag=tag
+                    "R1", multiplier=time_signature.pair, tag=tag
                 )
                 mmrests.append(mmrest)
     assert all(isinstance(_, abjad.MultimeasureRest | abjad.Container) for _ in mmrests)
@@ -1528,7 +1528,7 @@ def replace_nontrivial_skip_filled_tuplets(argument):
             violators.append(tuplet)
     for tuplet in violators:
         duration = abjad.get.duration(tuplet)
-        skip = abjad.Skip(1, multiplier=duration.pair())
+        skip = abjad.Skip("s1", multiplier=duration.pair())
         assert duration == abjad.get.duration(skip)
         abjad.mutate.replace([tuplet], [skip])
 

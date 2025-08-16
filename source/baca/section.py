@@ -1442,7 +1442,7 @@ def _make_global_rests(
     rests = []
     for time_signature in time_signatures:
         rest = abjad.MultimeasureRest(
-            abjad.Duration(1),
+            "R1",
             multiplier=time_signature.pair,
             tag=_helpers.function_name(_frame(), n=1),
         )
@@ -1461,7 +1461,7 @@ def _make_global_skips(
     measure_initial_grace_notes = measure_initial_grace_notes or {}
     for n, time_signature in enumerate(time_signatures, start=1):
         skip = abjad.Skip(
-            1,
+            "s1",
             multiplier=time_signature.pair,
             tag=_helpers.function_name(_frame(), n=1),
         )
@@ -1480,7 +1480,7 @@ def _make_global_skips(
     if append_anchor_skip:
         tag = _helpers.function_name(_frame(), n=3)
         tag = tag.append(_tags.ANCHOR_SKIP)
-        skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
+        skip = abjad.Skip("s1", multiplier=(1, 4), tag=tag)
         abjad.attach(_enums.ANCHOR_SKIP, skip)
         context.append(skip)
         anchor_time_signature = abjad.TimeSignature((1, 4))
@@ -1806,7 +1806,7 @@ def _replace_rests_with_multimeasure_rests(
                 continue
             time_signature = offset_to_time_signature[start_offset]
             pair = time_signature.pair
-            multimeasure_rest = abjad.MultimeasureRest(1, multiplier=pair)
+            multimeasure_rest = abjad.MultimeasureRest("R1", multiplier=pair)
             abjad.mutate.replace(group[:1], [multimeasure_rest], wrappers=True)
             abjad.mutate.replace(group[1:], [])
 
