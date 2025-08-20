@@ -411,7 +411,7 @@ def _make_cluster(
     pitches = _make_cluster_pitches(start_pitch, width)
     key_cluster = abjad.KeyCluster(hide_flat_markup=hide_flat_markup)
     for pleaf in plt:
-        chord = abjad.Chord(pitches, pleaf.written_duration())
+        chord = abjad.Chord.from_pitches_and_duration(pitches, pleaf.written_duration())
         wrappers = abjad.get.wrappers(pleaf)
         abjad.detach(object, pleaf)
         abjad.mutate.replace(pleaf, chord, wrappers=True)
@@ -517,7 +517,7 @@ def _set_lt_pitch(
         else:
             assert isinstance(lt.head(), abjad.Note | abjad.Rest)
             for leaf in lt:
-                chord = abjad.Chord(
+                chord = abjad.Chord.from_pitches_and_duration(
                     pitch,
                     leaf.written_duration(),
                     multiplier=leaf.multiplier(),
