@@ -85,7 +85,7 @@ def imbricate(
         if isinstance(logical_tie.head(), abjad.Rest):
             for leaf in logical_tie:
                 duration = leaf.written_duration()
-                skip = abjad.Skip(duration)
+                skip = abjad.Skip.from_duration(duration)
                 abjad.mutate.replace(leaf, [skip])
         elif isinstance(logical_tie.head(), abjad.Skip):
             pass
@@ -107,7 +107,7 @@ def imbricate(
                 tail = logical_tie.tail()
                 for leaf in logical_tie[1:]:
                     duration = leaf.written_duration()
-                    skip = abjad.Skip(duration)
+                    skip = abjad.Skip.from_duration(duration)
                     abjad.mutate.replace(leaf, [skip])
                 abjad.detach(abjad.Tie, head)
                 next_leaf = abjad.get.leaf(tail, 1)
@@ -116,12 +116,12 @@ def imbricate(
             if hocket:
                 for leaf in original_logical_tie:
                     duration = leaf.written_duration()
-                    skip = abjad.Skip(duration)
+                    skip = abjad.Skip.from_duration(duration)
                     abjad.mutate.replace(leaf, [skip])
         else:
             for leaf in logical_tie:
                 duration = leaf.written_duration()
-                skip = abjad.Skip(duration)
+                skip = abjad.Skip.from_duration(duration)
                 abjad.mutate.replace(leaf, [skip])
     if not allow_unused_pitches and i < len(segment):
         current, total = i, len(segment)
