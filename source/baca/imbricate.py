@@ -47,7 +47,7 @@ def _trim_matching_chord(logical_tie, pitch_object):
     for chord in logical_tie:
         duration = chord.written_duration()
         pitch = abjad.NamedPitch(pitch_object)
-        note = abjad.Note.from_pitch_and_duration(pitch, duration)
+        note = abjad.Note.from_duration_and_pitch(duration, pitch)
         abjad.mutate.replace(chord, [note])
 
 

@@ -14,7 +14,7 @@ def insert_and_transpose(notes, subrun_tokens):
 
     >>> pitches = [abjad.NamedPitch(_) for _ in [0, 2, 7, 9, 5, 11, 4]]
     >>> duration = abjad.Duration(1, 4)
-    >>> notes = [abjad.Note.from_pitch_and_duration(_, duration) for _ in pitches]
+    >>> notes = [abjad.Note.from_duration_and_pitch(duration, _) for _ in pitches]
     >>> subrun_tokens = [(0, [2, 4]), (4, [3, 1])]
     >>> baca.math.insert_and_transpose(notes, subrun_tokens)
 
@@ -124,8 +124,9 @@ def _make_new_notes(anchor_pitch, anchor_written_duration, subrun_intervals):
         new_pc += subrun_interval
         new_pc %= 12
         new_pitch = abjad.NamedPitch(new_pc)
-        new_note = abjad.Note.from_pitch_and_duration(
-            new_pitch, anchor_written_duration
+        new_note = abjad.Note.from_duration_and_pitch(
+            anchor_written_duration,
+            new_pitch,
         )
         new_notes.append(new_note)
     return new_notes

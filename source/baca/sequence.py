@@ -1117,7 +1117,7 @@ def repeat_subruns_to_length(notes, pairs, *, history=False):
 
         >>> pitches = [abjad.NamedPitch(_) for _ in [0, 2, 4, 5, 7, 9, 11]]
         >>> duration = abjad.Duration(1, 4)
-        >>> sequence = [abjad.Note.from_pitch_and_duration(_, duration) for _ in pitches]
+        >>> sequence = [abjad.Note.from_duration_and_pitch(duration, _) for _ in pitches]
         >>> result = baca.sequence.repeat_subruns_to_length(sequence, [(0, 4, 1), (2, 4, 1)])
         >>> for item in result: item
         Note("c'4")
@@ -1150,8 +1150,9 @@ def repeat_subruns_to_length(notes, pairs, *, history=False):
             source = notes[i % len_notes]
             pitch_number = source.written_pitch().number()
             pitch = abjad.NamedPitch(pitch_number)
-            new_note = abjad.Note.from_pitch_and_duration(
-                pitch, source.written_duration()
+            new_note = abjad.Note.from_duration_and_pitch(
+                source.written_duration(),
+                pitch,
             )
             if history:
                 abjad.attach(history, new_note)

@@ -27,7 +27,7 @@ Constellation.
     >>> duration = abjad.Duration(1, 4)
     >>> for set_ in constellation:
     ...     pitches = abjad.pitch.pitches(set_)
-    ...     chord = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    ...     chord = abjad.Chord.from_duration_and_pitches(duration, pitches)
     ...     constellation.label_chord(chord)
     ...     chords.append(chord)
 
@@ -710,7 +710,7 @@ Constellation.
     >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> pitches = abjad.pitch.pitches(generator)
     >>> duration = abjad.Duration(1, 4)
-    >>> generator = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    >>> generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
     >>> score = abjad.illustrators.make_piano_score([generator])
@@ -790,12 +790,12 @@ Constellation.
     >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> pitches = abjad.pitch.pitches(generator)
     >>> duration = abjad.Duration(1, 4)
-    >>> generator = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    >>> generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
     >>> pivot = baca.constellation.find_pivot(constellation, circuit[1])
     >>> pitches = abjad.pitch.pitches(pivot)
-    >>> pivot = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    >>> pivot = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.label_chord(pivot)
     >>> leaves = [generator, pivot]
     >>> score = abjad.illustrators.make_piano_score(leaves)
@@ -878,7 +878,7 @@ Constellation.
     >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> pitches = abjad.pitch.pitches(generator)
     >>> duration = abjad.Duration(1, 4)
-    >>> generator = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    >>> generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.label_chord(generator)
     >>> leaves = [generator]
     >>> score = abjad.illustrators.make_piano_score(leaves)
@@ -920,11 +920,11 @@ Constellation.
     >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> pitches = abjad.pitch.pitches(generator)
     >>> duration = abjad.Duration(1, 4)
-    >>> generator = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    >>> generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.label_chord(generator)
     >>> pivot = baca.constellation.find_pivot(constellation, circuit[1])
     >>> pitches = abjad.pitch.pitches(pivot)
-    >>> pivot = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    >>> pivot = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.label_chord(pivot)
     >>> leaves = [generator, pivot]
     >>> score = abjad.illustrators.make_piano_score(leaves)
@@ -969,7 +969,7 @@ Constellation.
     >>> pivot = baca.constellation.find_pivot(constellation, circuit[1])
     >>> pitches = abjad.pitch.pitches(pivot)
     >>> duration = abjad.Duration(1, 4)
-    >>> pivot = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    >>> pivot = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.label_chord(pivot)
     >>> leaves = [pivot]
     >>> score = abjad.illustrators.make_piano_score(leaves)
@@ -1012,7 +1012,7 @@ Constellation.
     >>> for constellation in circuit:
     ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     pitches = abjad.pitch.pitches(generator)
-    ...     generator = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    ...     generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     ...     constellation.color_chord(generator)
     ...     generators.append(generator)
 
@@ -1368,13 +1368,13 @@ Constellation.
     >>> for i, constellation in enumerate(circuit):
     ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     pitches = abjad.pitch.pitches(generator)
-    ...     generator = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    ...     generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     ...     constellation.color_chord(generator)
     ...     generators.append(generator)
     ...     next_constellation = circuit[(i + 1) % length]
     ...     pivot = baca.constellation.find_pivot(constellation, next_constellation)
     ...     pitches = abjad.pitch.pitches(pivot)
-    ...     pivot = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    ...     pivot = abjad.Chord.from_duration_and_pitches(duration, pitches)
     ...     pivots.append(pivot)
 
     >>> chords = list(zip(generators, pivots))
@@ -1746,7 +1746,7 @@ Constellation.
     >>> for constellation in circuit:
     ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     pitches = abjad.pitch.pitches(generator)
-    ...     generator = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    ...     generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     ...     generators.append(generator)
 
     >>> score = abjad.illustrators.make_piano_score(generators)
@@ -1803,12 +1803,12 @@ Constellation.
     >>> for i, constellation in enumerate(circuit):
     ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     pitches = abjad.pitch.pitches(generator)
-    ...     generator = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    ...     generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     ...     generators.append(generator)
     ...     next_constellation = circuit[(i + 1) % length]
     ...     pivot = baca.constellation.find_pivot(constellation, next_constellation)
     ...     pitches = abjad.pitch.pitches(pivot)
-    ...     pivot = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    ...     pivot = abjad.Chord.from_duration_and_pitches(duration, pitches)
     ...     pivots.append(pivot)
 
     >>> chords = list(zip(generators, pivots))
@@ -1883,7 +1883,7 @@ Constellation.
     ...     next_constellation = circuit[(i + 1) % length]
     ...     pivot = baca.constellation.find_pivot(constellation, next_constellation)
     ...     pitches = abjad.pitch.pitches(pivot)
-    ...     pivot = abjad.Chord.from_pitches_and_duration(pitches, duration)
+    ...     pivot = abjad.Chord.from_duration_and_pitches(duration, pitches)
     ...     pivots.append(pivot)
 
     >>> score = abjad.illustrators.make_piano_score(pivots)
