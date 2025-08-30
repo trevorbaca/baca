@@ -117,19 +117,20 @@ def _make_index_length_pairs(subrun_token):
     return pairs
 
 
-def _make_new_notes(anchor_pitch, anchor_written_duration, subrun_intervals):
-    new_notes = []
-    for subrun_interval in subrun_intervals:
-        new_pc = abjad.NumberedPitch(anchor_pitch).number()
-        new_pc += subrun_interval
-        new_pc %= 12
-        new_pitch = abjad.NamedPitch(new_pc)
-        new_note = abjad.Note.from_duration_and_pitch(
-            anchor_written_duration,
-            new_pitch,
-        )
-        new_notes.append(new_note)
-    return new_notes
+def _make_new_notes(
+    anchor_pitch: abjad.NamedPitch, duration: abjad.Duration, subrun_intervals
+) -> list[abjad.Note]:
+    assert isinstance(anchor_pitch, abjad.NamedPitch)
+    assert isinstance(duration, abjad.Duration)
+    assert all(isinstance(_, int) for _ in subrun_intervals)
+    notes = []
+    for interval_number in subrun_intervals:
+        pitch_number = anchor_pitch.number() + interval_number
+        pitch_class = pitch_number % 12
+        pitch = abjad.NamedPitch(pitch_class)
+        note = abjad.Note.from_duration_and_pitch(duration, pitch)
+        notes.append(note)
+    return notes
 
 
 def partition_integer_into_halves(n, bigger=abjad.LEFT, allow_even=True):

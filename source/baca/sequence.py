@@ -4,6 +4,7 @@ Sequence.
 
 import copy
 import itertools
+import typing
 
 import abjad
 
@@ -1109,16 +1110,22 @@ def repeat_by(sequence, counts: list[int], *, cyclic: bool = False):
     return type(sequence)(items)
 
 
-def repeat_subruns_to_length(notes, pairs, *, history=False):
+def repeat_subruns_to_length(
+    notes: typing.Sequence[abjad.Note],
+    triples: list[tuple[int, int, int]],
+    *,
+    history: bool = False,
+) -> list[abjad.Note]:
     """
-    Repeats ``notes`` according to ``pairs``.
+    Repeats ``notes`` according to ``triples``.
 
     ..  container:: example
 
-        >>> pitches = [abjad.NamedPitch(_) for _ in [0, 2, 4, 5, 7, 9, 11]]
         >>> duration = abjad.Duration(1, 4)
-        >>> sequence = [abjad.Note.from_duration_and_pitch(duration, _) for _ in pitches]
-        >>> result = baca.sequence.repeat_subruns_to_length(sequence, [(0, 4, 1), (2, 4, 1)])
+        >>> pitches = abjad.pitch.pitches([0, 2, 4, 5, 7, 9, 11])
+        >>> notes = [abjad.Note.from_duration_and_pitch(duration, _) for _ in pitches]
+        >>> triples = [(0, 4, 1), (2, 4, 1)]
+        >>> result = baca.sequence.repeat_subruns_to_length(notes, triples)
         >>> for item in result: item
         Note("c'4")
         Note("d'4")
@@ -1136,29 +1143,26 @@ def repeat_subruns_to_length(notes, pairs, *, history=False):
         Note("a'4")
         Note("b'4")
 
-    Returns list of components.
     """
-    assert all([isinstance(_, abjad.Note) for _ in notes])
-    assert isinstance(pairs, list)
-    assert all([len(_) == 3 for _ in pairs])
     assert isinstance(notes, list)
+    assert all([isinstance(_, abjad.Note) for _ in notes])
+    assert isinstance(triples, list)
+    assert all([len(_) == 3 for _ in triples])
     instructions = []
     len_notes = len(notes)
-    for pair in reversed(pairs):
+    for triple in reversed(triples):
         new_notes = []
-        for i in range(pair[0], pair[0] + pair[1]):
+        for i in range(triple[0], triple[0] + triple[1]):
             source = notes[i % len_notes]
+            duration = source.written_duration()
             pitch_number = source.written_pitch().number()
             pitch = abjad.NamedPitch(pitch_number)
-            new_note = abjad.Note.from_duration_and_pitch(
-                source.written_duration(),
-                pitch,
-            )
+            new_note = abjad.Note.from_duration_and_pitch(duration, pitch)
             if history:
                 abjad.attach(history, new_note)
             new_notes.append(new_note)
-        reps = pair[-1]
-        instruction = (pair[0] + pair[1], new_notes, reps)
+        reps = triple[-1]
+        instruction = (triple[0] + triple[1], new_notes, reps)
         instructions.append(instruction)
     for index, new_notes, reps in reversed(sorted(instructions)):
         total = []

@@ -411,7 +411,8 @@ def _make_cluster(
     pitches = _make_cluster_pitches(start_pitch, width)
     key_cluster = abjad.KeyCluster(hide_flat_markup=hide_flat_markup)
     for pleaf in plt:
-        chord = abjad.Chord.from_duration_and_pitches(pleaf.written_duration(), pitches)
+        duration = pleaf.written_duration()
+        chord = abjad.Chord.from_duration_and_pitches(duration, pitches)
         wrappers = abjad.get.wrappers(pleaf)
         abjad.detach(object, pleaf)
         abjad.mutate.replace(pleaf, chord, wrappers=True)
@@ -517,10 +518,10 @@ def _set_lt_pitch(
         else:
             assert isinstance(lt.head(), abjad.Note | abjad.Rest)
             for leaf in lt:
+                duration = leaf.written_duration()
+                multiplier = leaf.multiplier()
                 chord = abjad.Chord.from_duration_and_pitches(
-                    leaf.written_duration(),
-                    pitch,
-                    multiplier=leaf.multiplier(),
+                    duration, pitch, multiplier=multiplier
                 )
                 abjad.mutate.replace(leaf, chord, wrappers=True)
             new_lt = abjad.get.logical_tie(chord)
@@ -538,10 +539,12 @@ def _set_lt_pitch(
                 raise Exception("set allow_obgc_mutation=True")
                 pass
             for leaf in lt:
+                duration = leaf.written_duration()
+                multiplier = leaf.multiplier()
                 note = abjad.Note.from_duration_and_pitch(
-                    leaf.written_duration(),
+                    duration,
                     pitch,
-                    multiplier=leaf.multiplier(),
+                    multiplier=multiplier,
                 )
                 abjad.mutate.replace(leaf, note, wrappers=True)
             new_lt = abjad.get.logical_tie(note)
