@@ -24,7 +24,7 @@ def chead(argument, n: int, *, exclude: _typings.Exclude | None = None) -> abjad
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
@@ -110,7 +110,7 @@ def cheads(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad.C
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
@@ -218,7 +218,7 @@ def clparts(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
@@ -417,7 +417,7 @@ def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -809,7 +809,7 @@ def lleaf(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -955,7 +955,7 @@ def lleaves(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1065,7 +1065,7 @@ def lparts(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1166,7 +1166,7 @@ def lt(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1254,7 +1254,7 @@ def ltleaf(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 r4 r16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1338,7 +1338,7 @@ def ltleaves(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 r4 r16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1459,7 +1459,7 @@ def ltqrun(
         ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1547,7 +1547,7 @@ def ltqruns(
         ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1661,7 +1661,7 @@ def ltrun(
         ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1752,7 +1752,7 @@ def ltruns(
         ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -1862,7 +1862,7 @@ def lts(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2278,7 +2278,7 @@ def ntrun(
         ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2369,7 +2369,7 @@ def ntruns(
         ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2603,7 +2603,7 @@ def phead(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2691,7 +2691,7 @@ def pheads(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2808,7 +2808,7 @@ def pleaf(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -2898,7 +2898,7 @@ def pleaves(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -3021,7 +3021,7 @@ def plt(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -3110,7 +3110,7 @@ def plts(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -3226,7 +3226,7 @@ def ptail(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -3313,7 +3313,7 @@ def ptails(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -3426,7 +3426,7 @@ def ptlt(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -3513,7 +3513,7 @@ def ptlts(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -3620,7 +3620,7 @@ def qrun(
         ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -3708,7 +3708,7 @@ def qruns(
         ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -3824,7 +3824,7 @@ def rleaf(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -3989,7 +3989,7 @@ def rleaves(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -4160,7 +4160,7 @@ def rrun(
         ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -4252,7 +4252,7 @@ def rruns(
         ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -4505,7 +4505,7 @@ def tleaf(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -4596,7 +4596,7 @@ def tleaves(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -4782,7 +4782,7 @@ def wleaf(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -4860,7 +4860,7 @@ def wleaf(
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
@@ -4946,7 +4946,7 @@ def wleaves(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad.
         ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
         ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
         ... ]
-        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets)
+        >>> tuplets = zip(["9:10", "9:8", "9:10"], tuplets, strict=True)
         >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
         >>> rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         >>> lilypond_file = abjad.illustrators.components(tuplets)

@@ -106,7 +106,7 @@ class PitchArray:
         assert isinstance(argument, PitchArray), repr(argument)
         assert self.depth() == argument.depth(), repr((self.depth(), argument.depth()))
         new_array = PitchArray([])
-        for self_row, arg_row in zip(self.rows(), argument.rows()):
+        for self_row, arg_row in zip(self.rows(), argument.rows(), strict=True):
             new_row = self_row + arg_row
             new_array.append_row(new_row)
         return new_array
@@ -147,7 +147,7 @@ class PitchArray:
         Returns true or false.
         """
         if isinstance(argument, type(self)):
-            for self_row, arg_row in zip(self.rows(), argument.rows()):
+            for self_row, arg_row in zip(self.rows(), argument.rows(), strict=True):
                 if not self_row == arg_row:
                     return False
                 return True
@@ -201,7 +201,7 @@ class PitchArray:
         Returns pitch array.
         """
         assert isinstance(argument, PitchArray), repr(argument)
-        for self_row, arg_row in zip(self.rows(), argument.rows()):
+        for self_row, arg_row in zip(self.rows(), argument.rows(), strict=True):
             self_row += arg_row
         return self
 
@@ -426,7 +426,7 @@ class PitchArray:
         if self.depth() < column_depth:
             self.pad_to_depth(column_depth)
         self.pad_to_width(self.width())
-        for row, cell in zip(self.rows(), column):
+        for row, cell in zip(self.rows(), column, strict=True):
             row.append(cell)
 
     def append_row(self, row):
@@ -462,7 +462,7 @@ class PitchArray:
 
         Returns none.
         """
-        for row, pitch_list in zip(self.rows(), pitch_lists):
+        for row, pitch_list in zip(self.rows(), pitch_lists, strict=True):
             row.apply_pitches(pitch_list)
 
     def copy_subarray(self, upper_left_pair, lower_right_pair):
@@ -653,7 +653,9 @@ class PitchArray:
         array_depth = len(score)
         pitch_array = class_.from_counts(array_depth, array_width)
         items = _make_multiplied_quarter_notes(offsets)
-        for leaf_iterable, pitch_array_row in zip(score, pitch_array.rows()):
+        for leaf_iterable, pitch_array_row in zip(
+            score, pitch_array.rows(), strict=True
+        ):
             durations = []
             leaves = abjad.iterate.leaves(leaf_iterable)
             for leaf in leaves:
@@ -668,7 +670,7 @@ class PitchArray:
                 pitch_array_row.merge(group)
             leaves = abjad.iterate.leaves(leaf_iterable)
             if populate:
-                for cell, leaf in zip(pitch_array_row.cells(), leaves):
+                for cell, leaf in zip(pitch_array_row.cells(), leaves, strict=True):
                     cell.pitches().extend(abjad.iterate.pitches(leaf))
         return pitch_array
 
@@ -1570,7 +1572,7 @@ class PitchArrayColumn:
         Returns true or false.
         """
         if isinstance(argument, PitchArrayColumn):
-            for self_cell, arg_cell in zip(self.cells(), argument.cells()):
+            for self_cell, arg_cell in zip(self.cells(), argument.cells(), strict=True):
                 if not self_cell == arg_cell:
                     return False
             return True
@@ -2033,7 +2035,7 @@ class PitchArrayRow:
         Returns true or false.
         """
         if isinstance(argument, PitchArrayRow):
-            for self_cell, arg_cell in zip(self.cells(), argument.cells()):
+            for self_cell, arg_cell in zip(self.cells(), argument.cells(), strict=True):
                 if not self_cell.matches_cell(arg_cell):
                     return False
                 return True
@@ -2717,6 +2719,6 @@ def pitch_arrays_to_score(pitch_arrays) -> abjad.Score:
     for pitch_array in pitch_arrays:
         score_ = pitch_array.to_measures()
         measures = abjad.mutate.eject_contents(score_["Staff"])
-        for staff, measure in zip(staves, measures):
+        for staff, measure in zip(staves, measures, strict=True):
             staff.append(measure)
     return score

@@ -80,7 +80,7 @@ def imbricate(
         pitch_number = pitch_number[0]
     original_logical_ties = abjad.select.logical_ties(original_container)
     logical_ties = abjad.select.logical_ties(container)
-    pairs = zip(logical_ties, original_logical_ties)
+    pairs = zip(logical_ties, original_logical_ties, strict=True)
     for logical_tie, original_logical_tie in pairs:
         if isinstance(logical_tie.head(), abjad.Rest):
             for leaf in logical_tie:

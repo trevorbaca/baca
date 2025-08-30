@@ -1377,7 +1377,7 @@ Constellation.
     ...     pivot = abjad.Chord.from_duration_and_pitches(duration, pitches)
     ...     pivots.append(pivot)
 
-    >>> chords = list(zip(generators, pivots))
+    >>> chords = list(zip(generators, pivots, strict=True))
     >>> chords_ = abjad.sequence.flatten(chords)
     >>> score = abjad.illustrators.make_piano_score(chords_)
     >>> abjad.show(score) # doctest: +SKIP

@@ -310,7 +310,7 @@ def _make_accelerando_multipliers(
     assert sum(durations_) == total_duration
     pairs = []
     assert len(durations) == len(durations_)
-    for duration_, duration in zip(durations_, durations):
+    for duration_, duration in zip(durations_, durations, strict=True):
         fraction = duration_ / duration
         pair = abjad.duration.pair_with_denominator(fraction, 2**10)
         pairs.append(pair)
@@ -345,7 +345,7 @@ def _style_accelerando(
                 scaled_pairs.append(scaled_pair)
             pairs = scaled_pairs
         assert len(hleaves) == len(pairs)
-        for pair, leaf in zip(pairs, hleaves):
+        for pair, leaf in zip(pairs, hleaves, strict=True):
             leaf.set_multiplier(pair)
         if abjad.select.rests(hleaves):
             stemlet_length = 0.75
@@ -890,7 +890,7 @@ def attach_bgcs(
     bgcs = bgcs or []
     lts = abjad.select.logical_ties(argument)
     assert len(bgcs) == len(lts)
-    pairs = zip(bgcs, lts)
+    pairs = zip(bgcs, lts, strict=True)
     for bgc, lt in pairs:
         if bgc is not None:
             abjad.attach(bgc, lt.head(), tag=tag)
