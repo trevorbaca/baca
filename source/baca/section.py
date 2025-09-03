@@ -563,9 +563,9 @@ def _calculate_clock_times(
     if clock_time_override:
         metronome_mark = clock_time_override
         abjad.detach(metronome_mark, skips[0])
-    stop_clock_time = clock_times[-1].clock_string()
+    stop_clock_time = abjad.math.clock_string(clock_times[-1])
     duration = clock_times[-1] - clock_times[0]
-    duration_clock_string = duration.clock_string()
+    duration_clock_string = abjad.math.clock_string(duration)
     return ClockTimes(
         duration_clock_string=duration_clock_string,
         clock_times=clock_times,
@@ -1296,7 +1296,7 @@ def _label_clock_time(
     total = len(skips)
     clock_times = times.clock_times[:total]
     final_clock_time = clock_times[-1]
-    final_clock_string = final_clock_time.clock_string()
+    final_clock_string = abjad.math.clock_string(final_clock_time)
     final_seconds = int(final_clock_time)
     final_fermata_string = f"{final_seconds}''"
     final_measure_number = first_measure_number + total - 1
@@ -1310,7 +1310,7 @@ def _label_clock_time(
             is_fermata = True
         skip = skips[measure_index]
         clock_time = clock_times[measure_index]
-        clock_string = clock_time.clock_string()
+        clock_string = abjad.math.clock_string(clock_time)
         seconds = int(clock_time)
         fermata_string = f"{seconds}''"
         if measure_index < total - 1:

@@ -1549,7 +1549,7 @@ def set_tuplet_ratios_in_terms_of(argument, denominator):
             contents_duration_with_denominator[0],
             tuplet_duration_with_denominator[0],
         )
-        if tuplet.ratio().as_fraction() == fractions.Fraction(*pair):
+        if tuplet.ratio().fraction() == fractions.Fraction(*pair):
             ratio = abjad.Ratio(*pair)
             tuplet.set_ratio(ratio)
 
