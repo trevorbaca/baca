@@ -263,7 +263,7 @@ def _evaluate_item(
     if capture_original_item is not False or isinstance(item, OBGC):
         components = [_ for _ in components if not isinstance(_, abjad.Skip)]
         total_duration = abjad.get.duration(components)
-        stop_offset = abjad.Offset(total_duration.fraction())
+        stop_offset = abjad.Offset(total_duration.as_fraction())
         if isinstance(item, OBGC):
             item_duration = abjad.get.duration(result)
         else:
@@ -277,9 +277,13 @@ def _evaluate_item(
 
 
 def _make_accelerando_multipliers(
-    durations: list[abjad.Duration], exponent: float
+    durations: list[abjad.Duration],
+    exponent: float | int,
 ) -> list[tuple[int, int]]:
-    sums = abjad.math.cumulative_sums(durations)
+    assert all(isinstance(_, abjad.Duration) for _ in durations), repr(durations)
+    assert isinstance(exponent, float | int), repr(exponent)
+    value_durations = abjad.duration.value_durations(durations)
+    sums = abjad.math.cumulative_sums(value_durations, start=abjad.ValueDuration(0, 1))
     generator = abjad.sequence.nwise(sums, n=2)
     pairs = list(generator)
     total_duration = pairs[-1][-1]
@@ -288,13 +292,18 @@ def _make_accelerando_multipliers(
     start_offsets_ = []
     for start_offset in start_offsets:
         start_offset_ = rmakers.functions._interpolate_exponential(
-            0, total_duration, start_offset, exponent
+            0,
+            total_duration,
+            start_offset,
+            exponent,
         )
         start_offsets_.append(start_offset_)
     start_offsets_.append(float(total_duration))
-    durations_ = abjad.math.difference_series(start_offsets_)
-    durations_ = rmakers.makers._round_durations(durations_, 2**10)
-    current_duration = sum(durations_)
+    float_durations = abjad.math.difference_series(start_offsets_)
+    assert all(isinstance(_, float) for _ in float_durations), repr(float_durations)
+    durations_ = rmakers.makers._round_durations(float_durations, 2**10)
+    assert all(isinstance(_, abjad.ValueDuration) for _ in durations_), repr(durations_)
+    current_duration = sum(durations_, start=abjad.ValueDuration(0, 1))
     if current_duration < total_duration:
         missing_duration = total_duration - current_duration
         if durations_[0] < durations_[-1]:
@@ -307,11 +316,11 @@ def _make_accelerando_multipliers(
             durations_[-1] -= extra_duration
         else:
             durations_[0] -= extra_duration
-    assert sum(durations_) == total_duration
+    assert sum(durations_, start=abjad.ValueDuration(0, 1)) == total_duration
     pairs = []
     assert len(durations) == len(durations_)
     for duration_, duration in zip(durations_, durations, strict=True):
-        fraction = duration_ / duration
+        fraction = duration_.as_fraction() / duration.as_fraction()
         pair = abjad.duration.pair_with_denominator(fraction, 2**10)
         pairs.append(pair)
     return pairs
