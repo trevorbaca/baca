@@ -57,13 +57,13 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
             rmakers.tie(components, tag=tag)
     elif isinstance(item, int) and 0 < item:
         pitch_list = [abjad.NamedPitch("c'")]
-        leaf_duration = abjad.Duration(item, denominator)
+        leaf_duration = abjad.ValueDuration(item, denominator)
         components = abjad.makers.make_leaves([pitch_list], [leaf_duration], tag=tag)
     elif isinstance(item, int) and item < 0:
-        leaf_duration = abjad.Duration(-item, denominator)
+        leaf_duration = abjad.ValueDuration(-item, denominator)
         components = abjad.makers.make_leaves([[]], [leaf_duration], tag=tag)
     elif isinstance(item, Chord):
-        chord_duration = abjad.Duration(item.numerator, denominator)
+        chord_duration = abjad.ValueDuration(item.numerator, denominator)
         pitch_tuple = item.note_head_count * (0,)
         pitch_lists = abjad.makers.make_pitch_lists([pitch_tuple])
         components = abjad.makers.make_leaves(pitch_lists, [chord_duration], tag=tag)
@@ -116,17 +116,17 @@ def _evaluate_item(
     capture_original_item: bool | abjad.Component = False
     if isinstance(item, int) and 0 < item:
         pitch_list = [abjad.NamedPitch("c'")]
-        leaf_duration = abjad.Duration(item, denominator)
+        leaf_duration = abjad.ValueDuration(item, denominator)
         notes = abjad.makers.make_leaves([pitch_list], [leaf_duration], tag=tag)
         components.extend(notes)
         result = notes
     elif isinstance(item, int) and item < 0:
-        leaf_duration = abjad.Duration(-item, denominator)
+        leaf_duration = abjad.ValueDuration(-item, denominator)
         rests = abjad.makers.make_leaves([[]], [leaf_duration], tag=tag)
         components.extend(rests)
         result = rests
     elif isinstance(item, Chord):
-        chord_duration = abjad.Duration(item.numerator, denominator)
+        chord_duration = abjad.ValueDuration(item.numerator, denominator)
         pitch_tuple = item.note_head_count * (0,)
         pitch_lists = abjad.makers.make_pitch_lists([pitch_tuple])
         chords = abjad.makers.make_leaves(pitch_lists, [chord_duration], tag=tag)
@@ -277,10 +277,10 @@ def _evaluate_item(
 
 
 def _make_accelerando_multipliers(
-    durations: list[abjad.Duration],
+    durations: list[abjad.ValueDuration],
     exponent: float | int,
 ) -> list[tuple[int, int]]:
-    assert all(isinstance(_, abjad.Duration) for _ in durations), repr(durations)
+    assert all(isinstance(_, abjad.ValueDuration) for _ in durations), repr(durations)
     assert isinstance(exponent, float | int), repr(exponent)
     value_durations = abjad.duration.value_durations(durations)
     sums = abjad.math.cumulative_sums(value_durations, start=abjad.ValueDuration(0, 1))
@@ -329,7 +329,7 @@ def _make_accelerando_multipliers(
 def _style_accelerando(
     container: abjad.Container | abjad.Tuplet,
     exponent: float,
-    total_duration: abjad.Duration | None = None,
+    total_duration: abjad.ValueDuration | None = None,
 ) -> abjad.Container | abjad.Tuplet:
     assert isinstance(container, abjad.Container), repr(container)
     temporary_voice = None
@@ -339,7 +339,7 @@ def _style_accelerando(
         assert isinstance(container, abjad.Tuplet), repr(container)
         assert isinstance(exponent, float), repr(exponent)
         if total_duration is not None:
-            assert isinstance(total_duration, abjad.Duration), repr(total_duration)
+            assert isinstance(total_duration, abjad.ValueDuration), repr(total_duration)
         hleaves = _select.hleaves(container)
         leaf_durations = [abjad.get.duration(_) for _ in hleaves]
         pairs = _make_accelerando_multipliers(leaf_durations, exponent)
@@ -526,7 +526,7 @@ class Feather:
     def __call__(self, denominator: int, voice_name: str, tag: abjad.Tag):
         assert isinstance(denominator, int), repr(denominator)
         tag = tag.append(_helpers.function_name(_frame()))
-        feather_duration = abjad.Duration(self.numerator, denominator)
+        feather_duration = abjad.ValueDuration(self.numerator, denominator)
         tuplet = make_accelerando(
             self.items,
             denominator,
@@ -741,7 +741,7 @@ class OBGC:
     grace_note_numerators: list[int]
     nongrace_note_numerators: list
     do_not_attach_one_voice_command: bool = False
-    grace_leaf_duration: abjad.Duration | bool | None = None
+    grace_leaf_duration: abjad.ValueDuration | bool | None = None
     grace_polyphony_command: abjad.VoiceNumber = abjad.VoiceNumber(1)
     nongrace_polyphony_command: abjad.VoiceNumber = abjad.VoiceNumber(2)
 
@@ -756,9 +756,9 @@ class OBGC:
             self.do_not_attach_one_voice_command
         )
         if self.grace_leaf_duration is not None:
-            assert isinstance(self.grace_leaf_duration, abjad.Duration | bool), repr(
-                self.grace_leaf_duration
-            )
+            assert isinstance(
+                self.grace_leaf_duration, abjad.ValueDuration | bool
+            ), repr(self.grace_leaf_duration)
 
     def __call__(
         self, denominator: int, voice_name: str, tag: abjad.Tag
@@ -773,7 +773,7 @@ class OBGC:
         dummy_voice = abjad.Voice(nongrace_leaves, name=voice_name, tag=tag)
         pitch_list = [abjad.NamedPitch("c'")]
         grace_note_durations = [
-            abjad.Duration(_, denominator) for _ in self.grace_note_numerators
+            abjad.ValueDuration(_, denominator) for _ in self.grace_note_numerators
         ]
         grace_leaves = abjad.makers.make_leaves(
             [pitch_list],
@@ -782,9 +782,9 @@ class OBGC:
         )
         if self.grace_leaf_duration is True:
             nongrace_duration = abjad.get.duration(nongrace_leaves)
-            grace_leaf_duration = abjad.Duration(nongrace_duration / len(grace_leaves))
+            grace_leaf_duration = nongrace_duration / len(grace_leaves)
         else:
-            assert isinstance(self.grace_leaf_duration, abjad.Duration)
+            assert isinstance(self.grace_leaf_duration, abjad.ValueDuration)
             grace_leaf_duration = self.grace_leaf_duration
         abjad.on_beat_grace_container(
             grace_leaves,
@@ -859,7 +859,7 @@ class Tuplet:
             components.extend(components_)
         contents_duration = sum([abjad.get.duration(_) for _ in components])
         if isinstance(self.extra_counts, int):
-            extra_duration = abjad.Duration(self.extra_counts, denominator)
+            extra_duration = abjad.ValueDuration(self.extra_counts, denominator)
             prolated_duration = contents_duration + extra_duration
             multiplier = prolated_duration / contents_duration
             ratio = abjad.Ratio(multiplier.denominator, multiplier.numerator)
@@ -886,7 +886,7 @@ class WrittenDuration:
         if 1 < len(components):
             raise NotImplementedError(f"multiple leaves: {components}")
         leaf = components[0]
-        written_duration = abjad.Duration(self.written_n, denominator)
+        written_duration = abjad.ValueDuration(self.written_n, denominator)
         rmakers.written_duration([leaf], written_duration)
         return leaf
 
@@ -909,7 +909,7 @@ def from_collection(
     collection: _collection_typing,
     counts: list[int | str],
     denominator: int,
-    prolation: int | str | abjad.Duration | None = None,
+    prolation: int | str | abjad.ValueDuration | None = None,
 ) -> abjad.Tuplet:
     collection = getattr(collection, "argument", collection)
     prototype = (
@@ -930,14 +930,14 @@ def from_collection(
         assert isinstance(item, int | float | str | tuple), repr(item)
         while abjad.Fraction(*talea[i]) < 0:
             pair = talea[i]
-            duration = -abjad.Duration(*pair)
+            duration = -abjad.ValueDuration(*pair)
             tag = _helpers.function_name(_frame(), n=1)
             rests = abjad.makers.make_leaves([[]], [duration], tag=tag)
             leaves.extend(rests)
             i += 1
         pair = talea[i]
-        duration = abjad.Duration(*pair)
-        assert 0 < duration, repr(duration)
+        duration = abjad.ValueDuration(*pair)
+        assert abjad.ValueDuration(0) < duration, repr(duration)
         tag = _helpers.function_name(_frame(), n=3)
         pitch_lists = abjad.makers.make_pitch_lists([item])
         pleaves = abjad.makers.make_leaves(pitch_lists, [duration], tag=tag)
@@ -945,7 +945,7 @@ def from_collection(
         i += 1
         while abjad.Fraction(*talea[i]) < 0 and not i % len(talea) == 0:
             pair = talea[i]
-            duration = -abjad.Duration(*pair)
+            duration = -abjad.ValueDuration(*pair)
             tag = _helpers.function_name(_frame(), n=4)
             rests = abjad.makers.make_leaves([[]], [duration], tag=tag)
             leaves.extend(rests)
@@ -977,7 +977,7 @@ def get_previous_rhythm_state(
 def make_accelerando(
     items: list,
     denominator: int,
-    duration: abjad.Duration,
+    duration: abjad.ValueDuration,
     *,
     exponent: float = 0.625,
     voice_name: str | None = None,
@@ -987,7 +987,7 @@ def make_accelerando(
     tag = tag.append(_helpers.function_name(_frame()))
     leaves = []
     assert isinstance(denominator, int), repr(denominator)
-    assert isinstance(duration, abjad.Duration), repr(duration)
+    assert isinstance(duration, abjad.ValueDuration), repr(duration)
     assert isinstance(exponent, float), repr(exponent)
     for item in items:
         components = _evaluate_basic_item(item, denominator, voice_name, tag)
@@ -1002,11 +1002,11 @@ def make_bgcs(
     collection: list[int | float],
     lmr: LMR,
     *,
-    duration: abjad.Duration = abjad.Duration(1, 16),
+    duration: abjad.ValueDuration = abjad.ValueDuration(1, 16),
 ) -> tuple[list[abjad.BeforeGraceContainer | None], list[int | float]]:
     assert isinstance(collection, list), repr(collection)
     assert all(isinstance(_, int | float) for _ in collection), repr(collection)
-    assert isinstance(duration, abjad.Duration), repr(duration)
+    assert isinstance(duration, abjad.ValueDuration), repr(duration)
     assert isinstance(lmr, LMR), repr(LMR)
     segment_parts = lmr(collection)
     segment_parts = [_ for _ in segment_parts if _]
@@ -1061,7 +1061,7 @@ def make_mmrests(
             if isinstance(time_signature, abjad.TimeSignature):
                 pair = time_signature.pair
             else:
-                assert isinstance(time_signature, abjad.Duration)
+                assert isinstance(time_signature, abjad.ValueDuration)
                 pair = time_signature.pair()
             mmrest = abjad.MultimeasureRest("R1", multiplier=pair, tag=tag)
             mmrests.append(mmrest)
@@ -1131,10 +1131,12 @@ def make_mmrests(
 
 
 def make_monads(fractions) -> list[abjad.Leaf | abjad.Tuplet]:
+    assert all(isinstance(_, str) for _ in fractions), repr(fractions)
     music: list[abjad.Leaf | abjad.Tuplet] = []
     pitch_list = [abjad.NamedPitch("c'")]
     for fraction in fractions.split():
-        duration = abjad.Duration(fraction)
+        fraction_ = abjad.Fraction(fraction)
+        duration = abjad.ValueDuration(*fraction_.as_integer_ratio())
         leaves = abjad.makers.make_leaves([pitch_list], [duration])
         music.extend(leaves)
     assert all(isinstance(_, abjad.Leaf | abjad.Tuplet) for _ in music)
@@ -1192,14 +1194,14 @@ def make_repeated_duration_notes(
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _helpers.function_name(_frame())
     # TODO: will both branches will always be false?
-    if isinstance(weights, abjad.Duration):
+    if isinstance(weights, abjad.ValueDuration):
         weights = [weights]
     elif isinstance(weights, tuple):
         assert len(weights) == 2
-        weights = [abjad.Duration(*weights)]
-    durations = abjad.duration.durations(time_signatures)
-    durations = [sum(durations, start=abjad.Duration(0))]
-    weights = abjad.duration.durations(weights)
+        weights = [abjad.ValueDuration(*weights)]
+    durations = abjad.duration.value_durations(time_signatures)
+    durations = [sum(durations, start=abjad.ValueDuration(0))]
+    weights = abjad.duration.value_durations(weights)
     durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
     components = rmakers.note(durations, tag=tag)
@@ -1271,7 +1273,12 @@ def make_rhythm(
     if time_signatures is not None:
         total_duration = sum(_.duration() for _ in time_signatures)
         existing_duration = sum(
-            [abjad.get.duration(_) for _ in components if not isinstance(_, abjad.Skip)]
+            [
+                abjad.get.duration(_)
+                for _ in components
+                if not isinstance(_, abjad.Skip)
+            ],
+            start=abjad.ValueDuration(0),
         )
         if existing_duration < total_duration:
             spacer_skip = None
@@ -1298,7 +1305,10 @@ def make_rhythm(
                             timespan, original_item = pair
                             timespan_start_offset = timespan.start_offset
                             assert isinstance(timespan_start_offset, abjad.Offset)
-                            if unchanged_duration <= timespan_start_offset.fraction:
+                            if (
+                                unchanged_duration.as_fraction()
+                                <= timespan_start_offset.fraction
+                            ):
                                 timespan = timespan.translate(needed_duration)
                                 pair = (timespan, original_item)
                             pairs.append(pair)
@@ -1352,11 +1362,13 @@ def make_rhythm(
     return voice
 
 
-def make_single_attack(time_signatures, duration) -> list[abjad.Leaf | abjad.Tuplet]:
+def make_single_attack(
+    time_signatures, duration: abjad.ValueDuration
+) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+    assert isinstance(duration, abjad.ValueDuration), repr(duration)
     durations = [_.duration() for _ in time_signatures]
     tag = _helpers.function_name(_frame())
-    duration = abjad.Duration(duration)
     numerator, denominator = duration.pair()
     tuplets = rmakers.incised(
         durations,
@@ -1402,17 +1414,17 @@ def make_tied_repeated_durations(
 ) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _helpers.function_name(_frame())
-    durations = abjad.duration.durations(time_signatures)
-    durations = [sum(durations, abjad.Duration(0))]
-    weights = abjad.duration.durations(weights)
+    durations = abjad.duration.value_durations(time_signatures)
+    durations = [sum(durations, abjad.ValueDuration(0))]
+    weights = abjad.duration.value_durations(weights)
     durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
     # TODO: both branches will always be false, correct?
-    if isinstance(weights, abjad.Duration):
+    if isinstance(weights, abjad.ValueDuration):
         weights = [weights]
     elif isinstance(weights, tuple):
         assert len(weights) == 2
-        weights = [abjad.Duration(*weights)]
+        weights = [abjad.ValueDuration(*weights)]
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     pheads = _select.pheads(voice)[1:]
@@ -1472,7 +1484,8 @@ def nest(containers: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
     assert isinstance(treatment, str), repr(treatment)
     if "/" in treatment:
         assert treatment.startswith("+") or treatment.startswith("-"), repr(treatment)
-        addendum = abjad.Duration(treatment)
+        fraction = abjad.Fraction(treatment)
+        addendum = abjad.ValueDuration(*fraction.as_integer_ratio())
         contents_duration = abjad.get.duration(containers)
         target_duration = contents_duration + addendum
         multiplier = target_duration / contents_duration
@@ -1488,14 +1501,16 @@ def nest(containers: list[abjad.Tuplet], treatment: str) -> abjad.Tuplet:
 
 def prolate(
     tuplet: abjad.Tuplet,
-    treatment: int | str | abjad.Duration,
+    treatment: int | str | abjad.ValueDuration,
     denominator: int | None = None,
 ) -> abjad.Tuplet:
     if isinstance(treatment, int):
         extra_count = treatment
         contents_duration = abjad.get.duration(tuplet)
         assert denominator is not None
-        pair = abjad.duration.pair_with_denominator(contents_duration, denominator)
+        pair = abjad.duration.pair_with_denominator(
+            contents_duration.as_fraction(), denominator
+        )
         contents_duration_pair = pair
         contents_count = contents_duration_pair[0]
         if 0 < extra_count:
@@ -1510,7 +1525,7 @@ def prolate(
     elif isinstance(treatment, str) and ":" in treatment:
         n, d = treatment.split(":")
         multiplier = (int(d), int(n))
-    elif isinstance(treatment, abjad.Duration):
+    elif isinstance(treatment, abjad.ValueDuration):
         tuplet_duration = treatment
         contents_duration = abjad.get.duration(tuplet)
         fraction = tuplet_duration / contents_duration
@@ -1546,13 +1561,15 @@ def set_tuplet_ratios_in_terms_of(argument, denominator):
     for tuplet in abjad.select.tuplets(argument):
         tuplet_duration = abjad.get.duration(tuplet)
         tuplet_duration_with_denominator = abjad.duration.pair_with_denominator(
-            tuplet_duration, denominator
+            tuplet_duration.as_fraction(),
+            denominator,
         )
         numerator_ = tuplet.ratio().denominator
         denominator_ = tuplet.ratio().numerator
         contents_duration = abjad.Fraction(denominator_, numerator_) * tuplet_duration
         contents_duration_with_denominator = abjad.duration.pair_with_denominator(
-            contents_duration, denominator
+            contents_duration.as_fraction(),
+            denominator,
         )
         pair = (
             contents_duration_with_denominator[0],

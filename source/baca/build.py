@@ -650,7 +650,7 @@ def _make_section_clicktrack(lilypond_file, mtime, section_directory):
     for i, time_signature in enumerate(time_signatures):
         measure_number = i + 1
         if measure_number in fermata_measure_numbers:
-            metronome_mark = abjad.MetronomeMark(abjad.Duration(1, 4), 60)
+            metronome_mark = abjad.MetronomeMark(abjad.ValueDuration(1, 4), 60)
             time_signature = abjad.TimeSignature((3, 4))
             notes = [abjad.Rest("r2.")]
         else:

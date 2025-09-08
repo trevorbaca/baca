@@ -24,7 +24,7 @@ Constellation.
 
     >>> constellation = circuit[1 - 1]
     >>> chords = []
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> for set_ in constellation:
     ...     pitches = abjad.pitch.pitches(set_)
     ...     chord = abjad.Chord.from_duration_and_pitches(duration, pitches)
@@ -709,7 +709,7 @@ Constellation.
     >>> constellation = circuit[1 - 1]
     >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> pitches = abjad.pitch.pitches(generator)
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
@@ -789,7 +789,7 @@ Constellation.
     >>> constellation = circuit[1 - 1]
     >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> pitches = abjad.pitch.pitches(generator)
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.color_chord(generator)
     >>> constellation.label_chord(generator)
@@ -877,7 +877,7 @@ Constellation.
     >>> constellation = circuit[1 - 1]
     >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> pitches = abjad.pitch.pitches(generator)
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.label_chord(generator)
     >>> leaves = [generator]
@@ -919,7 +919,7 @@ Constellation.
     >>> constellation = circuit[1 - 1]
     >>> generator = abjad.sequence.flatten(constellation.generator())
     >>> pitches = abjad.pitch.pitches(generator)
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> generator = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.label_chord(generator)
     >>> pivot = baca.constellation.find_pivot(constellation, circuit[1])
@@ -968,7 +968,7 @@ Constellation.
     >>> constellation = circuit[1 - 1]
     >>> pivot = baca.constellation.find_pivot(constellation, circuit[1])
     >>> pitches = abjad.pitch.pitches(pivot)
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> pivot = abjad.Chord.from_duration_and_pitches(duration, pitches)
     >>> constellation.label_chord(pivot)
     >>> leaves = [pivot]
@@ -1008,7 +1008,7 @@ Constellation.
     Here's the colored generator chord for each constellation in CC1:
 
     >>> generators = []
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> for constellation in circuit:
     ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     pitches = abjad.pitch.pitches(generator)
@@ -1364,7 +1364,7 @@ Constellation.
 
     >>> generators, pivots = [], []
     >>> length = len(circuit)
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> for i, constellation in enumerate(circuit):
     ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     pitches = abjad.pitch.pitches(generator)
@@ -1742,7 +1742,7 @@ Constellation.
     Here's the generator for each constellation in CC1:
 
     >>> generators = []
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> for constellation in circuit:
     ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     pitches = abjad.pitch.pitches(generator)
@@ -1799,7 +1799,7 @@ Constellation.
 
     >>> generators = []
     >>> length = len(circuit)
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> for i, constellation in enumerate(circuit):
     ...     generator = abjad.sequence.flatten(constellation.generator())
     ...     pitches = abjad.pitch.pitches(generator)
@@ -1878,7 +1878,7 @@ Constellation.
     Here's the pivot chord for each constellation in CC1:
 
     >>> pivots = []
-    >>> duration = abjad.Duration(1, 4)
+    >>> duration = abjad.ValueDuration(1, 4)
     >>> for i, constellation in enumerate(circuit):
     ...     next_constellation = circuit[(i + 1) % length]
     ...     pivot = baca.constellation.find_pivot(constellation, next_constellation)

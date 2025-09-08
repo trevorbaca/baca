@@ -24,7 +24,7 @@ def _get_leaf_offsets(argment):
 
 def _make_multiplied_quarter_notes(durations):
     notes = []
-    duration = abjad.Duration(1, 4)
+    duration = abjad.ValueDuration(1, 4)
     pitch = abjad.NamedPitch("C4")
     for duration_ in durations:
         fraction = duration_ / duration
@@ -2617,7 +2617,7 @@ class PitchArrayRow:
         """
         pair = (self.width(), cell_duration_denominator)
         time_signature = abjad.TimeSignature(pair)
-        basic_cell_duration = abjad.Duration(1, cell_duration_denominator)
+        basic_cell_duration = abjad.ValueDuration(1, cell_duration_denominator)
         measure_pitches: list[int | None] = []
         measure_durations = []
         for cell in self.cells():

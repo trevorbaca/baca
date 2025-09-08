@@ -968,30 +968,30 @@ def period_of_rotation(sequence) -> int:
     return len(sequence) // degree_of_rotational_symmetry(sequence)
 
 
-def quarters(durations: list[abjad.Duration]) -> list[abjad.Duration]:
+def quarters(durations: list[abjad.ValueDuration]) -> list[abjad.ValueDuration]:
     r"""
     Splits ``durations`` into quarters.
 
     ..  container:: example
 
-        >>> durations = abjad.duration.durations([(2, 4), (6, 4)])
+        >>> durations = abjad.duration.value_durations([(2, 4), (6, 4)])
         >>> for list_ in baca.sequence.quarters(durations): list_
-        Duration(1, 4)
-        Duration(1, 4)
-        Duration(1, 4)
-        Duration(1, 4)
-        Duration(1, 4)
-        Duration(1, 4)
-        Duration(1, 4)
-        Duration(1, 4)
+        ValueDuration(numerator=1, denominator=4)
+        ValueDuration(numerator=1, denominator=4)
+        ValueDuration(numerator=1, denominator=4)
+        ValueDuration(numerator=1, denominator=4)
+        ValueDuration(numerator=1, denominator=4)
+        ValueDuration(numerator=1, denominator=4)
+        ValueDuration(numerator=1, denominator=4)
+        ValueDuration(numerator=1, denominator=4)
 
     """
     assert isinstance(durations, list), repr(durations)
-    assert all(isinstance(_, abjad.Duration) for _ in durations), repr(durations)
-    weights = abjad.duration.durations([(1, 4)])
+    assert all(isinstance(_, abjad.ValueDuration) for _ in durations), repr(durations)
+    weights = abjad.duration.value_durations([(1, 4)])
     lists = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     result = abjad.sequence.flatten(lists, depth=-1)
-    assert all(isinstance(_, abjad.Duration) for _ in result), repr(result)
+    assert all(isinstance(_, abjad.ValueDuration) for _ in result), repr(result)
     return result
 
 
@@ -1121,7 +1121,7 @@ def repeat_subruns_to_length(
 
     ..  container:: example
 
-        >>> duration = abjad.Duration(1, 4)
+        >>> duration = abjad.ValueDuration(1, 4)
         >>> pitches = abjad.pitch.pitches([0, 2, 4, 5, 7, 9, 11])
         >>> notes = [abjad.Note.from_duration_and_pitch(duration, _) for _ in pitches]
         >>> triples = [(0, 4, 1), (2, 4, 1)]

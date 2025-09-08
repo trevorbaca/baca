@@ -2550,28 +2550,30 @@ def ompltgroups(
     return result_4
 
 
-def parse_duration_inequality_string(string) -> tuple[str, abjad.Duration]:
+def parse_duration_inequality_string(string) -> tuple[str, abjad.ValueDuration]:
     """
     Parses duration inequality ``string``.
 
         >>> baca.select.parse_duration_inequality_string("3/16")
-        ('==', Duration(3, 16))
+        ('==', ValueDuration(numerator=3, denominator=16))
 
         >>> baca.select.parse_duration_inequality_string("<=3/16")
-        ('<=', Duration(3, 16))
+        ('<=', ValueDuration(numerator=3, denominator=16))
 
         >>> baca.select.parse_duration_inequality_string("<3/16")
-        ('<', Duration(3, 16))
+        ('<', ValueDuration(numerator=3, denominator=16))
 
     """
     for operator in ("<=", "<", ">=", ">"):
         if string.startswith(operator):
             fraction_string = string.removeprefix(operator)
-            duration = abjad.Duration(fraction_string)
+            fraction = abjad.Fraction(fraction_string)
+            duration = abjad.ValueDuration(*fraction.as_integer_ratio())
             break
     else:
         operator = "=="
-        duration = abjad.Duration(string)
+        fraction = abjad.Fraction(string)
+        duration = abjad.ValueDuration(*fraction.as_integer_ratio())
     return operator, duration
 
 
@@ -2579,7 +2581,8 @@ def partition_in_halves(argument) -> list[list]:
     durations = [abjad.get.duration(_) for _ in argument]
     maximum_denominator = max([_.denominator for _ in durations])
     pairs = [
-        abjad.duration.pair_with_denominator(_, maximum_denominator) for _ in durations
+        abjad.duration.pair_with_denominator(_.as_fraction(), maximum_denominator)
+        for _ in durations
     ]
     numerators = [_[0] for _ in pairs]
     lists = _sequence.partition_in_halves(numerators)

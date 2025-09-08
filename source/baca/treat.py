@@ -350,7 +350,7 @@ def _to_indicator_stem(indicator: typing.Any) -> str:
         >>> baca.treat._to_indicator_stem(abjad.Violin())
         'INSTRUMENT'
 
-        >>> metronome_mark = abjad.MetronomeMark(abjad.Duration(1, 4), 58)
+        >>> metronome_mark = abjad.MetronomeMark(abjad.ValueDuration(1, 4), 58)
         >>> baca.treat._to_indicator_stem(metronome_mark)
         'METRONOME_MARK'
 
