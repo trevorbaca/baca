@@ -2550,30 +2550,30 @@ def ompltgroups(
     return result_4
 
 
-def parse_duration_inequality_string(string) -> tuple[str, abjad.ValueDuration]:
+def parse_duration_inequality_string(string) -> tuple[str, abjad.Duration]:
     """
     Parses duration inequality ``string``.
 
         >>> baca.select.parse_duration_inequality_string("3/16")
-        ('==', ValueDuration(numerator=3, denominator=16))
+        ('==', Duration(numerator=3, denominator=16))
 
         >>> baca.select.parse_duration_inequality_string("<=3/16")
-        ('<=', ValueDuration(numerator=3, denominator=16))
+        ('<=', Duration(numerator=3, denominator=16))
 
         >>> baca.select.parse_duration_inequality_string("<3/16")
-        ('<', ValueDuration(numerator=3, denominator=16))
+        ('<', Duration(numerator=3, denominator=16))
 
     """
     for operator in ("<=", "<", ">=", ">"):
         if string.startswith(operator):
             fraction_string = string.removeprefix(operator)
             fraction = abjad.Fraction(fraction_string)
-            duration = abjad.ValueDuration(*fraction.as_integer_ratio())
+            duration = abjad.Duration(*fraction.as_integer_ratio())
             break
     else:
         operator = "=="
         fraction = abjad.Fraction(string)
-        duration = abjad.ValueDuration(*fraction.as_integer_ratio())
+        duration = abjad.Duration(*fraction.as_integer_ratio())
     return operator, duration
 
 

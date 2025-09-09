@@ -216,7 +216,7 @@ def bcps(
 
 
 def durations(items):
-    return [abjad.ValueDuration(_) for _ in items]
+    return [abjad.Duration(_) for _ in items]
 
 
 def finger_pressure_transition(argument) -> None:

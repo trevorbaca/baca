@@ -117,7 +117,7 @@ class CacheGetItemWrapper:
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class ClockTimes:
     duration_clock_string: str | None
-    clock_times: list[abjad.ValueDuration] | None
+    clock_times: list[abjad.Duration] | None
     start_clock_time: str
     stop_clock_time: str | None
 
@@ -532,7 +532,7 @@ def _calculate_clock_times(
         assert (len(skips) == len(rests)) or (len(skips) == len(rests) + 1)
     start_clock_time = previous_stop_clock_time
     start_clock_time = start_clock_time or "0'00''"
-    start_offset = abjad.ValueDuration.from_clock_string(start_clock_time)
+    start_offset = abjad.Duration.from_clock_string(start_clock_time)
     if clock_time_override:
         metronome_mark = clock_time_override
         abjad.attach(metronome_mark, skips[0])
@@ -546,7 +546,7 @@ def _calculate_clock_times(
     clock_times = []
     for local_measure_index, skip in enumerate(skips):
         if abjad.get.has_indicator(skip, _enums.CLOCK_TIME_RESTART):
-            start_offset = abjad.ValueDuration(0)
+            start_offset = abjad.Duration(0)
         measure_number = first_measure_number + local_measure_index
         if measure_number not in fermata_measure_numbers:
             clock_times.append(start_offset)
@@ -554,10 +554,10 @@ def _calculate_clock_times(
         else:
             rest = rests[local_measure_index]
             fermata_duration = abjad.get.annotation(rest, _enums.FERMATA_DURATION)
-            duration = abjad.ValueDuration(fermata_duration)
+            duration = abjad.Duration(fermata_duration)
             clock_times.append(duration)
         start_offset += duration
-    assert isinstance(start_offset, abjad.ValueDuration), repr(start_offset)
+    assert isinstance(start_offset, abjad.Duration), repr(start_offset)
     clock_times.append(start_offset)
     assert len(skips) == len(clock_times) - 1
     if clock_time_override:
@@ -694,7 +694,7 @@ def _check_persistent_indicators_for_leaf(
 def _clean_up_laissez_vibrer_tie_direction(score: abjad.Score) -> None:
     default = abjad.Clef("treble")
     for note in abjad.iterate.leaves(score, abjad.Note):
-        if note.written_duration() < abjad.ValueDuration(1):
+        if note.written_duration() < abjad.Duration(1):
             continue
         if not abjad.get.has_indicator(note, abjad.LaissezVibrer):
             continue
@@ -715,7 +715,7 @@ def _clean_up_obgcs(score: abjad.Score) -> None:
 def _clean_up_repeat_tie_direction(score: abjad.Score) -> None:
     default = abjad.Clef("treble")
     for leaf in abjad.iterate.leaves(score, pitched=True):
-        if leaf.written_duration() < abjad.ValueDuration(1):
+        if leaf.written_duration() < abjad.Duration(1):
             continue
         if not abjad.get.has_indicator(leaf, abjad.RepeatTie):
             continue
@@ -2054,7 +2054,7 @@ def _style_framed_notes(score: abjad.Score) -> None:
     for leaf in abjad.iterate.leaves(score):
         if abjad.get.indicator(leaf, _enums.FRAMED_LEAF):
             duration = abjad.get.duration(leaf)
-            leaf.set_written_duration(abjad.ValueDuration(1, 4))
+            leaf.set_written_duration(abjad.Duration(1, 4))
             multiplier = 4 * duration
             leaf.set_multiplier(multiplier.pair())
             literal = abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f")
@@ -3456,7 +3456,7 @@ def wrap(items) -> TimeSignatureServer:
     for item in items:
         if isinstance(item, tuple):
             time_signature = abjad.TimeSignature(item)
-        elif isinstance(item, abjad.ValueDuration):
+        elif isinstance(item, abjad.Duration):
             pair = item.pair()
             time_signature = abjad.TimeSignature(pair)
         elif hasattr(item, "pair"):

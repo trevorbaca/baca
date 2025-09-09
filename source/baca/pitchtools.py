@@ -764,7 +764,7 @@ def bass_to_octave(argument, n: int) -> None:
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
         >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
-        >>> durations = [abjad.ValueDuration(1, 4)]
+        >>> durations = [abjad.Duration(1, 4)]
         >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> baca.bass_to_octave(leaves, 3)
         >>> lilypond_file = abjad.illustrators.components(leaves)
@@ -798,7 +798,7 @@ def bass_to_octave(argument, n: int) -> None:
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
         >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
-        >>> durations = [abjad.ValueDuration(1, 4)]
+        >>> durations = [abjad.Duration(1, 4)]
         >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> _ = [baca.bass_to_octave(_, 3) for _ in leaves]
         >>> lilypond_file = abjad.illustrators.components(leaves)
@@ -839,7 +839,7 @@ def center_to_octave(argument, n: int) -> None:
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
         >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
-        >>> durations = [abjad.ValueDuration(1, 4)]
+        >>> durations = [abjad.Duration(1, 4)]
         >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> _ = baca.center_to_octave(leaves, 3)
         >>> lilypond_file = abjad.illustrators.components(leaves)
@@ -873,7 +873,7 @@ def center_to_octave(argument, n: int) -> None:
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
         >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
-        >>> durations = [abjad.ValueDuration(1, 4)]
+        >>> durations = [abjad.Duration(1, 4)]
         >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> _ = [baca.center_to_octave(_, 3) for _ in leaves]
         >>> lilypond_file = abjad.illustrators.components(leaves)
@@ -1054,7 +1054,7 @@ def displacement(argument, displacements: list[int]) -> None:
         Octave-displaces PLTs:
 
         >>> pitch_lists = abjad.makers.make_pitch_lists(3 * [0, 2, 3])
-        >>> durations = [abjad.ValueDuration(1, 4)]
+        >>> durations = [abjad.Duration(1, 4)]
         >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> container = abjad.Container(leaves)
         >>> baca.displacement(container, [0, 0, -1, -1, 1, 1])
@@ -1093,7 +1093,7 @@ def displacement(argument, displacements: list[int]) -> None:
         Octave-displaces chords:
 
         >>> pitches = abjad.makers.make_pitch_lists(6 * [(0, 2, 3)])
-        >>> durations = [abjad.ValueDuration(1, 4)]
+        >>> durations = [abjad.Duration(1, 4)]
         >>> leaves = abjad.makers.make_leaves(pitches, durations)
         >>> container = abjad.Container(leaves)
         >>> baca.displacement(container, [0, 0, -1, -1, 1, 1])
@@ -1332,7 +1332,7 @@ def pitch(
         >>> durations = [_.duration() for _ in time_signatures]
         >>> nested_music = rmakers.note(durations)
         >>> music = abjad.sequence.flatten(nested_music)
-        >>> rmakers.written_duration(music, abjad.ValueDuration(1))
+        >>> rmakers.written_duration(music, abjad.Duration(1))
         >>> voice.extend(music)
         >>> _ = baca.pitch(voice, "C4:D4:E4")
         >>> baca.docs.remove_deactivated_wrappers(score)
@@ -1801,7 +1801,7 @@ def register(
 
         >>> numbers = [0, 2, 10, 18, 16, 15, 20, 19, 9]
         >>> pitch_lists = abjad.makers.make_pitch_lists(numbers)
-        >>> durations = [abjad.ValueDuration(1, 4)]
+        >>> durations = [abjad.Duration(1, 4)]
         >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> container = abjad.Container(leaves)
         >>> _ = baca.register(container, -6)
@@ -1841,7 +1841,7 @@ def register(
 
         >>> numbers = [0, 2, 10, 18, 16, 15, 20, 19, 9]
         >>> pitch_lists = abjad.makers.make_pitch_lists(numbers)
-        >>> durations = [abjad.ValueDuration(1, 4)]
+        >>> durations = [abjad.Duration(1, 4)]
         >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> container = abjad.Container(leaves)
         >>> _ = baca.register(container, -6, 18)
@@ -3031,7 +3031,7 @@ def soprano_to_octave(argument, n: int) -> None:
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
         >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
-        >>> durations = [abjad.ValueDuration(1, 4)]
+        >>> durations = [abjad.Duration(1, 4)]
         >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> container = abjad.Container(leaves)
         >>> baca.soprano_to_octave(container, 3)
@@ -3068,7 +3068,7 @@ def soprano_to_octave(argument, n: int) -> None:
 
         >>> collections = [(0, 2, 10), 17, (15, 16, 30), (7, 20), 9]
         >>> pitch_lists = abjad.makers.make_pitch_lists(collections)
-        >>> durations = [abjad.ValueDuration(1, 4)]
+        >>> durations = [abjad.Duration(1, 4)]
         >>> leaves = abjad.makers.make_leaves(pitch_lists, durations)
         >>> container = abjad.Container(leaves)
         >>> for plt in baca.select.plts(container):

@@ -13,7 +13,7 @@ def insert_and_transpose(notes, subrun_tokens):
     ``subrun_tokens``.
 
     >>> pitches = [abjad.NamedPitch(_) for _ in [0, 2, 7, 9, 5, 11, 4]]
-    >>> duration = abjad.ValueDuration(1, 4)
+    >>> duration = abjad.Duration(1, 4)
     >>> notes = [abjad.Note.from_duration_and_pitch(duration, _) for _ in pitches]
     >>> subrun_tokens = [(0, [2, 4]), (4, [3, 1])]
     >>> baca.math.insert_and_transpose(notes, subrun_tokens)
@@ -118,10 +118,10 @@ def _make_index_length_pairs(subrun_token):
 
 
 def _make_new_notes(
-    anchor_pitch: abjad.NamedPitch, duration: abjad.ValueDuration, subrun_intervals
+    anchor_pitch: abjad.NamedPitch, duration: abjad.Duration, subrun_intervals
 ) -> list[abjad.Note]:
     assert isinstance(anchor_pitch, abjad.NamedPitch)
-    assert isinstance(duration, abjad.ValueDuration)
+    assert isinstance(duration, abjad.Duration)
     assert all(isinstance(_, int) for _ in subrun_intervals)
     notes = []
     for interval_number in subrun_intervals:
@@ -217,7 +217,7 @@ def list_related_tempos(
     ..  container:: example
 
         >>> pairs = baca.math.list_related_tempos(
-        ...     abjad.MetronomeMark(abjad.ValueDuration(1, 4), 58),
+        ...     abjad.MetronomeMark(abjad.Duration(1, 4), 58),
         ...     maximum_numerator=8,
         ...     maximum_denominator=8,
         ...  )
@@ -225,51 +225,51 @@ def list_related_tempos(
         >>> for tempo, ratio in pairs:
         ...     print(f"{tempo}:")
         ...     print(f"    {ratio!r}")
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(29, 1), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(29, 1), textual_indication=None, custom_markup=None, decimal=False):
             (1, 2)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(232, 7), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(232, 7), textual_indication=None, custom_markup=None, decimal=False):
             (4, 7)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(174, 5), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(174, 5), textual_indication=None, custom_markup=None, decimal=False):
             (3, 5)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(145, 4), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(145, 4), textual_indication=None, custom_markup=None, decimal=False):
             (5, 8)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(116, 3), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(116, 3), textual_indication=None, custom_markup=None, decimal=False):
             (2, 3)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(290, 7), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(290, 7), textual_indication=None, custom_markup=None, decimal=False):
             (5, 7)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(87, 2), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(87, 2), textual_indication=None, custom_markup=None, decimal=False):
             (3, 4)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(232, 5), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(232, 5), textual_indication=None, custom_markup=None, decimal=False):
             (4, 5)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(145, 3), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(145, 3), textual_indication=None, custom_markup=None, decimal=False):
             (5, 6)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(348, 7), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(348, 7), textual_indication=None, custom_markup=None, decimal=False):
             (6, 7)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(203, 4), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(203, 4), textual_indication=None, custom_markup=None, decimal=False):
             (7, 8)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(58, 1), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(58, 1), textual_indication=None, custom_markup=None, decimal=False):
             (1, 1)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(464, 7), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(464, 7), textual_indication=None, custom_markup=None, decimal=False):
             (8, 7)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(203, 3), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(203, 3), textual_indication=None, custom_markup=None, decimal=False):
             (7, 6)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(348, 5), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(348, 5), textual_indication=None, custom_markup=None, decimal=False):
             (6, 5)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(145, 2), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(145, 2), textual_indication=None, custom_markup=None, decimal=False):
             (5, 4)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(232, 3), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(232, 3), textual_indication=None, custom_markup=None, decimal=False):
             (4, 3)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(406, 5), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(406, 5), textual_indication=None, custom_markup=None, decimal=False):
             (7, 5)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(87, 1), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(87, 1), textual_indication=None, custom_markup=None, decimal=False):
             (3, 2)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(464, 5), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(464, 5), textual_indication=None, custom_markup=None, decimal=False):
             (8, 5)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(290, 3), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(290, 3), textual_indication=None, custom_markup=None, decimal=False):
             (5, 3)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(203, 2), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(203, 2), textual_indication=None, custom_markup=None, decimal=False):
             (7, 4)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(116, 1), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(116, 1), textual_indication=None, custom_markup=None, decimal=False):
             (2, 1)
 
     ..  container:: example
@@ -277,7 +277,7 @@ def list_related_tempos(
         Integer-valued tempos only:
 
         >>> pairs = baca.math.list_related_tempos(
-        ...     abjad.MetronomeMark(abjad.ValueDuration(1, 4), 58),
+        ...     abjad.MetronomeMark(abjad.Duration(1, 4), 58),
         ...     maximum_numerator=16,
         ...     maximum_denominator=16,
         ...     integer_tempos_only=True,
@@ -286,13 +286,13 @@ def list_related_tempos(
         >>> for tempo, ratio in pairs:
         ...     print(f"{tempo}:")
         ...     print(f"    {ratio!r}")
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(29, 1), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(29, 1), textual_indication=None, custom_markup=None, decimal=False):
             (1, 2)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(58, 1), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(58, 1), textual_indication=None, custom_markup=None, decimal=False):
             (1, 1)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(87, 1), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(87, 1), textual_indication=None, custom_markup=None, decimal=False):
             (3, 2)
-        MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=Fraction(116, 1), textual_indication=None, custom_markup=None, decimal=False):
+        MetronomeMark(reference_duration=Duration(numerator=1, denominator=4), units_per_minute=Fraction(116, 1), textual_indication=None, custom_markup=None, decimal=False):
             (2, 1)
 
     Constrains ratios such that ``1:2 <= n:d <= 2:1``.
