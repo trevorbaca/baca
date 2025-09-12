@@ -282,8 +282,8 @@ def _make_accelerando_multipliers(
 ) -> list[tuple[int, int]]:
     assert all(isinstance(_, abjad.Duration) for _ in durations), repr(durations)
     assert isinstance(exponent, float | int), repr(exponent)
-    value_durations = abjad.duration.value_durations(durations)
-    sums = abjad.math.cumulative_sums(value_durations, start=abjad.Duration(0, 1))
+    durations = abjad.duration.durations(durations)
+    sums = abjad.math.cumulative_sums(durations, start=abjad.Duration(0, 1))
     generator = abjad.sequence.nwise(sums, n=2)
     pairs = list(generator)
     total_duration = pairs[-1][-1]
@@ -1199,9 +1199,9 @@ def make_repeated_duration_notes(
     elif isinstance(weights, tuple):
         assert len(weights) == 2
         weights = [abjad.Duration(*weights)]
-    durations = abjad.duration.value_durations(time_signatures)
+    durations = abjad.duration.durations(time_signatures)
     durations = [sum(durations, start=abjad.Duration(0))]
-    weights = abjad.duration.value_durations(weights)
+    weights = abjad.duration.durations(weights)
     durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
     components = rmakers.note(durations, tag=tag)
@@ -1414,9 +1414,9 @@ def make_tied_repeated_durations(
 ) -> list[abjad.Leaf | abjad.Tuplet]:
     assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
     tag = _helpers.function_name(_frame())
-    durations = abjad.duration.value_durations(time_signatures)
+    durations = abjad.duration.durations(time_signatures)
     durations = [sum(durations, abjad.Duration(0))]
-    weights = abjad.duration.value_durations(weights)
+    weights = abjad.duration.durations(weights)
     durations = abjad.sequence.split(durations, weights, cyclic=True, overhang=True)
     durations = abjad.sequence.flatten(durations, depth=-1)
     # TODO: both branches will always be false, correct?
