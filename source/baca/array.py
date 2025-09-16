@@ -29,7 +29,7 @@ def _make_multiplied_quarter_notes(durations):
     for duration_ in durations:
         fraction = duration_ / duration
         pair = (fraction.numerator, fraction.denominator)
-        note = abjad.Note.from_duration_and_pitch(duration, pitch, multiplier=pair)
+        note = abjad.Note.from_duration_and_pitch(duration, pitch, dmp=pair)
         notes.append(note)
     return notes
 

@@ -114,6 +114,9 @@ def _evaluate_item(
     voice_name,
 ) -> abjad.Component | list[abjad.Component]:
     capture_original_item: bool | abjad.Component = False
+    result: (
+        abjad.Component | typing.Sequence[abjad.Component | abjad.Leaf | abjad.Tuplet]
+    )
     if isinstance(item, int) and 0 < item:
         pitch_list = [abjad.NamedPitch("c'")]
         leaf_duration = abjad.Duration(item, denominator)
@@ -233,7 +236,7 @@ def _evaluate_item(
         components.extend(components_)
         result = components_
     elif item in ("+", "-"):
-        skip = abjad.Skip("s1", multiplier=(99, 1))
+        skip = abjad.Skip("s1", dmp=(99, 1))
         abjad.attach("SPACER", skip)
         abjad.attach(item, skip)
         components.append(skip)
@@ -775,11 +778,12 @@ class OBGC:
         grace_note_durations = [
             abjad.Duration(_, denominator) for _ in self.grace_note_numerators
         ]
-        grace_leaves = abjad.makers.make_leaves(
+        grace_components = abjad.makers.make_leaves(
             [pitch_list],
             grace_note_durations,
             tag=tag,
         )
+        grace_leaves = [_ for _ in grace_components if isinstance(_, abjad.Leaf)]
         if self.grace_leaf_duration is True:
             nongrace_duration = abjad.get.duration(nongrace_leaves)
             grace_leaf_duration = nongrace_duration / len(grace_leaves)
@@ -1063,7 +1067,7 @@ def make_mmrests(
             else:
                 assert isinstance(time_signature, abjad.Duration)
                 pair = time_signature.pair()
-            mmrest = abjad.MultimeasureRest("R1", multiplier=pair, tag=tag)
+            mmrest = abjad.MultimeasureRest("R1", dmp=pair, tag=tag)
             mmrests.append(mmrest)
     else:
         assert isinstance(head, str)
@@ -1074,7 +1078,7 @@ def make_mmrests(
                 tag = tag.append(_tags.HIDDEN)
                 note_or_rest = _tags.NOTE
                 tag = tag.append(_tags.NOTE)
-                note = abjad.Note("c'1", multiplier=time_signature.pair, tag=tag)
+                note = abjad.Note("c'1", dmp=time_signature.pair, tag=tag)
                 abjad.override(note).Accidental.stencil = False
                 abjad.override(note).NoteColumn.ignore_collision = True
                 abjad.attach(_enums.NOTE, note)
@@ -1100,9 +1104,7 @@ def make_mmrests(
                 tag = _helpers.function_name(_frame(), n=6)
                 tag = tag.append(_tags.REST_VOICE)
                 tag = tag.append(_tags.MULTIMEASURE_REST)
-                rest = abjad.MultimeasureRest(
-                    "R1", multiplier=time_signature.pair, tag=tag
-                )
+                rest = abjad.MultimeasureRest("R1", dmp=time_signature.pair, tag=tag)
                 abjad.attach(_enums.MULTIMEASURE_REST, rest)
                 abjad.attach(_enums.REST_VOICE, rest)
                 if "Music" in voice_name:
@@ -1122,9 +1124,7 @@ def make_mmrests(
                 abjad.attach(_enums.MULTIMEASURE_REST_CONTAINER, container)
                 mmrests.append(container)
             else:
-                mmrest = abjad.MultimeasureRest(
-                    "R1", multiplier=time_signature.pair, tag=tag
-                )
+                mmrest = abjad.MultimeasureRest("R1", dmp=time_signature.pair, tag=tag)
                 mmrests.append(mmrest)
     assert all(isinstance(_, abjad.MultimeasureRest | abjad.Container) for _ in mmrests)
     return mmrests
@@ -1552,7 +1552,7 @@ def replace_nontrivial_skip_filled_tuplets(argument):
             violators.append(tuplet)
     for tuplet in violators:
         duration = abjad.get.duration(tuplet)
-        skip = abjad.Skip("s1", multiplier=duration.pair())
+        skip = abjad.Skip("s1", dmp=duration.pair())
         assert duration == abjad.get.duration(skip)
         abjad.mutate.replace([tuplet], [skip])
 

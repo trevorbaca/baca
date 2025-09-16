@@ -1371,11 +1371,11 @@ def _label_duration_multipliers(score: abjad.Score) -> None:
         for leaf in abjad.iterate.leaves(voice):
             if isinstance(leaf, abjad.Skip):
                 continue
-            if leaf.multiplier() is None:
+            if leaf.dmp() is None:
                 continue
             if leaf in already_labeled:
                 continue
-            n, d = leaf.multiplier()
+            n, d = leaf.dmp()
             string = r"\baca-duration-multiplier-markup"
             string += f' #"{n}" #"{d}"'
             markup = abjad.Markup(string)
@@ -1443,7 +1443,7 @@ def _make_global_rests(
     for time_signature in time_signatures:
         rest = abjad.MultimeasureRest(
             "R1",
-            multiplier=time_signature.pair,
+            dmp=time_signature.pair,
             tag=_helpers.function_name(_frame(), n=1),
         )
         rests.append(rest)
@@ -1462,7 +1462,7 @@ def _make_global_skips(
     for n, time_signature in enumerate(time_signatures, start=1):
         skip = abjad.Skip(
             "s1",
-            multiplier=time_signature.pair,
+            dmp=time_signature.pair,
             tag=_helpers.function_name(_frame(), n=1),
         )
         grace_strings = measure_initial_grace_notes.get(n, None)
@@ -1480,7 +1480,7 @@ def _make_global_skips(
     if append_anchor_skip:
         tag = _helpers.function_name(_frame(), n=3)
         tag = tag.append(_tags.ANCHOR_SKIP)
-        skip = abjad.Skip("s1", multiplier=(1, 4), tag=tag)
+        skip = abjad.Skip("s1", dmp=(1, 4), tag=tag)
         abjad.attach(_enums.ANCHOR_SKIP, skip)
         context.append(skip)
         anchor_time_signature = abjad.TimeSignature((1, 4))
@@ -1806,7 +1806,7 @@ def _replace_rests_with_multimeasure_rests(
                 continue
             time_signature = offset_to_time_signature[start_offset]
             pair = time_signature.pair
-            multimeasure_rest = abjad.MultimeasureRest("R1", multiplier=pair)
+            multimeasure_rest = abjad.MultimeasureRest("R1", dmp=pair)
             abjad.mutate.replace(group[:1], [multimeasure_rest], wrappers=True)
             abjad.mutate.replace(group[1:], [])
 
@@ -2107,7 +2107,7 @@ def append_anchor_note(argument, *, runtime=None) -> None:
     tag = tag.append(_tags.ANCHOR_NOTE)
     tag = tag.append(_tags.HIDDEN)
     tag = tag.append(_tags.NOTE)
-    note = abjad.Note("c'1", multiplier=(1, 4), tag=tag)
+    note = abjad.Note("c'1", dmp=(1, 4), tag=tag)
     abjad.attach(_enums.ANCHOR_NOTE, note)
     abjad.attach(_enums.HIDDEN, note)
     abjad.attach(_enums.NOT_YET_PITCHED, note)

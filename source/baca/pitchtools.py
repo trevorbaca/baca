@@ -508,7 +508,7 @@ def _set_lt_pitch(
             pass
         else:
             for leaf in lt:
-                rest = abjad.Rest(leaf.written_duration(), multiplier=leaf.multiplier())
+                rest = abjad.Rest(leaf.written_duration(), dmp=leaf.dmp())
                 abjad.mutate.replace(leaf, rest, wrappers=True)
             new_lt = abjad.get.logical_tie(rest)
     elif isinstance(pitch, collections.abc.Iterable):
@@ -519,9 +519,9 @@ def _set_lt_pitch(
             assert isinstance(lt.head(), abjad.Note | abjad.Rest)
             for leaf in lt:
                 duration = leaf.written_duration()
-                multiplier = leaf.multiplier()
+                multiplier = leaf.dmp()
                 chord = abjad.Chord.from_duration_and_pitches(
-                    duration, pitch, multiplier=multiplier
+                    duration, pitch, dmp=multiplier
                 )
                 abjad.mutate.replace(leaf, chord, wrappers=True)
             new_lt = abjad.get.logical_tie(chord)
@@ -540,11 +540,11 @@ def _set_lt_pitch(
                 pass
             for leaf in lt:
                 duration = leaf.written_duration()
-                multiplier = leaf.multiplier()
+                multiplier = leaf.dmp()
                 note = abjad.Note.from_duration_and_pitch(
                     duration,
                     pitch,
-                    multiplier=multiplier,
+                    dmp=multiplier,
                 )
                 abjad.mutate.replace(leaf, note, wrappers=True)
             new_lt = abjad.get.logical_tie(note)
