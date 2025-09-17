@@ -2056,7 +2056,7 @@ def _style_framed_notes(score: abjad.Score) -> None:
             duration = abjad.get.duration(leaf)
             leaf.set_written_duration(abjad.Duration(1, 4))
             multiplier = 4 * duration
-            leaf.set_multiplier(multiplier.pair())
+            leaf.set_dmp(multiplier.pair())
             literal = abjad.LilyPondLiteral(r"\once \override Accidental.stencil = ##f")
             abjad.attach(literal, leaf, tag=tag)
             literal = abjad.LilyPondLiteral(r"\once \override Stem.thickness = 6")

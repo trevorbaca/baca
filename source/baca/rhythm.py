@@ -358,7 +358,7 @@ def _style_accelerando(
             pairs = scaled_pairs
         assert len(hleaves) == len(pairs)
         for pair, leaf in zip(pairs, hleaves, strict=True):
-            leaf.set_multiplier(pair)
+            leaf.set_dmp(pair)
         if abjad.select.rests(hleaves):
             stemlet_length = 0.75
         else:
@@ -735,7 +735,7 @@ class Multiplier:
         tag = _helpers.function_name(_frame())
         components = _evaluate_basic_item(self.argument, denominator, voice_name, tag)
         for leaf in abjad.select.leaves(components):
-            leaf.set_multiplier(self.multiplier)
+            leaf.set_dmp(self.multiplier)
         return components
 
 
@@ -976,6 +976,17 @@ def get_previous_rhythm_state(
         assert len(previous_rhythm_state) in (4, 5), repr(previous_rhythm_state)
         assert previous_rhythm_state["name"] == name, repr(previous_rhythm_state)
     return previous_rhythm_state
+
+
+def interpolations(
+    *pair_lists: list[tuple[int, int]],
+) -> list[rmakers.Interpolation]:
+    interpolations = []
+    for pair_list in pair_lists:
+        durations = abjad.duration.durations(pair_list)
+        interpolation = rmakers.Interpolation(*durations)
+        interpolations.append(interpolation)
+    return interpolations
 
 
 def make_accelerando(
