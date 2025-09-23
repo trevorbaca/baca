@@ -772,7 +772,7 @@ def partition_in_halves(sequence) -> list:
     best_candidate, minimum_distance = [], None
     for i in range(1, len(sequence)):
         candidate = [sequence[:-i], sequence[-i:]]
-        weights = [abjad.sequence.weight(_) for _ in candidate]
+        weights = [abjad.math.weight(_, start=0) for _ in candidate]
         maximum, minimum = max(weights), min(weights)
         if maximum == minimum:
             return candidate
