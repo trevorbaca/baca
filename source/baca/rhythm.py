@@ -294,7 +294,7 @@ def _make_accelerando_multipliers(
     start_offsets = [_ / total_duration for _ in start_offsets]
     start_offsets_ = []
     for start_offset in start_offsets:
-        start_offset_ = rmakers.functions._interpolate_exponential(
+        start_offset_ = rmakers.makers._interpolate_exponential(
             0,
             total_duration,
             start_offset,
