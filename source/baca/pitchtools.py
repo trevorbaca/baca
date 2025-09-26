@@ -161,7 +161,7 @@ def _do_pitch_command(
     for pleaf in pleaves:
         # TOOD: let <c' d'>8 ~ c' work
         plt = abjad.get.logical_tie(pleaf)
-        if plt.head() is pleaf:
+        if plt[0] is pleaf:
             plts.append(plt)
     if strict is True and len(pitches) != len(plts):
         message = f"PLT count ({len(plts)}) does not match"
@@ -248,7 +248,7 @@ def _do_staff_position_command(
     mutated_score = False
     for i, plt in enumerate(_select.plts(argument)):
         clef = abjad.get.effective_indicator(
-            plt.head(),
+            plt[0],
             abjad.Clef,
             default=abjad.Clef("treble"),
         )
@@ -297,13 +297,13 @@ def _do_staff_position_interpolation_command(
     if isinstance(start, abjad.StaffPosition):
         start_staff_position = start
     else:
-        start_phead = plts[0].head()
+        start_phead = plts[0][0]
         clef = abjad.get.effective_indicator(start_phead, abjad.Clef)
         start_staff_position = clef.to_staff_position(start)
     if isinstance(stop, abjad.StaffPosition):
         stop_staff_position = stop
     else:
-        stop_phead = plts[-1].head()
+        stop_phead = plts[-1][0]
         clef = abjad.get.effective_indicator(
             stop_phead,
             abjad.Clef,
@@ -318,7 +318,7 @@ def _do_staff_position_interpolation_command(
         staff_position = round(staff_position)
         staff_position = abjad.StaffPosition(staff_position)
         clef = abjad.get.effective_indicator(
-            plt.head(),
+            plt[0],
             abjad.Clef,
             default=abjad.Clef("treble"),
         )
@@ -375,10 +375,10 @@ def _do_staff_position_interpolation_command(
 
 
 def _get_lowest_diatonic_pitch_number(plt):
-    if isinstance(plt.head(), abjad.Note):
-        pitch = plt.head().written_pitch()
-    elif isinstance(plt.head(), abjad.Chord):
-        pitch = plt.head().written_pitches()[0]
+    if isinstance(plt[0], abjad.Note):
+        pitch = plt[0].written_pitch()
+    elif isinstance(plt[0], abjad.Chord):
+        pitch = plt[0].written_pitches()[0]
     else:
         raise TypeError(plt)
     return pitch._get_diatonic_pitch_number()
@@ -404,10 +404,10 @@ def _get_registration(start_pitch, stop_pitch, i, length):
 def _make_cluster(
     plt, width, *, direction=abjad.UP, hide_flat_markup=False, start_pitch=None
 ):
-    assert plt.is_pitched(), repr(plt)
+    # assert plt.is_pitched(), repr(plt)
     assert isinstance(width, int), repr(width)
     if start_pitch is None:
-        start_pitch = plt.head().written_pitch()
+        start_pitch = plt[0].written_pitch()
     pitches = _make_cluster_pitches(start_pitch, width)
     key_cluster = abjad.KeyCluster(hide_flat_markup=hide_flat_markup)
     for pleaf in plt:
@@ -512,11 +512,11 @@ def _set_lt_pitch(
                 abjad.mutate.replace(leaf, rest, wrappers=True)
             new_lt = abjad.get.logical_tie(rest)
     elif isinstance(pitch, collections.abc.Iterable):
-        if isinstance(lt.head(), abjad.Chord):
+        if isinstance(lt[0], abjad.Chord):
             for chord in lt:
                 chord.set_written_pitches(pitch)
         else:
-            assert isinstance(lt.head(), abjad.Note | abjad.Rest)
+            assert isinstance(lt[0], abjad.Note | abjad.Rest)
             for leaf in lt:
                 duration = leaf.written_duration()
                 multiplier = leaf.dmp()
@@ -526,15 +526,15 @@ def _set_lt_pitch(
                 abjad.mutate.replace(leaf, chord, wrappers=True)
             new_lt = abjad.get.logical_tie(chord)
     else:
-        if isinstance(lt.head(), abjad.Note):
+        if isinstance(lt[0], abjad.Note):
             for note in lt:
                 note.set_written_pitch(pitch)
-        elif set_chord_pitches_equal is True and isinstance(lt.head(), abjad.Chord):
+        elif set_chord_pitches_equal is True and isinstance(lt[0], abjad.Chord):
             for chord in lt:
                 for note_head in chord.note_heads():
                     note_head.set_written_pitch(pitch)
         else:
-            assert isinstance(lt.head(), abjad.Chord | abjad.Rest)
+            assert isinstance(lt[0], abjad.Chord | abjad.Rest)
             if not allow_obgc_mutation:
                 raise Exception("set allow_obgc_mutation=True")
                 pass

@@ -1102,7 +1102,7 @@ def _find_repeat_pitch_classes(argument) -> list[abjad.LogicalTie]:
         previous_lt: abjad.LogicalTie | None = None
         previous_pcs: set[abjad.NamedPitchClass] = set()
         for lt in abjad.iterate.logical_ties(voice):
-            head = lt.head()
+            head = lt[0]
             if abjad.get.has_indicator(head, _enums.HIDDEN):
                 written_pitches = set()
             elif isinstance(head, abjad.Note):

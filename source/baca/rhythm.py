@@ -906,7 +906,7 @@ def attach_bgcs(
     pairs = zip(bgcs, lts, strict=True)
     for bgc, lt in pairs:
         if bgc is not None:
-            abjad.attach(bgc, lt.head(), tag=tag)
+            abjad.attach(bgc, lt[0], tag=tag)
 
 
 def from_collection(
@@ -1235,7 +1235,8 @@ def make_rests(time_signatures) -> list[abjad.Rest | abjad.Tuplet]:
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     lts = _select.lts(voice)
-    rmakers.force_rest(lts, tag=tag)
+    leaves = abjad.select.leaves(lts)
+    rmakers.force_rest(leaves, tag=tag)
     contents = abjad.mutate.eject_contents(voice)
     music: list[abjad.Rest | abjad.Tuplet] = []
     for component in contents:
