@@ -1178,7 +1178,7 @@ def lt(
 
         >>> result = baca.select.lt(staff, -1)
         >>> result
-        LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1471,7 +1471,7 @@ def ltqrun(
 
         >>> result = baca.select.ltqrun(staff, -1)
         >>> result
-        [LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
+        [[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]]
 
         >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1561,12 +1561,12 @@ def ltqruns(
         >>> for item in result:
         ...     item
         ...
-        [LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")])]
-        [LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])]
-        [LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")])]
-        [LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])]
-        [LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")])]
-        [LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
+        [[Note("c'16")], [Note("c'16")], [Note("c'16")]]
+        [[Chord("<d' e'>4"), Chord("<d' e'>16")]]
+        [[Note("d'16")], [Note("d'16")], [Note("d'16")]]
+        [[Chord("<e' fs'>4"), Chord("<e' fs'>16")]]
+        [[Note("e'16")], [Note("e'16")], [Note("e'16")]]
+        [[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]]
 
         >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1673,7 +1673,7 @@ def ltrun(
 
         >>> result = baca.select.ltrun(staff, -1)
         >>> result
-        [LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
+        [[Note("e'16")], [Note("e'16")], [Note("e'16")], [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]]
 
         >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1766,9 +1766,9 @@ def ltruns(
         >>> for item in result:
         ...     item
         ...
-        [LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Note("c'16")]), LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])]
-        [LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Note("d'16")]), LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])]
-        [LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Note("e'16")]), LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])]
+        [[Note("c'16")], [Note("c'16")], [Note("c'16")], [Chord("<d' e'>4"), Chord("<d' e'>16")]]
+        [[Note("d'16")], [Note("d'16")], [Note("d'16")], [Chord("<e' fs'>4"), Chord("<e' fs'>16")]]
+        [[Note("e'16")], [Note("e'16")], [Note("e'16")], [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]]
 
         >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1876,21 +1876,21 @@ def lts(
         >>> for item in result:
         ...     item
         ...
-        LogicalTie(items=[Rest('r16')])
-        LogicalTie(items=[Note("bf'16")])
-        LogicalTie(items=[Chord("<a'' b''>16")])
-        LogicalTie(items=[Note("c'16")])
-        LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])
-        LogicalTie(items=[Rest('r16')])
-        LogicalTie(items=[Note("bf'16")])
-        LogicalTie(items=[Chord("<a'' b''>16")])
-        LogicalTie(items=[Note("d'16")])
-        LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-        LogicalTie(items=[Rest('r16')])
-        LogicalTie(items=[Note("bf'16")])
-        LogicalTie(items=[Chord("<a'' b''>16")])
-        LogicalTie(items=[Note("e'16")])
-        LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Rest('r16')]
+        [Note("bf'16")]
+        [Chord("<a'' b''>16")]
+        [Note("c'16")]
+        [Chord("<d' e'>4"), Chord("<d' e'>16")]
+        [Rest('r16')]
+        [Note("bf'16")]
+        [Chord("<a'' b''>16")]
+        [Note("d'16")]
+        [Chord("<e' fs'>4"), Chord("<e' fs'>16")]
+        [Rest('r16')]
+        [Note("bf'16")]
+        [Chord("<a'' b''>16")]
+        [Note("e'16")]
+        [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3036,7 +3036,7 @@ def plt(
 
         >>> result = baca.select.plt(staff, -1)
         >>> result
-        LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3127,18 +3127,18 @@ def plts(
         >>> for item in result:
         ...     item
         ...
-        LogicalTie(items=[Note("bf'16")])
-        LogicalTie(items=[Chord("<a'' b''>16")])
-        LogicalTie(items=[Note("c'16")])
-        LogicalTie(items=[Chord("<d' e'>4"), Chord("<d' e'>16")])
-        LogicalTie(items=[Note("bf'16")])
-        LogicalTie(items=[Chord("<a'' b''>16")])
-        LogicalTie(items=[Note("d'16")])
-        LogicalTie(items=[Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-        LogicalTie(items=[Note("bf'16")])
-        LogicalTie(items=[Chord("<a'' b''>16")])
-        LogicalTie(items=[Note("e'16")])
-        LogicalTie(items=[Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
+        [Note("bf'16")]
+        [Chord("<a'' b''>16")]
+        [Note("c'16")]
+        [Chord("<d' e'>4"), Chord("<d' e'>16")]
+        [Note("bf'16")]
+        [Chord("<a'' b''>16")]
+        [Note("d'16")]
+        [Chord("<e' fs'>4"), Chord("<e' fs'>16")]
+        [Note("bf'16")]
+        [Chord("<a'' b''>16")]
+        [Note("e'16")]
+        [Chord("<fs' gs'>4"), Chord("<fs' gs'>16")]
 
         >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3441,7 +3441,7 @@ def ptlt(
 
         >>> result = baca.select.ptlt(staff, -1)
         >>> result
-        LogicalTie(items=[Note("e'16")])
+        [Note("e'16")]
 
         >>> abjad.label.color_leaves(result, "#green")
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -3530,15 +3530,15 @@ def ptlts(
         >>> for item in result:
         ...     item
         ...
-        LogicalTie(items=[Note("bf'16")])
-        LogicalTie(items=[Chord("<a'' b''>16")])
-        LogicalTie(items=[Note("c'16")])
-        LogicalTie(items=[Note("bf'16")])
-        LogicalTie(items=[Chord("<a'' b''>16")])
-        LogicalTie(items=[Note("d'16")])
-        LogicalTie(items=[Note("bf'16")])
-        LogicalTie(items=[Chord("<a'' b''>16")])
-        LogicalTie(items=[Note("e'16")])
+        [Note("bf'16")]
+        [Chord("<a'' b''>16")]
+        [Note("c'16")]
+        [Note("bf'16")]
+        [Chord("<a'' b''>16")]
+        [Note("d'16")]
+        [Note("bf'16")]
+        [Chord("<a'' b''>16")]
+        [Note("e'16")]
 
         >>> abjad.label.color_leaves(result, ["#red", "#blue"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
