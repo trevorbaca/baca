@@ -1153,7 +1153,7 @@ def lparts(
 
 def lt(
     argument, n: int, *, exclude: _typings.Exclude | None = None
-) -> abjad.LogicalTie:
+) -> list[abjad.Leaf]:
     r"""
     Selects logical tie ``n``.
 
@@ -1446,7 +1446,7 @@ def ltleaves(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad
 
 def ltqrun(
     argument, n: int, *, exclude: _typings.Exclude | None = None
-) -> list[abjad.LogicalTie]:
+) -> list[list[abjad.Leaf]]:
     r"""
     Selects logical tie equipitch run ``n``.
 
@@ -1534,7 +1534,7 @@ def ltqrun(
 
 def ltqruns(
     argument, *, exclude: _typings.Exclude | None = None
-) -> list[list[abjad.LogicalTie]]:
+) -> list[list[list[abjad.Leaf]]]:
     r"""
     Selects logical tie equipitch runs.
 
@@ -1648,7 +1648,7 @@ def ltqruns(
 
 def ltrun(
     argument, n: int, *, exclude: _typings.Exclude | None = None
-) -> list[abjad.LogicalTie]:
+) -> list[list[abjad.Leaf]]:
     r"""
     Selects logical tie run ``n``.
 
@@ -1739,7 +1739,7 @@ def ltrun(
 
 def ltruns(
     argument, *, exclude: _typings.Exclude | None = None
-) -> list[list[abjad.LogicalTie]]:
+) -> list[list[list[abjad.Leaf]]]:
     r"""
     Selects logical tie runs.
 
@@ -1849,7 +1849,7 @@ def lts(
     *,
     exclude: _typings.Exclude | None = None,
     nontrivial: bool | None = None,
-) -> list[abjad.LogicalTie]:
+) -> list[list[abjad.Leaf]]:
     r"""
     Selects logical ties.
 
@@ -2539,7 +2539,7 @@ def ompltgroups(
     counts: typing.Sequence[int] = [1],
     *,
     exclude: _typings.Exclude | None = None,
-) -> list[list[abjad.LogicalTie]]:
+) -> list[list[list[abjad.Leaf]]]:
     """
     Partitions measure-grouped plts (with overhang).
     """
@@ -3011,7 +3011,7 @@ def plt(
     *,
     exclude: _typings.Exclude | None = None,
     grace: bool | None = None,
-) -> abjad.LogicalTie:
+) -> list[abjad.Leaf]:
     r"""
     Selects pitched logical tie ``n``.
 
@@ -3100,7 +3100,7 @@ def plt(
 # TODO: remove grace=None keyword
 def plts(
     argument, *, exclude: _typings.Exclude | None = None, grace: bool | None = None
-) -> list[abjad.LogicalTie]:
+) -> list[list[abjad.Leaf]]:
     r"""
     Selects pitched logical ties.
 
@@ -3416,7 +3416,7 @@ def ptails(
 
 def ptlt(
     argument, n: int, *, exclude: _typings.Exclude | None = None
-) -> abjad.LogicalTie:
+) -> list[abjad.Leaf]:
     r"""
     Selects pitched trivial logical tie ``n``.
 
@@ -3503,7 +3503,7 @@ def ptlt(
 
 def ptlts(
     argument, *, exclude: _typings.Exclude | None = None
-) -> list[abjad.LogicalTie]:
+) -> list[list[abjad.Leaf]]:
     r"""
     Selects pitched trivial logical ties.
 

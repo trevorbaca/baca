@@ -1094,12 +1094,12 @@ def _find_first_measure_number(previous_metadata: dict) -> int:
     return first_measure_number
 
 
-def _find_repeat_pitch_classes(argument) -> list[abjad.LogicalTie]:
-    violators: list[abjad.LogicalTie] = []
+def _find_repeat_pitch_classes(argument) -> list[list[abjad.Leaf]]:
+    violators = []
     for voice in abjad.iterate.components(argument, abjad.Voice):
         if abjad.get.has_indicator(voice, _enums.INTERMITTENT):
             continue
-        previous_lt: abjad.LogicalTie | None = None
+        previous_lt = None
         previous_pcs: set[abjad.NamedPitchClass] = set()
         for lt in abjad.iterate.logical_ties(voice):
             head = lt[0]
@@ -1130,10 +1130,12 @@ def _find_repeat_pitch_classes(argument) -> list[abjad.LogicalTie]:
 def _force_nonnatural_accidentals(score: abjad.Score) -> None:
     natural = abjad.Accidental("natural")
     for plt in _select.plts(score):
-        if isinstance(plt[0], abjad.Note):
-            note_heads = [plt[0].note_head()]
+        head = plt[0]
+        if isinstance(head, abjad.Note):
+            note_heads = [head.note_head()]
         else:
-            note_heads = plt[0].note_heads()
+            assert isinstance(head, abjad.Chord)
+            note_heads = head.note_heads()
         for note_head in note_heads:
             note_head_written_pitch = note_head.written_pitch()
             assert isinstance(note_head_written_pitch, abjad.NamedPitch)
