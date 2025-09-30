@@ -2243,7 +2243,11 @@ def color_octaves(score: abjad.Score) -> None:
                 pitches.extend(leaf.written_pitches())
         if not pitches:
             continue
-        pitch_classes = [_.pitch_class() for _ in pitches]
+        pitch_classes = []
+        for pitch in pitches:
+            assert isinstance(pitch, abjad.NamedPitch)
+            pitch_class = pitch.pitch_class()
+            pitch_classes.append(pitch_class)
         if _pcollections.has_duplicates([pitch_classes]):
             color = True
             for pleaf in pleaves:

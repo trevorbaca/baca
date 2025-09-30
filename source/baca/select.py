@@ -2787,8 +2787,12 @@ def pheads(
             }
 
     """
-    result = plts(argument, exclude=exclude, grace=grace)
-    return [_[0] for _ in result]
+    result = []
+    for plt in plts(argument, exclude=exclude, grace=grace):
+        phead = plt[0]
+        assert isinstance(phead, abjad.Chord | abjad.Note)
+        result.append(phead)
+    return result
 
 
 # TODO: remove grace=None keyword
@@ -3409,9 +3413,12 @@ def ptails(
             }
 
     """
-    plts_ = plts(argument, exclude=exclude)
-    leaves_ = [_[-1] for _ in plts_]
-    return leaves_
+    ptails = []
+    for plt in plts(argument, exclude=exclude):
+        ptail = plt[-1]
+        assert isinstance(ptail, abjad.Chord | abjad.Note)
+        ptails.append(ptail)
+    return ptails
 
 
 def ptlt(

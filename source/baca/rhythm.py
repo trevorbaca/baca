@@ -1283,7 +1283,10 @@ def make_rhythm(
         assert isinstance(result, abjad.Component | list), repr(result)
     assert all(isinstance(_, abjad.Component) for _ in components), repr(components)
     if time_signatures is not None:
-        total_duration = sum(_.duration() for _ in time_signatures)
+        total_duration = sum(
+            [_.duration() for _ in time_signatures],
+            start=abjad.Duration(0),
+        )
         existing_duration = sum(
             [
                 abjad.get.duration(_)
