@@ -1145,7 +1145,8 @@ def interpolate_pitches(
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
         >>> lilypond_file = abjad.illustrators.components(tuplets)
-        >>> rmakers.beam(tuplets)
+        >>> leaf_lists = [_[:] for _ in tuplets]
+        >>> rmakers.beam(leaf_lists)
         >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
         >>> _ = baca.interpolate_pitches(tuplets, "Eb4", "F#5")
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
@@ -1205,7 +1206,8 @@ def interpolate_pitches(
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
         >>> lilypond_file = abjad.illustrators.components(tuplets)
-        >>> rmakers.beam(tuplets)
+        >>> leaf_lists = [_[:] for _ in tuplets]
+        >>> rmakers.beam(leaf_lists)
         >>> _ = baca.clef(abjad.select.leaf(tuplets, 0), "treble")
         >>> baca.interpolate_pitches(tuplets, "Eb4", "F#5")
         >>> baca.glissando(tuplets)
@@ -1663,7 +1665,8 @@ def register(
         >>> collections = [[10, 12, 14], [10, 12, 14], [10, 12, 14]]
         >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
         >>> lilypond_file = abjad.illustrators.components(tuplets)
-        >>> rmakers.beam(tuplets)
+        >>> leaf_lists = [_[:] for _ in tuplets]
+        >>> rmakers.beam(leaf_lists)
         >>> _ = baca.register(tuplets, 15)
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1770,7 +1773,7 @@ def register(
         Works with chords:
 
         >>> tuplet = baca.from_collection((10, 12, 14), [1], 16)
-        >>> rmakers.beam([tuplet])
+        >>> rmakers.beam([tuplet[:]])
         >>> _ = baca.register(tuplet, -6)
         >>> lilypond_file = abjad.illustrators.components([tuplet])
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
@@ -1880,7 +1883,8 @@ def register(
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
         >>> lilypond_file = abjad.illustrators.components(tuplets)
-        >>> rmakers.beam(tuplets)
+        >>> leaf_lists = [_[:] for _ in tuplets]
+        >>> rmakers.beam(leaf_lists)
         >>> _ = baca.register(tuplets, 0, 24)
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -1940,7 +1944,8 @@ def register(
         >>> collections = [[6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2]]
         >>> collections = [tuple(_) for _ in collections]
         >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
-        >>> rmakers.beam(tuplets)
+        >>> leaf_lists = [_[:] for _ in tuplets]
+        >>> rmakers.beam(leaf_lists)
         >>> _ = baca.register(tuplets, 0, 24)
         >>> lilypond_file = abjad.illustrators.components(tuplets)
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
@@ -2457,7 +2462,8 @@ def register(
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
         >>> lilypond_file = abjad.illustrators.components(tuplets)
-        >>> rmakers.beam(tuplets)
+        >>> leaf_lists = [_[:] for _ in tuplets]
+        >>> rmakers.beam(leaf_lists)
         >>> _ = [baca.register(_, 0, 24) for _ in tuplets]
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -2551,7 +2557,8 @@ def replace_with_clusters(
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
         >>> lilypond_file = abjad.illustrators.components(tuplets)
-        >>> rmakers.beam(tuplets)
+        >>> leaf_lists = [_[:] for _ in tuplets]
+        >>> rmakers.beam(leaf_lists)
         >>> _ = baca.replace_with_clusters(tuplets, [3, 4])
         >>> rmakers.swap_trivial(lilypond_file["Staff"])
         >>> abjad.show(lilypond_file) # doctest: +SKIP
