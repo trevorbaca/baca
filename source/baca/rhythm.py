@@ -1055,7 +1055,7 @@ def make_even_divisions(time_signatures) -> list[abjad.Leaf | abjad.Tuplet]:
     durations = [_.duration() for _ in time_signatures]
     tuplets = rmakers.even_division(durations, [8], tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
-    leaf_lists = [_[:] for _ in tuplets]
+    leaf_lists = [abjad.select.leaves(_) for _ in tuplets]
     rmakers.beam(leaf_lists, tag=tag)
     rmakers.extract_trivial(voice)
     components = abjad.mutate.eject_contents(voice)
@@ -1396,7 +1396,8 @@ def make_single_attack(
         talea_denominator=denominator,
     )
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
-    rmakers.beam(voice)
+    leaf_lists = [abjad.select.leaves(_) for _ in tuplets]
+    rmakers.beam(leaf_lists)
     rmakers.extract_trivial(voice)
     components = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
