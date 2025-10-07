@@ -388,6 +388,14 @@ def cmgroups(
     return items
 
 
+def containers_to_leaf_lists(
+    containers: typing.Sequence[abjad.Container],
+) -> list[list[abjad.Leaf]]:
+    assert all(isinstance(_, abjad.Container) for _ in containers), repr(containers)
+    leaf_lists = [abjad.select.leaves(_) for _ in containers]
+    return leaf_lists
+
+
 def duration(argument, string, *, preprolated: bool = False) -> list:
     result = []
     operator, duration = parse_duration_inequality_string(string)
