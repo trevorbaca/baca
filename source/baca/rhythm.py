@@ -364,7 +364,7 @@ def _style_accelerando(
         else:
             stemlet_length = None
         rmakers.feather_beam([hleaves], beam_rests=True, stemlet_length=stemlet_length)
-        rmakers.duration_bracket(container)
+        rmakers.duration_bracket([container])
     if temporary_voice is not None:
         temporary_voice[:] = []
     return container
