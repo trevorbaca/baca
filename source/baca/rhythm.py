@@ -1057,7 +1057,7 @@ def make_even_divisions(time_signatures) -> list[abjad.Leaf | abjad.Tuplet]:
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     leaf_lists = [abjad.select.leaves(_) for _ in tuplets]
     rmakers.beam(leaf_lists, tag=tag)
-    rmakers.extract_trivial(voice)
+    rmakers.extract_trivial(tuplets)
     components = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
     for component in components:
@@ -1398,7 +1398,7 @@ def make_single_attack(
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     leaf_lists = [abjad.select.leaves(_) for _ in tuplets]
     rmakers.beam(leaf_lists)
-    rmakers.extract_trivial(voice)
+    rmakers.extract_trivial(tuplets)
     components = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
     for component in components:
