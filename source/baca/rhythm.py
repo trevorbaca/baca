@@ -1167,7 +1167,8 @@ def make_notes(
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     rmakers.rewrite_meter(voice)
     if repeat_ties is True:
-        rmakers.force_repeat_tie(voice)
+        leaves = abjad.select.leaves(voice)
+        rmakers.force_repeat_tie(leaves)
     contents, music = abjad.mutate.eject_contents(voice), []
     for component in contents:
         assert isinstance(component, abjad.Leaf | abjad.Tuplet)
@@ -1188,7 +1189,8 @@ def make_repeat_tied_notes(
     rmakers.repeat_tie(_select.pheads(voice)[1:], tag=tag)
     if not do_not_rewrite_meter:
         rmakers.rewrite_meter(voice)
-    rmakers.force_repeat_tie(voice)
+    leaves = abjad.select.leaves(voice)
+    rmakers.force_repeat_tie(leaves)
     components = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
     for component in components:
@@ -1220,7 +1222,8 @@ def make_repeated_duration_notes(
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     if not do_not_rewrite_meter:
         rmakers.rewrite_meter(voice, tag=tag)
-    rmakers.force_repeat_tie(voice)
+    leaves = abjad.select.leaves(voice)
+    rmakers.force_repeat_tie(leaves)
     contents = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
     for component in contents:
@@ -1446,7 +1449,8 @@ def make_tied_repeated_durations(
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     pheads = _select.pheads(voice)[1:]
     rmakers.repeat_tie(pheads, tag=tag)
-    rmakers.force_repeat_tie(voice)
+    leaves = abjad.select.leaves(voice)
+    rmakers.force_repeat_tie(leaves)
     contents = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
     for component in contents:
