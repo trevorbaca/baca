@@ -50,7 +50,8 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
             for component in components:
                 abjad.attach(_enums.FRAMED_LEAF, component)
         elif isinstance(item, InvisibleMusic):
-            rmakers.invisible_music(components, tag=tag)
+            leaves = abjad.select.leaves(components)
+            rmakers.invisible_music(leaves, tag=tag)
         elif isinstance(item, RepeatTie):
             rmakers.repeat_tie(components, tag=tag)
         elif isinstance(item, Tie):
@@ -206,7 +207,8 @@ def _evaluate_item(
             for component in components:
                 abjad.attach(_enums.FRAMED_LEAF, component)
         elif isinstance(item, InvisibleMusic):
-            rmakers.invisible_music(result, tag=tag)
+            leaves = abjad.select.leaves(result)
+            rmakers.invisible_music(leaves, tag=tag)
         elif isinstance(item, RepeatTie):
             rmakers.repeat_tie(result, tag=tag)
         elif isinstance(item, Tie):
