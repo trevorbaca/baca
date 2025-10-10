@@ -210,9 +210,17 @@ def _evaluate_item(
             leaves = abjad.select.leaves(result)
             rmakers.invisible_music(leaves, tag=tag)
         elif isinstance(item, RepeatTie):
-            rmakers.repeat_tie(result, tag=tag)
+            if isinstance(result, list):
+                rmakers.repeat_tie(result, tag=tag)
+            else:
+                assert isinstance(result, abjad.Note | abjad.Chord), repr(result)
+                rmakers.repeat_tie([result], tag=tag)
         elif isinstance(item, Tie):
-            rmakers.tie(result, tag=tag)
+            if isinstance(result, list):
+                rmakers.tie(result, tag=tag)
+            else:
+                assert isinstance(result, abjad.Note | abjad.Chord), repr(result)
+                rmakers.tie([result], tag=tag)
     elif isinstance(item, TremoloContainer):
         container = item(denominator, voice_name, tag)
         pitch_list = [abjad.NamedPitch(101)]
