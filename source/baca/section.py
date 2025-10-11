@@ -2639,7 +2639,8 @@ def postprocess(
             )
     with abjad.contextmanagers.ForbidUpdate(component=score, update_on_exit=True):
         abjad.makers.tweak_tuplet_bracket_edge_height(score)
-        rmakers.tweak_tuplet_number_text_calc_fraction_text(score)
+        tuplets = abjad.select.tuplets(score)
+        rmakers.tweak_tuplet_number_text_calc_fraction_text(tuplets)
         extend_beams(score)
         _attach_sounds_during(score)
         if first_section is False:

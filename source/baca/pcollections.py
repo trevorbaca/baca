@@ -46,7 +46,8 @@ class ArpeggiationSpacingSpecifier:
         >>> leaf_lists = [_[:] for _ in containers]
         >>> rmakers.beam(leaf_lists)
         >>> baca.bass_to_octave(containers, 2)
-        >>> rmakers.swap_trivial(lilypond_file["Staff"])
+        >>> tuplets = abjad.select.tuplets(lilypond_file["Staff"])
+        >>> rmakers.swap_trivial_tuplets_for_containers(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -96,7 +97,8 @@ class ArpeggiationSpacingSpecifier:
         >>> leaf_lists = [_[:] for _ in containers]
         >>> rmakers.beam(leaf_lists)
         >>> baca.bass_to_octave(containers, 2)
-        >>> rmakers.swap_trivial(lilypond_file["Staff"])
+        >>> tuplets = abjad.select.tuplets(lilypond_file["Staff"])
+        >>> rmakers.swap_trivial_tuplets_for_containers(tuplets)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
