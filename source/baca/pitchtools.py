@@ -1334,7 +1334,7 @@ def pitch(
         >>> durations = [_.duration() for _ in time_signatures]
         >>> nested_music = rmakers.note(durations)
         >>> music = abjad.sequence.flatten(nested_music)
-        >>> rmakers.written_duration(music, abjad.Duration(1))
+        >>> rmakers.respell_leaves_written_duration_and_dmp(music, abjad.Duration(1))
         >>> voice.extend(music)
         >>> _ = baca.pitch(voice, "C4:D4:E4")
         >>> baca.docs.remove_deactivated_wrappers(score)

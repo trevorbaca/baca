@@ -901,7 +901,7 @@ class WrittenDuration:
             raise NotImplementedError(f"multiple leaves: {components}")
         leaf = components[0]
         written_duration = abjad.Duration(self.written_n, denominator)
-        rmakers.written_duration([leaf], written_duration)
+        rmakers.respell_leaves_written_duration_and_dmp([leaf], written_duration)
         return leaf
 
 
