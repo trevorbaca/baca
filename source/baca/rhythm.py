@@ -1381,7 +1381,8 @@ def make_rhythm(
                     break
             assert timespan_components, repr(timespan_components)
             if not is_obgc_polyphony_container:
-                rmakers.unbeam(timespan_components, smart=True)
+                leaves_ = abjad.select.leaves(timespan_components)
+                rmakers.unbeam_leaves(leaves_, smart=True)
             abjad.mutate.replace(timespan_components, original_item)
             if is_obgc_polyphony_container:
                 nongrace_voice = original_item[1]
