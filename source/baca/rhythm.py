@@ -1352,7 +1352,7 @@ def make_rhythm(
             for component in lists[0]:
                 components.append(component)
             last_leaf = abjad.select.leaf(components, -1)
-            rmakers.untie(last_leaf)
+            rmakers.untie_leaves([last_leaf])
         if do_not_rewrite_meter is False:
             voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
             rmakers.rewrite_meter(
