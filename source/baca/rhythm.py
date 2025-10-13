@@ -1066,7 +1066,7 @@ def make_even_divisions(time_signatures) -> list[abjad.Leaf | abjad.Tuplet]:
     tuplets = rmakers.even_division(durations, [8], tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     leaf_lists = [abjad.select.leaves(_) for _ in tuplets]
-    rmakers.beam(leaf_lists, tag=tag)
+    rmakers.beam_runs(leaf_lists, tag=tag)
     rmakers.extract_trivial(tuplets)
     components = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
@@ -1195,7 +1195,7 @@ def make_repeat_tied_notes(
     durations = [_.duration() for _ in time_signatures]
     leaves_and_tuplets = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(leaves_and_tuplets, time_signatures)
-    rmakers.beam(_select.plts(voice))
+    rmakers.beam_runs(_select.plts(voice))
     rmakers.repeat_tie(_select.pheads(voice)[1:], tag=tag)
     if not do_not_rewrite_meter:
         rmakers.rewrite_meter(voice)
@@ -1411,7 +1411,7 @@ def make_single_attack(
     )
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     leaf_lists = [abjad.select.leaves(_) for _ in tuplets]
-    rmakers.beam(leaf_lists)
+    rmakers.beam_runs(leaf_lists)
     rmakers.extract_trivial(tuplets)
     components = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
@@ -1428,7 +1428,7 @@ def make_tied_notes(time_signatures) -> list[abjad.Note | abjad.Tuplet]:
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     plts = _select.plts(voice)
-    rmakers.beam(plts, tag=tag)
+    rmakers.beam_runs(plts, tag=tag)
     ptails = _select.ptails(voice)[:-1]
     rmakers.tie(ptails, tag=tag)
     rmakers.rewrite_meter(voice, tag=tag)
