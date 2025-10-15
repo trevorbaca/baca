@@ -1251,7 +1251,7 @@ def make_rests(time_signatures) -> list[abjad.Rest | abjad.Tuplet]:
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     lts = _select.lts(voice)
     leaves = abjad.select.leaves(lts)
-    rmakers.force_rest(leaves, tag=tag)
+    rmakers.replace_leaves_with_rests(leaves, tag=tag)
     contents = abjad.mutate.eject_contents(voice)
     music: list[abjad.Rest | abjad.Tuplet] = []
     for component in contents:
