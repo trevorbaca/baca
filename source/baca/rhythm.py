@@ -373,8 +373,9 @@ def _style_accelerando(
             stemlet_length = 0.75
         else:
             stemlet_length = None
-        rmakers.feather_beam([hleaves], beam_rests=True, stemlet_length=stemlet_length)
-        rmakers.duration_bracket([container])
+        rmakers.beam_runs([hleaves], beam_rests=True, stemlet_length=stemlet_length)
+        rmakers.override_beam_grow_direction([hleaves])
+        rmakers.override_tuplet_number_text_duration_markup([container])
     if temporary_voice is not None:
         temporary_voice[:] = []
     return container
@@ -1067,7 +1068,7 @@ def make_even_divisions(time_signatures) -> list[abjad.Leaf | abjad.Tuplet]:
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     leaf_lists = [abjad.select.leaves(_) for _ in tuplets]
     rmakers.beam_runs(leaf_lists, tag=tag)
-    rmakers.extract_trivial(tuplets)
+    rmakers.extract_trivial_tuplets(tuplets)
     components = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
     for component in components:
@@ -1412,7 +1413,7 @@ def make_single_attack(
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     leaf_lists = [abjad.select.leaves(_) for _ in tuplets]
     rmakers.beam_runs(leaf_lists)
-    rmakers.extract_trivial(tuplets)
+    rmakers.extract_trivial_tuplets(tuplets)
     components = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
     for component in components:
