@@ -51,11 +51,11 @@ def _evaluate_basic_item(item, denominator, voice_name, tag):
                 abjad.attach(_enums.FRAMED_LEAF, component)
         elif isinstance(item, InvisibleMusic):
             leaves = abjad.select.leaves(components)
-            rmakers.invisible_music(leaves, tag=tag)
+            rmakers.attach_invisible_music_commands_to_leaves(leaves, tag=tag)
         elif isinstance(item, RepeatTie):
-            rmakers.repeat_tie(components, tag=tag)
+            rmakers.attach_repeat_ties_to_pleaves(components, tag=tag)
         elif isinstance(item, Tie):
-            rmakers.tie(components, tag=tag)
+            rmakers.attach_ties_to_pleaves(components, tag=tag)
     elif isinstance(item, int) and 0 < item:
         pitch_list = [abjad.NamedPitch("c'")]
         leaf_duration = abjad.Duration(item, denominator)
@@ -208,19 +208,19 @@ def _evaluate_item(
                 abjad.attach(_enums.FRAMED_LEAF, component)
         elif isinstance(item, InvisibleMusic):
             leaves = abjad.select.leaves(result)
-            rmakers.invisible_music(leaves, tag=tag)
+            rmakers.attach_invisible_music_commands_to_leaves(leaves, tag=tag)
         elif isinstance(item, RepeatTie):
             if isinstance(result, list):
-                rmakers.repeat_tie(result, tag=tag)
+                rmakers.attach_repeat_ties_to_pleaves(result, tag=tag)
             else:
                 assert isinstance(result, abjad.Note | abjad.Chord), repr(result)
-                rmakers.repeat_tie([result], tag=tag)
+                rmakers.attach_repeat_ties_to_pleaves([result], tag=tag)
         elif isinstance(item, Tie):
             if isinstance(result, list):
-                rmakers.tie(result, tag=tag)
+                rmakers.attach_ties_to_pleaves(result, tag=tag)
             else:
                 assert isinstance(result, abjad.Note | abjad.Chord), repr(result)
-                rmakers.tie([result], tag=tag)
+                rmakers.attach_ties_to_pleaves([result], tag=tag)
     elif isinstance(item, TremoloContainer):
         container = item(denominator, voice_name, tag)
         pitch_list = [abjad.NamedPitch(101)]
@@ -1197,7 +1197,7 @@ def make_repeat_tied_notes(
     leaves_and_tuplets = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(leaves_and_tuplets, time_signatures)
     rmakers.beam_runs(_select.plts(voice))
-    rmakers.repeat_tie(_select.pheads(voice)[1:], tag=tag)
+    rmakers.attach_repeat_ties_to_pleaves(_select.pheads(voice)[1:], tag=tag)
     if not do_not_rewrite_meter:
         rmakers.rewrite_meter(voice)
     leaves = abjad.select.leaves(voice)
@@ -1353,7 +1353,7 @@ def make_rhythm(
             for component in lists[0]:
                 components.append(component)
             last_leaf = abjad.select.leaf(components, -1)
-            rmakers.untie_leaves([last_leaf])
+            rmakers.detach_ties_from_leaves([last_leaf])
         if do_not_rewrite_meter is False:
             voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
             rmakers.rewrite_meter(
@@ -1383,7 +1383,7 @@ def make_rhythm(
             assert timespan_components, repr(timespan_components)
             if not is_obgc_polyphony_container:
                 leaves_ = abjad.select.leaves(timespan_components)
-                rmakers.unbeam_leaves(leaves_, smart=True)
+                rmakers.detach_beams_from_leaves(leaves_, smart=True)
             abjad.mutate.replace(timespan_components, original_item)
             if is_obgc_polyphony_container:
                 nongrace_voice = original_item[1]
@@ -1431,7 +1431,7 @@ def make_tied_notes(time_signatures) -> list[abjad.Note | abjad.Tuplet]:
     plts = _select.plts(voice)
     rmakers.beam_runs(plts, tag=tag)
     ptails = _select.ptails(voice)[:-1]
-    rmakers.tie(ptails, tag=tag)
+    rmakers.attach_ties_to_pleaves(ptails, tag=tag)
     rmakers.rewrite_meter(voice, tag=tag)
     contents = abjad.mutate.eject_contents(voice)
     music: list[abjad.Note | abjad.Tuplet] = []
@@ -1460,7 +1460,7 @@ def make_tied_repeated_durations(
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     pheads = _select.pheads(voice)[1:]
-    rmakers.repeat_tie(pheads, tag=tag)
+    rmakers.attach_repeat_ties_to_pleaves(pheads, tag=tag)
     leaves = abjad.select.leaves(voice)
     rmakers.replace_ties_with_repeat_ties(leaves)
     contents = abjad.mutate.eject_contents(voice)
