@@ -17,7 +17,7 @@ def test_exceptions_01():
     tuplets = [baca.from_collection(_, [1], 16) for _ in collections]
     voice = abjad.Voice(tuplets)
     groups = rmakers.select_nongrace_leaves_by_tuplet(tuplets)
-    rmakers.beam_across_leaf_lists(groups)
+    rmakers.attach_span_beams_to_runs_across_leaf_lists(groups)
 
     with pytest.raises(Exception):
         baca.imbricate(

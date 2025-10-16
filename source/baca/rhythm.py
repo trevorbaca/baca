@@ -373,7 +373,9 @@ def _style_accelerando(
             stemlet_length = 0.75
         else:
             stemlet_length = None
-        rmakers.beam_runs([hleaves], beam_rests=True, stemlet_length=stemlet_length)
+        rmakers.attach_beams_to_runs_by_leaf_list(
+            [hleaves], beam_rests=True, stemlet_length=stemlet_length
+        )
         rmakers.override_beam_grow_direction([hleaves])
         rmakers.override_tuplet_number_text_duration_markup([container])
     if temporary_voice is not None:
@@ -1067,7 +1069,7 @@ def make_even_divisions(time_signatures) -> list[abjad.Leaf | abjad.Tuplet]:
     tuplets = rmakers.even_division(durations, [8], tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     leaf_lists = [abjad.select.leaves(_) for _ in tuplets]
-    rmakers.beam_runs(leaf_lists, tag=tag)
+    rmakers.attach_beams_to_runs_by_leaf_list(leaf_lists, tag=tag)
     rmakers.extract_trivial_tuplets(tuplets)
     components = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
@@ -1196,7 +1198,7 @@ def make_repeat_tied_notes(
     durations = [_.duration() for _ in time_signatures]
     leaves_and_tuplets = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(leaves_and_tuplets, time_signatures)
-    rmakers.beam_runs(_select.plts(voice))
+    rmakers.attach_beams_to_runs_by_leaf_list(_select.plts(voice))
     rmakers.attach_repeat_ties_to_pleaves(_select.pheads(voice)[1:], tag=tag)
     if not do_not_rewrite_meter:
         rmakers.rewrite_meter(voice)
@@ -1412,7 +1414,7 @@ def make_single_attack(
     )
     voice = rmakers.wrap_in_time_signature_staff(tuplets, time_signatures)
     leaf_lists = [abjad.select.leaves(_) for _ in tuplets]
-    rmakers.beam_runs(leaf_lists)
+    rmakers.attach_beams_to_runs_by_leaf_list(leaf_lists)
     rmakers.extract_trivial_tuplets(tuplets)
     components = abjad.mutate.eject_contents(voice)
     music: list[abjad.Leaf | abjad.Tuplet] = []
@@ -1429,7 +1431,7 @@ def make_tied_notes(time_signatures) -> list[abjad.Note | abjad.Tuplet]:
     components = rmakers.note(durations, tag=tag)
     voice = rmakers.wrap_in_time_signature_staff(components, time_signatures)
     plts = _select.plts(voice)
-    rmakers.beam_runs(plts, tag=tag)
+    rmakers.attach_beams_to_runs_by_leaf_list(plts, tag=tag)
     ptails = _select.ptails(voice)[:-1]
     rmakers.attach_ties_to_pleaves(ptails, tag=tag)
     rmakers.rewrite_meter(voice, tag=tag)
