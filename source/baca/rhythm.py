@@ -2,6 +2,7 @@
 Rhythm.
 """
 
+import collections
 import dataclasses
 import fractions
 import math as python_math
@@ -337,6 +338,61 @@ def _make_accelerando_multipliers(
         pair = abjad.duration.pair_with_denominator(fraction, 2**10)
         pairs.append(pair)
     return pairs
+
+
+def _repair_unmatched_beams(
+    leaves: collections.abc.Sequence[abjad.Leaf],
+    *,
+    tag: abjad.Tag = abjad.Tag(),
+) -> None:
+    tag = tag.append(_helpers.function_name(_frame()))
+    unmatched_start_beam = False
+    leaf: abjad.Leaf | None
+    leaf = leaves[0]
+    leaf = abjad.get.leaf(leaf, -1)
+    if leaf is not None:
+        if abjad.get.has_indicator(leaf, abjad.StopBeam):
+            pass
+        elif abjad.get.has_indicator(leaf, abjad.StartBeam):
+            abjad.detach(abjad.StartBeam, leaf)
+        else:
+            while True:
+                leaf = abjad.get.leaf(leaf, -1)
+                if leaf is None:
+                    break
+                if abjad.get.has_indicator(leaf, abjad.StopBeam):
+                    break
+                if abjad.get.has_indicator(leaf, abjad.StartBeam):
+                    unmatched_start_beam = True
+                    break
+    unmatched_stop_beam = False
+    leaf = leaves[-1]
+    leaf = abjad.get.leaf(leaf, 1)
+    if leaf is not None:
+        if abjad.get.has_indicator(leaf, abjad.StartBeam):
+            pass
+        elif abjad.get.has_indicator(leaf, abjad.StopBeam):
+            abjad.detach(abjad.StopBeam, leaf)
+        else:
+            while True:
+                leaf = abjad.get.leaf(leaf, 1)
+                if leaf is None:
+                    break
+                if abjad.get.has_indicator(leaf, abjad.StartBeam):
+                    break
+                if abjad.get.has_indicator(leaf, abjad.StopBeam):
+                    unmatched_stop_beam = True
+                    break
+    if unmatched_start_beam is True:
+        leaf = leaves[0]
+        leaf = abjad.get.leaf(leaf, -1)
+        assert leaf is not None
+        abjad.attach(abjad.StopBeam(), leaf, tag=tag)
+    if unmatched_stop_beam is True:
+        leaf = leaves[-1]
+        leaf = abjad.get.leaf(leaf, 1)
+        assert leaf is not None
+        abjad.attach(abjad.StartBeam(), leaf, tag=tag)
 
 
 def _style_accelerando(
@@ -1385,7 +1441,8 @@ def make_rhythm(
             assert timespan_components, repr(timespan_components)
             if not is_obgc_polyphony_container:
                 leaves_ = abjad.select.leaves(timespan_components)
-                rmakers.detach_beams_from_leaves(leaves_, smart=True)
+                rmakers.detach_beams_from_leaves(leaves_)
+                _repair_unmatched_beams(leaves_)
             abjad.mutate.replace(timespan_components, original_item)
             if is_obgc_polyphony_container:
                 nongrace_voice = original_item[1]
