@@ -4,7 +4,6 @@ Spanners.
 
 import collections
 import dataclasses
-import typing
 from inspect import currentframe as _frame
 
 import abjad
@@ -368,7 +367,7 @@ class _TextSpannerSpecifier:
     spanner_start: abjad.Bundle | abjad.StartTextSpan | None = None
     spanner_stop: abjad.StopTextSpan | None = None
 
-    def __iter__(self) -> typing.Iterator:
+    def __iter__(self) -> collections.abc.Iterator:
         result: list = []
         if self.spanner_stop:
             result.append(self.spanner_stop)
