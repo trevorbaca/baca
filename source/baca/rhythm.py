@@ -25,13 +25,9 @@ _collection_classes = (
     tuple,
 )
 
-_collection_typing = typing.Union[
-    abjad.PitchClassSegment,
-    abjad.PitchSegment,
-    abjad.PitchSet,
-    list,
-    tuple,
-]
+_collection_typing = (
+    abjad.PitchClassSegment | abjad.PitchSegment | abjad.PitchSet | list | tuple
+)
 
 
 def _evaluate_basic_item(item, denominator, voice_name, tag):

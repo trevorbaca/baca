@@ -2769,7 +2769,7 @@ def postprocess(
         if violators:
             raise Exception(f"{len(violators)} /    {total} out of range pitches")
     if doctest is False:
-        previous_stop_clock_time: typing.Optional[str]
+        previous_stop_clock_time: str | None
         if environment.section_not_included_in_score:
             previous_stop_clock_time = "0'00''"
         else:
