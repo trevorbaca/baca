@@ -117,7 +117,8 @@ def _evaluate_item(
 ) -> abjad.Component | list[abjad.Component]:
     capture_original_item: bool | abjad.Component = False
     result: (
-        abjad.Component | typing.Sequence[abjad.Component | abjad.Leaf | abjad.Tuplet]
+        abjad.Component
+        | collections.abc.Sequence[abjad.Component | abjad.Leaf | abjad.Tuplet]
     )
     if isinstance(item, int) and 0 < item:
         pitch_list = [abjad.NamedPitch("c'")]
@@ -658,15 +659,15 @@ class InvisibleMusic:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class LMR:
-    left_counts: typing.Sequence[int] = ()
+    left_counts: collections.abc.Sequence[int] = ()
     left_cyclic: bool = False
     left_length: int = 0
     left_reversed: bool = False
-    middle_counts: typing.Sequence[int] = ()
+    middle_counts: collections.abc.Sequence[int] = ()
     middle_cyclic: bool = False
     middle_reversed: bool = False
     priority: int | None = None
-    right_counts: typing.Sequence[int] = ()
+    right_counts: collections.abc.Sequence[int] = ()
     right_cyclic: bool = False
     right_length: int = 0
     right_reversed: bool = False
@@ -1325,7 +1326,7 @@ def make_rhythm(
     *,
     boundary_depth: int | None = None,
     do_not_rewrite_meter: bool = False,
-    reference_meters: typing.Sequence[abjad.Meter] | None = None,
+    reference_meters: collections.abc.Sequence[abjad.Meter] | None = None,
     tag: abjad.Tag | None = None,
     voice_name: str | None = None,
 ) -> abjad.Voice:

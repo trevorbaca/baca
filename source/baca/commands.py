@@ -2,6 +2,7 @@
 Commands.
 """
 
+import collections
 import copy
 import typing
 from inspect import currentframe as _frame
@@ -38,7 +39,7 @@ def bcps(
     argument,
     bcps,
     *tweaks: abjad.Tweak,
-    bow_change_tweaks: typing.Sequence[abjad.Tweak] = (),
+    bow_change_tweaks: collections.abc.Sequence[abjad.Tweak] = (),
     final_spanner: bool = False,
     helper: typing.Callable = lambda x, y: x,
 ) -> list[abjad.wrapper.Wrapper]:

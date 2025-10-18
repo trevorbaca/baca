@@ -2,8 +2,8 @@
 Select.
 """
 
+import collections
 import functools
-import typing
 
 import abjad
 
@@ -202,7 +202,7 @@ def cheads(argument, *, exclude: _typings.Exclude | None = None) -> list[abjad.C
 
 def clparts(
     argument,
-    counts: typing.Sequence[int],
+    counts: collections.abc.Sequence[int],
     *,
     exclude: _typings.Exclude | None = None,
 ) -> list[list[abjad.Leaf]]:
@@ -389,7 +389,7 @@ def cmgroups(
 
 
 def containers_to_leaf_lists(
-    containers: typing.Sequence[abjad.Container],
+    containers: collections.abc.Sequence[abjad.Container],
 ) -> list[list[abjad.Leaf]]:
     assert all(isinstance(_, abjad.Container) for _ in containers), repr(containers)
     leaf_lists = [abjad.select.leaves(_) for _ in containers]
@@ -412,7 +412,7 @@ def duration(argument, string, *, preprolated: bool = False) -> list:
     return result
 
 
-def enchain(argument, counts: typing.Sequence[int]) -> list[list]:
+def enchain(argument, counts: collections.abc.Sequence[int]) -> list[list]:
     r"""
     Enchains items in argument.
 
@@ -1055,7 +1055,7 @@ def lleaves(
 
 def lparts(
     argument,
-    counts: typing.Sequence[int],
+    counts: collections.abc.Sequence[int],
     *,
     exclude: _typings.Exclude | None = None,
     # TODO: change default to abjad.EXACT
@@ -1977,7 +1977,7 @@ def lts(
 
 def mgroups(
     argument,
-    counts: typing.Sequence[int] = [1],
+    counts: collections.abc.Sequence[int] = [1],
     *,
     exclude: _typings.Exclude | None = None,
 ) -> list[list[abjad.Leaf]]:
@@ -2472,7 +2472,7 @@ def ntruns(
 
 def omgroups(
     argument,
-    counts: typing.Sequence[int] = [1],
+    counts: collections.abc.Sequence[int] = [1],
     *,
     exclude: _typings.Exclude | None = None,
 ) -> list[list[abjad.Leaf]]:
@@ -2544,7 +2544,7 @@ def omgroups(
 
 def ompltgroups(
     argument,
-    counts: typing.Sequence[int] = [1],
+    counts: collections.abc.Sequence[int] = [1],
     *,
     exclude: _typings.Exclude | None = None,
 ) -> list[list[list[abjad.Leaf]]]:

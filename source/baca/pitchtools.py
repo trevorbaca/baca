@@ -4,7 +4,6 @@ Pitch functions.
 
 import collections
 import dataclasses
-import typing
 
 import abjad
 
@@ -589,8 +588,8 @@ class Loop:
 
     """
 
-    pitches: typing.Sequence[int]
-    intervals: typing.Sequence[int]
+    pitches: collections.abc.Sequence[int]
+    intervals: collections.abc.Sequence[int]
 
     def __post_init__(self):
         assert all(isinstance(_, int) for _ in self.pitches), self.pitches
@@ -1290,7 +1289,7 @@ def interpolate_pitches(
 
 def natural_clusters(
     argument,
-    widths: typing.Sequence[int],
+    widths: collections.abc.Sequence[int],
     *,
     start_pitch: int | str | abjad.NamedPitch | None = None,
 ) -> list[abjad.Chord]:

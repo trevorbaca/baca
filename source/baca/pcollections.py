@@ -2,6 +2,7 @@
 Pitch collections.
 """
 
+import collections
 import dataclasses
 import math
 import typing
@@ -907,7 +908,7 @@ class RegistrationComponent:
 
 @dataclasses.dataclass(frozen=True, order=True, slots=True, unsafe_hash=True)
 class Registration:
-    components: typing.Sequence[RegistrationComponent] = ()
+    components: collections.abc.Sequence[RegistrationComponent] = ()
 
     def __post_init__(self):
         for component in self.components:

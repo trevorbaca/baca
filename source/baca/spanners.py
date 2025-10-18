@@ -2,6 +2,7 @@
 Spanners.
 """
 
+import collections
 import dataclasses
 import typing
 from inspect import currentframe as _frame
@@ -97,7 +98,7 @@ def _iterate_text_spanner_pieces(
     do_not_start_spanner_on_final_piece: bool = False,
     left_broken: bool = False,
     right_broken: bool = False,
-    specifiers: typing.Sequence = (),
+    specifiers: collections.abc.Sequence = (),
 ) -> list[abjad.wrapper.Wrapper]:
     assert isinstance(tweaks, tuple), repr(tweaks)
     assert pieces is not None

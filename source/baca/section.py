@@ -2,6 +2,7 @@
 Section.
 """
 
+import collections
 import copy
 import dataclasses
 import importlib
@@ -2568,7 +2569,7 @@ def postprocess(
     do_not_treat_untreated_persistent_indicators: bool = False,
     empty_fermata_measures: bool = False,
     fermata_extra_offset_y: float = 2.5,
-    fermata_measure_empty_overrides: typing.Sequence[int] | None = None,
+    fermata_measure_empty_overrides: collections.abc.Sequence[int] | None = None,
     final_section: bool = False,
     first_section: bool = False,
     global_rests_in_every_staff: bool = False,

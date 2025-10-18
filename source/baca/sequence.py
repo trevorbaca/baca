@@ -2,9 +2,9 @@
 Sequence.
 """
 
+import collections
 import copy
 import itertools
-import typing
 
 import abjad
 
@@ -1111,7 +1111,7 @@ def repeat_by(sequence, counts: list[int], *, cyclic: bool = False):
 
 
 def repeat_subruns_to_length(
-    notes: typing.Sequence[abjad.Note],
+    notes: collections.abc.Sequence[abjad.Note],
     triples: list[tuple[int, int, int]],
     *,
     history: bool = False,
