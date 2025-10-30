@@ -1331,7 +1331,7 @@ def pitch(
         >>> voice = score["Music"]
         >>> time_signatures = time_signatures()
         >>> durations = [_.duration() for _ in time_signatures]
-        >>> nested_music = rmakers.note(durations)
+        >>> nested_music = rmakers.make_notes(durations)
         >>> music = abjad.sequence.flatten(nested_music)
         >>> rmakers.respell_leaves_written_duration_and_dmp(music, abjad.Duration(1))
         >>> voice.extend(music)
