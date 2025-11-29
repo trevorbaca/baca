@@ -8,6 +8,7 @@ import os
 import pathlib
 import shutil
 import signal
+import subprocess
 import sys
 import time
 import types
@@ -1859,7 +1860,7 @@ def run_xelatex(tex_file_path):
     with abjad.contextmanagers.temporary_directory_change(
         directory=tex_file_path.parent
     ):
-        abjad.io.spawn_subprocess(command_called_twice)
+        subprocess.call(command_called_twice, shell=True)
         source = tex_file_path.with_suffix(".log")
         name = "." + tex_file_path.stem + ".tex_file_path.log"
         target = tex_file_path.parent / name
